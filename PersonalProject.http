@@ -1,0 +1,61 @@
+@PersonalProject_HostAddress = http://localhost:5026
+
+### 1. Get All Schemes
+GET {{PersonalProject_HostAddress}}/api/schemes
+Accept: application/json
+
+### 2. Get Scheme by ID
+GET {{PersonalProject_HostAddress}}/api/schemes/1
+Accept: application/json
+
+### 3. Create a New Scheme
+POST {{PersonalProject_HostAddress}}/api/schemes
+Content-Type: application/json
+
+{
+  "title": "Need-Based Financial Aid",
+  "description": "Financial assistance for students with demonstrated financial need.",
+  "deadline": "2026-12-31T23:59:59Z",
+  "eligibilityID": 1
+}
+
+### 4. Test 404 (Non-existent ID)
+GET {{PersonalProject_HostAddress}}/api/schemes/999
+Accept: application/json
+
+
+### Get Eligibility by ID (includes schemes)
+GET {{PersonalProject_HostAddress}}/api/eligibility/1
+Accept: application/json
+
+### 1. Successful User Registration
+POST {{PersonalProject_HostAddress}}/api/users/register
+Content-Type: application/json
+
+{
+  "name": "Ali Khan",
+  "email": "ali.khan@example.com",
+  "password": "SecurePassword123"
+}
+
+### 2. Duplicate Registration Test (Returns 409 Conflict)
+POST {{PersonalProject_HostAddress}}/api/users/register
+Content-Type: application/json
+
+{
+  "name": "Ali Khan",
+  "email": "ali.khan@example.com",
+  "password": "SecurePassword123"
+}
+
+### 3. Invalid Email Format (Returns 400 Bad Request)
+POST {{PersonalProject_HostAddress}}/api/users/register
+Content-Type: application/json
+
+{
+  "name": "Ali Khan",
+  "email": "invalid-email-address",
+  "password": "123"
+}
+###
+GET {{PersonalProject_HostAddress}}/api/schemes/test-error

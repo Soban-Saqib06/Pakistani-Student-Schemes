@@ -1,12 +1,8 @@
-using System.Runtime.Intrinsics.X86;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.EntityFrameworkCore;
-using PersonalProject.Data;
 using PersonalProject.Dtos;
-using PersonalProject.Models;
+using PersonalProject.Services;
 
 namespace PersonalProject.Controllers;
 
@@ -15,11 +11,11 @@ namespace PersonalProject.Controllers;
 [Authorize]
 public class BookmarksController : ControllerBase
 {
-    private readonly AppDbContext _context;
+    private readonly IBookmarkService _bookmarkService;
 
-    public BookmarksController(AppDbContext context)
+    public BookmarksController(IBookmarkService bookmarkService)
     {
-        _context = context;
+        _bookmarkService = bookmarkService;
     }
 
     private int GetCurrentUserId()
@@ -32,71 +28,39 @@ public class BookmarksController : ControllerBase
         return userId;
     }
 
+    // GET: /api/bookmarks
     [HttpGet]
     public async Task<ActionResult<IEnumerable<SchemeResponseDto>>> GetSavedSchemes()
     {
-        var currentUserId = GetCurrentUserId();
-
-        var bookmarkedSchemes = await _context.SavedSchemes
-                                    .Where(ss => ss.UserId == currentUserId)
-                                    .Select(ss => new SchemeResponseDto
-                                    {
-                                        id = ss.Scheme!.Id,
-                                        Title = ss.Scheme.Title,
-                                        Description = ss.Scheme.Description,
-                                        Deadline = ss.Scheme.Deadline,
-                                        EligibilityName = ss.Scheme.Eligibility != null ? ss.Scheme.Eligibility.Name : "General",
-                                        Organization = ss.Scheme.Organization,
-                                        Province = ss.Scheme.Province,
-                                        ApplyUrl = ss.Scheme.ApplyUrl ?? ""
-                                    })
-                                    .ToListAsync(); 
-        return Ok(bookmarkedSchemes);
+        var schemes = await _bookmarkService.GetSavedSchemesAsync(GetCurrentUserId());
+        return Ok(schemes);
     }
-   
+
+    // POST: /api/bookmarks/{schemeId}
     [HttpPost("{schemeId:int}")]
     public async Task<IActionResult> BookmarkScheme(int schemeId)
     {
-        var currentuserId = GetCurrentUserId();
+        var result = await _bookmarkService.BookmarkSchemeAsync(GetCurrentUserId(), schemeId);
 
-        var schemeExists = await _context.Schemes.AnyAsync(s => s.Id == schemeId);
-        if (!schemeExists)
+        return result switch
         {
-            return NotFound(new {message = $"Scheme with ID {schemeId} does not exist"});
-        }
-
-        var alreadySaved = await _context.SavedSchemes
-                            .AnyAsync(ss => ss.UserId == currentuserId && ss.SchemeId == schemeId);
-
-        if (alreadySaved)
-        {
-            return Conflict(new {message = "Scheme is aready in your bookmarks"});
-        }
-
-        var SavedScheme = new SavedScheme
-        {
-            UserId = currentuserId,
-            SchemeId = schemeId,
-            SavedAt = DateTime.UtcNow
+            BookmarkResult.SchemeNotFound => NotFound(new { message = $"Scheme with ID {schemeId} does not exist" }),
+            BookmarkResult.AlreadyBookmarked => Conflict(new { message = "Scheme is already in your bookmarks" }),
+            BookmarkResult.Success => Ok(new { message = "Scheme bookmarked successfully" }),
+            _ => BadRequest()
         };
-
-        _context.SavedSchemes.Add(SavedScheme);
-        await _context.SaveChangesAsync();
-
-        return Ok(new {message = "Scheme bookmarked successfully"});
     }
 
+    // DELETE: /api/bookmarks/{schemeId}
     [HttpDelete("{schemeId:int}")]
     public async Task<IActionResult> DeleteBookmarkedScheme(int schemeId)
     {
-        var Deleted = await _context.SavedSchemes
-                        .Where(SS => SS.UserId == GetCurrentUserId() && SS.SchemeId == schemeId)
-                        .ExecuteDeleteAsync();
-        if (Deleted == 0)
+        var deleted = await _bookmarkService.RemoveBookmarkAsync(GetCurrentUserId(), schemeId);
+        if (!deleted)
         {
-            return NotFound(new {Message = "Scheme Not Found in bookmarks"});
+            return NotFound(new { message = "Scheme not found in bookmarks" });
         }
 
-        return Ok(new {Message = "Deleted Successfully"});
+        return Ok(new { message = "Deleted successfully" });
     }
 }

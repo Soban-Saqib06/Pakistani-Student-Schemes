@@ -11,9 +11,14 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: REDACTED
     ports:
-      - "5432:5432"
+      - "5433:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d personalproject"]
+      interval: 3s
+      timeout: 5s
+      retries: 5
 
   # ==========================================
   # Service 2: ASP.NET Core Web API
@@ -33,7 +38,8 @@ services:
       - Jwt__Issuer=PersonalProject
       - Jwt__Audience=PersonalProjectUsers
     depends_on:
-      - db
+      db:
+        condition: service_healthy
 
 # ==========================================
 # Persistent Storage Volumes

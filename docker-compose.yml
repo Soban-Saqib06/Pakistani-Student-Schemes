@@ -1,0 +1,42 @@
+services:
+  # ==========================================
+  # Service 1: PostgreSQL Database
+  # ==========================================
+  db:
+    image: postgres:16-alpine
+    container_name: pss_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: personalproject
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: REDACTED
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  # ==========================================
+  # Service 2: ASP.NET Core Web API
+  # ==========================================
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: pss_api
+    restart: unless-stopped
+    ports:
+      - "5000:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Host=db;Port=5432;Database=personalproject;Username=postgres;Password=REDACTED
+      - Jwt__Key=REDACTED
+      - Jwt__Issuer=PersonalProject
+      - Jwt__Audience=PersonalProjectUsers
+    depends_on:
+      - db
+
+# ==========================================
+# Persistent Storage Volumes
+# ==========================================
+volumes:
+  postgres_data:

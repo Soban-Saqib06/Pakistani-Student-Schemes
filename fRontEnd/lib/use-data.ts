@@ -5,10 +5,10 @@ import { api } from "./api"
 import type { SchemeSearchParams } from "./types"
 
 export function useCategories() {
-  const { data, error, isLoading } = useSWR("categories", () => api.listCategories(), {
+  const { data, error, isLoading, mutate } = useSWR("categories", () => api.listCategories(), {
     revalidateOnFocus: false,
   })
-  return { categories: data ?? [], error, isLoading }
+  return { categories: data ?? [], error, isLoading, mutate }
 }
 
 export function useSchemes(params: SchemeSearchParams) {

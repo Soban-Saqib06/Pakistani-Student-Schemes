@@ -301,4 +301,36 @@
   }
 }
 
+/* Accessibility: Font Scaling */
+html[data-font-scale="large"] {
+  font-size: 115%;
+}
+
+html[data-font-scale="xlarge"] {
+  font-size: 130%;
+}
+
+/* Accessibility: Dyslexia-friendly Typography */
+html[data-dyslexia="true"] body,
+html[data-dyslexia="true"] h1,
+html[data-dyslexia="true"] h2,
+html[data-dyslexia="true"] h3,
+html[data-dyslexia="true"] p,
+html[data-dyslexia="true"] span,
+html[data-dyslexia="true"] button,
+html[data-dyslexia="true"] a,
+html[data-dyslexia="true"] input,
+html[data-dyslexia="true"] label,
+html[data-dyslexia="true"] li {
+  font-family: 'Comic Sans MS', 'Comic Neue', 'Lexend', sans-serif !important;
+  letter-spacing: 0.04em !important;
+  word-spacing: 0.08em !important;
+}
+
+html[data-dyslexia="true"] p,
+html[data-dyslexia="true"] li {
+  line-height: 1.8 !important;
+}
+
+
 

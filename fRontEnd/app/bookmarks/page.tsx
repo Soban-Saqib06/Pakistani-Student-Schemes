@@ -17,36 +17,36 @@ export default function BookmarksPage() {
   const { schemes, loading: bookmarksLoading } = useBookmarks()
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-8">
-      <div className="mb-6 flex items-center gap-3">
-        <span className="flex size-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
-          <BookmarkIcon className="size-5" />
+    <div className="mx-auto max-w-6xl px-4 py-10">
+      <div className="mb-8 flex items-center gap-3.5">
+        <span className="flex size-12 items-center justify-center rounded-md bg-pak-green/10 text-pak-green">
+          <BookmarkIcon className="size-6" />
         </span>
         <div>
-          <h1 className="text-2xl font-bold tracking-tight">Saved schemes</h1>
-          <p className="text-sm text-muted-foreground">Scholarships and grants you&apos;ve bookmarked.</p>
+          <h1 className="text-3xl font-extrabold tracking-tight">Saved schemes</h1>
+          <p className="text-base text-muted-foreground">Scholarships and grants you&apos;ve bookmarked.</p>
         </div>
       </div>
 
       {loading ? (
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {Array.from({ length: 3 }).map((_, i) => (
-            <Skeleton key={i} className="h-52 w-full rounded-xl" />
+            <Skeleton key={i} className="h-52 w-full rounded-md" />
           ))}
         </div>
       ) : !user ? (
-        <Empty className="rounded-xl border">
+        <Empty className="rounded-md border p-8">
           <EmptyHeader>
             <EmptyMedia variant="icon">
               <LogInIcon />
             </EmptyMedia>
-            <EmptyTitle>Log in to see your bookmarks</EmptyTitle>
-            <EmptyDescription>
+            <EmptyTitle className="text-xl font-bold">Log in to see your bookmarks</EmptyTitle>
+            <EmptyDescription className="text-base">
               Your saved schemes are tied to your account so you can access them anytime.
             </EmptyDescription>
           </EmptyHeader>
           <EmptyContent>
-            <Button onClick={() => promptAuth("login")}>
+            <Button size="lg" className="bg-pak-green hover:bg-pak-green/90 text-white font-semibold cursor-pointer shadow-xs" onClick={() => promptAuth("login")}>
               <LogInIcon data-icon="inline-start" />
               Log in
             </Button>
@@ -55,11 +55,11 @@ export default function BookmarksPage() {
       ) : bookmarksLoading ? (
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {Array.from({ length: 3 }).map((_, i) => (
-            <Skeleton key={i} className="h-52 w-full rounded-xl" />
+            <Skeleton key={i} className="h-52 w-full rounded-md" />
           ))}
         </div>
       ) : schemes.length === 0 ? (
-        <Empty className="rounded-xl border">
+        <Empty className="rounded-md border">
           <EmptyHeader>
             <EmptyMedia variant="icon">
               <BookmarkIcon />

@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
-import { ChevronLeftIcon, ChevronRightIcon, SearchXIcon } from "lucide-react"
+import { ChevronLeftIcon, ChevronRightIcon, LayoutGridIcon, ListIcon, SearchXIcon } from "lucide-react"
 
 import { useCategories, useSchemes } from "@/lib/use-data"
 import { Button } from "@/components/ui/button"
@@ -39,6 +39,28 @@ export function SchemeBrowser() {
   }))
 
   const [page, setPage] = useState(1)
+  const [viewMode, setViewMode] = useState<"grid" | "list">("grid")
+
+  // Restore saved view mode preference
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem("taleemhub_view_mode")
+      if (saved === "list" || saved === "grid") {
+        setViewMode(saved)
+      }
+    } catch {
+      // Ignore localStorage errors
+    }
+  }, [])
+
+  function handleViewModeChange(mode: "grid" | "list") {
+    setViewMode(mode)
+    try {
+      localStorage.setItem("taleemhub_view_mode", mode)
+    } catch {
+      // Ignore localStorage errors
+    }
+  }
 
   // Keep filters synced whenever URL parameters change (e.g. clicking a category card or browser nav)
   useEffect(() => {
@@ -94,13 +116,13 @@ export function SchemeBrowser() {
     if (next.search) params.set("search", next.search)
     if (next.province) params.set("province", next.province)
     const qs = params.toString()
-    router.replace(qs ? `/?${qs}` : "/", { scroll: false })
+    router.replace(qs ? `/browse?${qs}` : "/browse", { scroll: false })
   }
 
   function handleReset() {
     setFilters(defaultFilters)
     setPage(1)
-    router.replace("/", { scroll: false })
+    router.replace("/browse", { scroll: false })
   }
 
   const totalCount = result?.totalCount ?? 0
@@ -119,16 +141,52 @@ export function SchemeBrowser() {
     <div className="flex flex-col gap-5">
       <SchemeFilters filters={filters} categories={categories} onChange={handleChange} onReset={handleReset} />
 
-      <p className="text-sm text-muted-foreground" aria-live="polite">
-        {rangeLabel}
-      </p>
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <p className="text-base font-medium text-muted-foreground" aria-live="polite">
+          {rangeLabel}
+        </p>
+
+        {/* View Switcher: Cards vs List */}
+        <div className="flex items-center gap-1 rounded-md border border-border/70 bg-card/75 p-1 shadow-2xs">
+          <Button
+            variant={viewMode === "grid" ? "secondary" : "ghost"}
+            size="sm"
+            className={`h-8 gap-1.5 px-3 text-xs font-semibold transition-all cursor-pointer ${
+              viewMode === "grid"
+                ? "bg-secondary text-foreground shadow-2xs font-bold"
+                : "text-muted-foreground hover:text-foreground"
+            }`}
+            onClick={() => handleViewModeChange("grid")}
+            aria-label="Cards view"
+            aria-pressed={viewMode === "grid"}
+          >
+            <LayoutGridIcon className="size-3.5 text-pak-green" />
+            <span>Cards</span>
+          </Button>
+          <Button
+            variant={viewMode === "list" ? "secondary" : "ghost"}
+            size="sm"
+            className={`h-8 gap-1.5 px-3 text-xs font-semibold transition-all cursor-pointer ${
+              viewMode === "list"
+                ? "bg-secondary text-foreground shadow-2xs font-bold"
+                : "text-muted-foreground hover:text-foreground"
+            }`}
+            onClick={() => handleViewModeChange("list")}
+            aria-label="List view"
+            aria-pressed={viewMode === "list"}
+          >
+            <ListIcon className="size-3.5 text-pak-green" />
+            <span>List</span>
+          </Button>
+        </div>
+      </div>
 
       {showSkeleton ? (
-        <div className="flex min-h-[320px] flex-col items-center justify-center rounded-2xl border border-border/60 bg-card/40 p-12 backdrop-blur-xs">
+        <div className="flex min-h-[320px] flex-col items-center justify-center rounded-lg border border-border/60 bg-card/40 p-12 backdrop-blur-xs">
           <CubeLoader size="md" label="Loading verified opportunities..." />
         </div>
       ) : schemes.length === 0 ? (
-        <Empty className="rounded-xl border">
+        <Empty className="rounded-md border">
           <EmptyHeader>
             <EmptyMedia variant="icon">
               <SearchXIcon />
@@ -138,45 +196,50 @@ export function SchemeBrowser() {
               Try adjusting your filters or search terms to find more scholarships and grants.
             </EmptyDescription>
           </EmptyHeader>
-          <Button variant="outline" onClick={handleReset}>
+          <Button variant="outline" size="lg" onClick={handleReset} className="mt-2 font-medium">
             Clear filters
           </Button>
         </Empty>
       ) : (
         <div
           className={
-            "grid gap-4 transition-opacity sm:grid-cols-2 lg:grid-cols-3 " +
-            (isLoading ? "opacity-60" : "opacity-100")
+            viewMode === "grid"
+              ? "grid gap-4 transition-opacity sm:grid-cols-2 lg:grid-cols-3 " +
+                (isLoading ? "opacity-60" : "opacity-100")
+              : "flex flex-col gap-3.5 transition-opacity " +
+                (isLoading ? "opacity-60" : "opacity-100")
           }
         >
           {schemes.map((scheme) => (
-            <SchemeCard key={scheme.id} scheme={scheme} />
+            <SchemeCard key={scheme.id} scheme={scheme} viewMode={viewMode} />
           ))}
         </div>
       )}
 
       {totalPages > 1 ? (
-        <div className="flex items-center justify-center gap-2 pt-2">
+        <div className="flex items-center justify-center gap-3 pt-4">
           <Button
             variant="outline"
-            size="sm"
+            size="default"
+            className="h-10 px-4 text-sm font-medium"
             disabled={page <= 1}
             onClick={() => setPage((p) => Math.max(1, p - 1))}
           >
-            <ChevronLeftIcon data-icon="inline-start" />
+            <ChevronLeftIcon data-icon="inline-start" className="size-4" />
             Previous
           </Button>
-          <span className="px-2 text-sm text-muted-foreground">
+          <span className="px-3 text-base font-medium text-foreground">
             Page {page} of {totalPages}
           </span>
           <Button
             variant="outline"
-            size="sm"
+            size="default"
+            className="h-10 px-4 text-sm font-medium"
             disabled={page >= totalPages}
             onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
           >
             Next
-            <ChevronRightIcon data-icon="inline-end" />
+            <ChevronRightIcon data-icon="inline-end" className="size-4" />
           </Button>
         </div>
       ) : null}

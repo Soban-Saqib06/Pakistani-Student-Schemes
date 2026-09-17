@@ -45,19 +45,19 @@ export function SchemeFilters({ filters, categories, onChange, onReset }: Scheme
   return (
     <div className="flex flex-col gap-4 rounded-2xl border border-border/70 bg-card/75 p-5 shadow-sm backdrop-blur-xs">
       <div className="relative">
-        <SearchIcon className="pointer-events-none absolute top-1/2 left-3.5 size-4.5 -translate-y-1/2 text-muted-foreground transition-colors group-focus-within:text-pak-green" />
+        <SearchIcon className="pointer-events-none absolute top-1/2 left-4 size-5 -translate-y-1/2 text-muted-foreground transition-colors group-focus-within:text-pak-green" />
         <Input
           value={filters.search}
           onChange={(e) => onChange({ search: e.target.value })}
           placeholder="Search by keyword, university, or program (e.g. HEC, Laptop, PEEF, STEM)..."
-          className="h-11 pl-11 pr-4 text-sm rounded-xl border-border/80 bg-background/90 shadow-2xs transition-all focus-visible:border-pak-green focus-visible:ring-3 focus-visible:ring-pak-green/20"
+          className="h-12 pl-12 pr-4 text-base rounded-md border-border/80 bg-background/90 shadow-2xs transition-all focus-visible:border-pak-green focus-visible:ring-3 focus-visible:ring-pak-green/20"
           aria-label="Search schemes"
         />
       </div>
 
       <div className="flex flex-wrap items-center gap-3 pt-1">
-        <div className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-muted-foreground pr-1">
-          <SlidersHorizontalIcon className="size-3.5 text-pak-green" />
+        <div className="flex items-center gap-1.5 text-sm font-semibold uppercase tracking-wider text-muted-foreground pr-1">
+          <SlidersHorizontalIcon className="size-4 text-pak-green" />
           <span>Filters</span>
         </div>
 
@@ -65,7 +65,7 @@ export function SchemeFilters({ filters, categories, onChange, onReset }: Scheme
           value={filters.eligibID === null ? ALL : String(filters.eligibID)}
           onValueChange={(v) => onChange({ eligibID: v === ALL ? null : Number(v) })}
         >
-          <SelectTrigger size="sm" className="w-[170px]">
+          <SelectTrigger className="h-10 w-[195px] text-sm font-medium">
             <SelectValue placeholder="Eligibility">
               {(val: string) => {
                 if (!val || val === ALL) return "All eligibility"
@@ -76,9 +76,9 @@ export function SchemeFilters({ filters, categories, onChange, onReset }: Scheme
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
-              <SelectItem value={ALL}>All eligibility</SelectItem>
+              <SelectItem value={ALL} className="text-sm">All eligibility</SelectItem>
               {categories.map((c) => (
-                <SelectItem key={c.id} value={String(c.id)}>
+                <SelectItem key={c.id} value={String(c.id)} className="text-sm">
                   {c.name}
                 </SelectItem>
               ))}
@@ -90,16 +90,16 @@ export function SchemeFilters({ filters, categories, onChange, onReset }: Scheme
           value={filters.province === null ? ALL : filters.province}
           onValueChange={(v) => onChange({ province: v === ALL ? null : v })}
         >
-          <SelectTrigger size="sm" className="w-[160px]">
+          <SelectTrigger className="h-10 w-[175px] text-sm font-medium">
             <SelectValue placeholder="Province">
               {(val: string) => (val === ALL ? "All regions" : val)}
             </SelectValue>
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
-              <SelectItem value={ALL}>All regions</SelectItem>
+              <SelectItem value={ALL} className="text-sm">All regions</SelectItem>
               {PROVINCES.map((p) => (
-                <SelectItem key={p} value={p}>
+                <SelectItem key={p} value={p} className="text-sm">
                   {p}
                 </SelectItem>
               ))}
@@ -108,7 +108,7 @@ export function SchemeFilters({ filters, categories, onChange, onReset }: Scheme
         </Select>
 
         <Select value={filters.sortBy} onValueChange={(v) => onChange({ sortBy: v as SortBy })}>
-          <SelectTrigger size="sm" className="w-[150px]">
+          <SelectTrigger className="h-10 w-[165px] text-sm font-medium">
             <SelectValue placeholder="Sort by">
               {(val: string) =>
                 val === "deadline" ? "Deadline" : val === "recent" ? "Recently added" : "Title A–Z"
@@ -117,14 +117,14 @@ export function SchemeFilters({ filters, categories, onChange, onReset }: Scheme
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
-              <SelectItem value="deadline">Deadline</SelectItem>
-              <SelectItem value="recent">Recently added</SelectItem>
-              <SelectItem value="title">Title A–Z</SelectItem>
+              <SelectItem value="deadline" className="text-sm">Deadline</SelectItem>
+              <SelectItem value="recent" className="text-sm">Recently added</SelectItem>
+              <SelectItem value="title" className="text-sm">Title A–Z</SelectItem>
             </SelectGroup>
           </SelectContent>
         </Select>
 
-        <Label className="flex items-center gap-2 text-sm font-normal">
+        <Label className="flex items-center gap-2.5 text-sm font-medium cursor-pointer">
           <Switch
             checked={filters.activeOnly}
             onCheckedChange={(checked) => onChange({ activeOnly: checked })}
@@ -133,8 +133,8 @@ export function SchemeFilters({ filters, categories, onChange, onReset }: Scheme
         </Label>
 
         {hasActive ? (
-          <Button variant="ghost" size="sm" onClick={onReset} className="ml-auto">
-            <XIcon data-icon="inline-start" />
+          <Button variant="ghost" size="default" onClick={onReset} className="ml-auto h-10 px-3.5 text-sm font-medium cursor-pointer">
+            <XIcon data-icon="inline-start" className="size-4" />
             Reset
           </Button>
         ) : null}

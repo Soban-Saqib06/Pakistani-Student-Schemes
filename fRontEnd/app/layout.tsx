@@ -51,8 +51,9 @@ export default function RootLayout({
             <footer className="border-t border-border/60 py-6 bg-muted/20">
               <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-4 sm:flex-row text-sm text-muted-foreground">
                 <p>TaleemHub · Pakistan Scholarships &amp; Youth Opportunities Portal</p>
-                <div>
+                <div className="flex items-center gap-5">
                   <a href="/about" className="text-sm font-medium hover:text-foreground transition-colors">About Us</a>
+                  <a href="/contact" className="text-sm font-medium hover:text-foreground transition-colors">Contact &amp; Submissions</a>
                 </div>
               </div>
             </footer>

@@ -12,7 +12,7 @@ export default function ContactPage() {
     <div className="mx-auto max-w-5xl px-4 py-16">
       {/* Header */}
       <div className="flex flex-col items-center text-center">
-        <span className="inline-flex items-center gap-2 rounded-full border border-pak-green/30 bg-pak-green/10 px-3.5 py-1 text-xs font-semibold text-pak-green mb-4 shadow-2xs">
+        <span className="inline-flex items-center gap-2 rounded-md border border-pak-green/30 bg-pak-green/10 px-3 py-1 text-xs font-semibold text-pak-green mb-4 shadow-2xs">
           <MessageSquareIcon className="size-3.5" />
           Get In Touch
         </span>
@@ -28,18 +28,18 @@ export default function ContactPage() {
       {/* Main Contact Cards Grid */}
       <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {/* Email Card */}
-        <div className="flex flex-col justify-between rounded-2xl border border-border/70 bg-card p-6 shadow-xs transition-all hover:border-pak-green/50 hover:shadow-md">
+        <div className="flex flex-col justify-between rounded-lg border border-border/70 bg-card p-6 shadow-xs transition-all hover:border-pak-green/50 hover:shadow-md">
           <div>
-            <div className="mb-4 flex size-11 items-center justify-center rounded-xl bg-pak-green/10 text-pak-green">
-              <MailIcon className="size-5" />
+            <div className="mb-4 flex size-12 items-center justify-center rounded-md bg-pak-green/10 text-pak-green">
+              <MailIcon className="size-6" />
             </div>
             <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
               Direct Email
             </span>
-            <h3 className="mt-1 text-base font-bold text-foreground break-all">
+            <h3 className="mt-1.5 text-lg font-bold text-foreground break-all">
               m.sobansaqib@gmail.com
             </h3>
-            <p className="mt-2 text-xs text-muted-foreground leading-relaxed">
+            <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
               Send scheme notifications, eligibility brochures, or official links directly to my inbox.
             </p>
           </div>
@@ -47,44 +47,44 @@ export default function ContactPage() {
           <div className="mt-6 pt-4 border-t border-border/50">
             <a
               href="mailto:m.sobansaqib@gmail.com?subject=New%20Scheme%20Submission%20-%20TaleemHub"
-              className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-pak-green px-4 py-2 text-xs font-semibold text-white transition-colors hover:bg-pak-green/90 shadow-2xs"
+              className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-pak-green px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-pak-green/90 shadow-2xs"
             >
-              <MailIcon className="size-3.5" />
+              <MailIcon className="size-4" />
               <span>Send Email</span>
             </a>
           </div>
         </div>
 
         {/* Phone / WhatsApp Card */}
-        <div className="flex flex-col justify-between rounded-2xl border border-border/70 bg-card p-6 shadow-xs transition-all hover:border-pak-green/50 hover:shadow-md">
+        <div className="flex flex-col justify-between rounded-lg border border-border/70 bg-card p-6 shadow-xs transition-all hover:border-pak-green/50 hover:shadow-md">
           <div>
-            <div className="mb-4 flex size-11 items-center justify-center rounded-xl bg-pak-green/10 text-pak-green">
-              <PhoneIcon className="size-5" />
+            <div className="mb-4 flex size-12 items-center justify-center rounded-md bg-pak-green/10 text-pak-green">
+              <PhoneIcon className="size-6" />
             </div>
             <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
               Phone &amp; WhatsApp
             </span>
-            <h3 className="mt-1 text-base font-bold text-foreground">
+            <h3 className="mt-1.5 text-lg font-bold text-foreground">
               0325-4333030
             </h3>
-            <p className="mt-2 text-xs text-muted-foreground leading-relaxed">
+            <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
               Available for quick tips, verification confirmations, or WhatsApp messages.
             </p>
           </div>
 
-          <div className="mt-6 pt-4 border-t border-border/50 flex gap-2">
+          <div className="mt-6 pt-4 border-t border-border/50 flex gap-2.5">
             <a
               href="tel:03254333030"
-              className="flex-1 inline-flex items-center justify-center gap-1.5 rounded-lg border border-border bg-background px-3 py-2 text-xs font-semibold text-foreground transition-colors hover:bg-muted"
+              className="flex-1 inline-flex items-center justify-center gap-1.5 rounded-md border border-border bg-background px-3 py-2.5 text-sm font-semibold text-foreground transition-colors hover:bg-muted"
             >
-              <PhoneIcon className="size-3.5 text-pak-green" />
+              <PhoneIcon className="size-4 text-pak-green" />
               <span>Call</span>
             </a>
             <a
               href="https://wa.me/923254333030?text=Hi,%20I%20would%20like%20to%20suggest%20a%20new%20scheme%20for%20TaleemHub"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 inline-flex items-center justify-center gap-1.5 rounded-lg bg-pak-green px-3 py-2 text-xs font-semibold text-white transition-colors hover:bg-pak-green/90 shadow-2xs"
+              className="flex-1 inline-flex items-center justify-center gap-1.5 rounded-md bg-pak-green px-3 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-pak-green/90 shadow-2xs"
             >
               <span>WhatsApp</span>
             </a>
@@ -92,11 +92,11 @@ export default function ContactPage() {
         </div>
 
         {/* LinkedIn Card */}
-        <div className="flex flex-col justify-between rounded-2xl border border-border/70 bg-card p-6 shadow-xs transition-all hover:border-pak-green/50 hover:shadow-md sm:col-span-2 lg:col-span-1">
+        <div className="flex flex-col justify-between rounded-lg border border-border/70 bg-card p-6 shadow-xs transition-all hover:border-pak-green/50 hover:shadow-md sm:col-span-2 lg:col-span-1">
           <div>
-            <div className="mb-4 flex size-11 items-center justify-center rounded-xl bg-pak-green/10 text-pak-green">
+            <div className="mb-4 flex size-12 items-center justify-center rounded-md bg-pak-green/10 text-pak-green">
               <svg
-                className="size-5 fill-current"
+                className="size-6 fill-current"
                 viewBox="0 0 24 24"
                 aria-hidden="true"
               >
@@ -106,10 +106,10 @@ export default function ContactPage() {
             <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
               Professional Network
             </span>
-            <h3 className="mt-1 text-base font-bold text-foreground truncate">
+            <h3 className="mt-1.5 text-lg font-bold text-foreground truncate">
               Muhammad Soban Saqib
             </h3>
-            <p className="mt-2 text-xs text-muted-foreground leading-relaxed">
+            <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
               Connect on LinkedIn for collaborative initiatives, developer discussions, and project updates.
             </p>
           </div>
@@ -119,43 +119,43 @@ export default function ContactPage() {
               href="https://www.linkedin.com/in/muhammad-soban-saqib-35053628b/"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex w-full items-center justify-center gap-2 rounded-lg border border-border bg-background px-4 py-2 text-xs font-semibold text-foreground transition-colors hover:bg-muted"
+              className="inline-flex w-full items-center justify-center gap-2 rounded-md border border-border bg-background px-4 py-2.5 text-sm font-semibold text-foreground transition-colors hover:bg-muted"
             >
               <span>View LinkedIn Profile</span>
-              <ExternalLinkIcon className="size-3.5 text-muted-foreground" />
+              <ExternalLinkIcon className="size-4 text-muted-foreground" />
             </a>
           </div>
         </div>
       </div>
 
       {/* Scheme Submission Guidelines Box */}
-      <div className="mt-12 rounded-2xl border border-border/70 bg-gradient-to-br from-card to-muted/30 p-6 sm:p-8 shadow-xs">
+      <div className="mt-12 rounded-lg border border-border/70 bg-gradient-to-br from-card to-muted/30 p-6 sm:p-8 shadow-xs">
         <div className="flex items-center gap-2 text-pak-green font-semibold text-sm mb-2">
           <SparklesIcon className="size-4" />
           <span>Help Us Keep TaleemHub Comprehensive</span>
         </div>
-        <h2 className="text-xl font-bold text-foreground">
+        <h2 className="text-2xl font-bold text-foreground">
           What information should you include when submitting a new scheme?
         </h2>
-        <p className="mt-1 text-sm text-muted-foreground leading-relaxed">
+        <p className="mt-1.5 text-base text-muted-foreground leading-relaxed">
           When sending in details for a newly announced opportunity, the following details will help us list it faster:
         </p>
 
-        <ul className="mt-6 grid gap-3 sm:grid-cols-2 text-xs sm:text-sm text-muted-foreground">
+        <ul className="mt-6 grid gap-3.5 sm:grid-cols-2 text-sm sm:text-base text-muted-foreground">
           <li className="flex items-start gap-2.5">
-            <CheckCircle2Icon className="size-4 text-pak-green shrink-0 mt-0.5" />
+            <CheckCircle2Icon className="size-4.5 text-pak-green shrink-0 mt-0.5" />
             <span><strong>Scheme Title:</strong> Official name of the scholarship or grant</span>
           </li>
           <li className="flex items-start gap-2.5">
-            <CheckCircle2Icon className="size-4 text-pak-green shrink-0 mt-0.5" />
+            <CheckCircle2Icon className="size-4.5 text-pak-green shrink-0 mt-0.5" />
             <span><strong>Organization / Ministry:</strong> HEC, PEEF, BEEF, or university name</span>
           </li>
           <li className="flex items-start gap-2.5">
-            <CheckCircle2Icon className="size-4 text-pak-green shrink-0 mt-0.5" />
+            <CheckCircle2Icon className="size-4.5 text-pak-green shrink-0 mt-0.5" />
             <span><strong>Target Category:</strong> Undergraduate, Postgraduate, Need-based, etc.</span>
           </li>
           <li className="flex items-start gap-2.5">
-            <CheckCircle2Icon className="size-4 text-pak-green shrink-0 mt-0.5" />
+            <CheckCircle2Icon className="size-4.5 text-pak-green shrink-0 mt-0.5" />
             <span><strong>Application Link &amp; Deadline:</strong> The official portal or advertisement link</span>
           </li>
         </ul>

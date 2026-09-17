@@ -63,7 +63,14 @@ export interface Paginated<T> {
   pageSize: number
 }
 
-export type SortBy = "deadline" | "recent" | "title"
+export type SortBy =
+  | "deadline"
+  | "deadline-asc"
+  | "deadline-desc"
+  | "recent"
+  | "title"
+  | "title-asc"
+  | "title-desc"
 
 export interface SchemeSearchParams {
   textQuery?: string

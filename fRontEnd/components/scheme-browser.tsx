@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useMemo, useState } from "react"
-import { useRouter, useSearchParams } from "next/navigation"
+import { useSearchParams } from "next/navigation"
 import { ChevronLeftIcon, ChevronRightIcon, LayoutGridIcon, ListIcon, SearchXIcon } from "lucide-react"
 
 import { useCategories, useSchemes } from "@/lib/use-data"
@@ -10,6 +10,7 @@ import { Skeleton } from "@/components/ui/skeleton"
 import { Empty, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from "@/components/ui/empty"
 import { SchemeCard } from "@/components/scheme-card"
 import { SchemeFilters, type FilterState } from "@/components/scheme-filters"
+import type { SortBy } from "@/lib/types"
 import { CubeLoader } from "@/components/cube-loader"
 
 const PAGE_SIZE = 9
@@ -18,24 +19,54 @@ const defaultFilters: FilterState = {
   search: "",
   eligibID: null,
   province: null,
-  sortBy: "deadline",
+  sortBy: "deadline-asc",
   activeOnly: true,
 }
 
 export function SchemeBrowser() {
-  const router = useRouter()
   const searchParams = useSearchParams()
   const { categories } = useCategories()
 
   const eligibParam = searchParams.get("eligibID")
   const searchParam = searchParams.get("search") || searchParams.get("textQuery")
   const provinceParam = searchParams.get("province")
+  const sortByParam = searchParams.get("sortBy")
+  const activeOnlyParam = searchParams.get("activeOnly")
+
+  function parseEligib(val: string | null): number | null {
+    if (!val || val === "all") return null
+    const n = Number(val)
+    return isNaN(n) ? null : n
+  }
+
+  function parseProvince(val: string | null): string | null {
+    if (!val || val === "all") return null
+    return val
+  }
+
+  function parseSortBy(val: string | null): SortBy {
+    if (!val) return "deadline-asc"
+    if (val === "deadline") return "deadline-asc"
+    if (val === "title") return "title-asc"
+    if (
+      val === "deadline-asc" ||
+      val === "deadline-desc" ||
+      val === "recent" ||
+      val === "title-asc" ||
+      val === "title-desc"
+    ) {
+      return val
+    }
+    return "deadline-asc"
+  }
 
   const [filters, setFilters] = useState<FilterState>(() => ({
     ...defaultFilters,
-    eligibID: eligibParam ? Number(eligibParam) : null,
+    eligibID: parseEligib(eligibParam),
     search: searchParam || "",
-    province: provinceParam || null,
+    province: parseProvince(provinceParam),
+    sortBy: parseSortBy(sortByParam),
+    activeOnly: activeOnlyParam === "false" ? false : true,
   }))
 
   const [page, setPage] = useState(1)
@@ -64,15 +95,20 @@ export function SchemeBrowser() {
 
   // Keep filters synced whenever URL parameters change (e.g. clicking a category card or browser nav)
   useEffect(() => {
-    const nextEligib = eligibParam ? Number(eligibParam) : null
+    const nextEligib = parseEligib(eligibParam)
     const nextSearch = searchParam || ""
-    const nextProvince = provinceParam || null
+    const nextProvince = parseProvince(provinceParam)
+    const nextSort = sortByParam ? parseSortBy(sortByParam) : null
+    const nextActiveOnly = activeOnlyParam === "false" ? false : true
 
     setFilters((prev) => {
+      const effectiveSort = nextSort ?? prev.sortBy
       if (
         prev.eligibID === nextEligib &&
         prev.search === nextSearch &&
-        prev.province === nextProvince
+        prev.province === nextProvince &&
+        prev.sortBy === effectiveSort &&
+        prev.activeOnly === nextActiveOnly
       ) {
         return prev
       }
@@ -81,10 +117,36 @@ export function SchemeBrowser() {
         eligibID: nextEligib,
         search: nextSearch,
         province: nextProvince,
+        sortBy: effectiveSort,
+        activeOnly: nextActiveOnly,
       }
     })
-    setPage(1)
-  }, [eligibParam, searchParam, provinceParam])
+  }, [eligibParam, searchParam, provinceParam, sortByParam, activeOnlyParam])
+
+  // Handle browser Back / Forward history buttons
+  useEffect(() => {
+    function onPopState() {
+      if (typeof window === "undefined") return
+      const sp = new URLSearchParams(window.location.search)
+      const nextEligib = parseEligib(sp.get("eligibID"))
+      const nextSearch = sp.get("search") || sp.get("textQuery") || ""
+      const nextProvince = parseProvince(sp.get("province"))
+      const nextSort = parseSortBy(sp.get("sortBy"))
+      const nextActiveOnly = sp.get("activeOnly") === "false" ? false : true
+
+      setFilters({
+        eligibID: nextEligib,
+        search: nextSearch,
+        province: nextProvince,
+        sortBy: nextSort,
+        activeOnly: nextActiveOnly,
+      })
+      setPage(1)
+    }
+
+    window.addEventListener("popstate", onPopState)
+    return () => window.removeEventListener("popstate", onPopState)
+  }, [])
 
   const [debouncedSearch, setDebouncedSearch] = useState(() => filters.search.trim())
 
@@ -104,25 +166,67 @@ export function SchemeBrowser() {
   })
 
   function handleChange(patch: Partial<FilterState>) {
+    // 1. If user explicitly chooses "All eligibility", redirect to /browse as requested
+    if ("eligibID" in patch && patch.eligibID === null) {
+      if (typeof window !== "undefined") {
+        window.location.href = "/browse"
+        return
+      }
+    }
+
+    // 2. If user explicitly chooses "All regions", redirect to /browse as requested
+    if ("province" in patch && patch.province === null) {
+      if (typeof window !== "undefined") {
+        window.location.href = "/browse"
+        return
+      }
+    }
+
+    // 3. If user changes sort order, reorder in-place without triggering any navigation or page reload
+    if ("sortBy" in patch && patch.sortBy) {
+      setFilters((prev) => ({ ...prev, sortBy: patch.sortBy! }))
+      setPage(1)
+      return
+    }
+
+    // 4. For other filter updates (search, activeOnly, specific category, specific region)
     const next = { ...filters, ...patch }
     setFilters(next)
     setPage(1)
 
-    // Sync to URL so filters are persistent, shareable, and reflect in history
-    const params = new URLSearchParams()
-    if (next.eligibID !== null && next.eligibID !== undefined) {
-      params.set("eligibID", String(next.eligibID))
+    // Safely reflect filters in the browser URL without triggering Next.js server route transitions
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams()
+      if (next.eligibID !== null && next.eligibID !== undefined && !isNaN(next.eligibID)) {
+        params.set("eligibID", String(next.eligibID))
+      }
+      if (next.search) params.set("search", next.search)
+      if (next.province && next.province !== "all") params.set("province", next.province)
+      if (!next.activeOnly) {
+        params.set("activeOnly", "false")
+      }
+      const qs = params.toString()
+      const targetUrl = qs ? `/browse?${qs}` : "/browse"
+
+      try {
+        window.history.replaceState(
+          { ...(window.history.state || {}), __NA: true },
+          "",
+          targetUrl
+        )
+      } catch {
+        // Safe fallback
+      }
     }
-    if (next.search) params.set("search", next.search)
-    if (next.province) params.set("province", next.province)
-    const qs = params.toString()
-    router.replace(qs ? `/browse?${qs}` : "/browse", { scroll: false })
   }
 
   function handleReset() {
-    setFilters(defaultFilters)
-    setPage(1)
-    router.replace("/browse", { scroll: false })
+    if (typeof window !== "undefined") {
+      window.location.href = "/browse"
+    } else {
+      setFilters(defaultFilters)
+      setPage(1)
+    }
   }
 
   const totalCount = result?.totalCount ?? 0

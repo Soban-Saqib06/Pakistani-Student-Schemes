@@ -39,7 +39,7 @@ export function SchemeFilters({ filters, categories, onChange, onReset }: Scheme
     filters.search !== "" ||
     filters.eligibID !== null ||
     filters.province !== null ||
-    filters.sortBy !== "deadline" ||
+    (filters.sortBy !== "deadline" && filters.sortBy !== "deadline-asc") ||
     !filters.activeOnly
 
   return (
@@ -49,6 +49,9 @@ export function SchemeFilters({ filters, categories, onChange, onReset }: Scheme
         <Input
           value={filters.search}
           onChange={(e) => onChange({ search: e.target.value })}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") e.preventDefault()
+          }}
           placeholder="Search by keyword, university, or program (e.g. HEC, Laptop, PEEF, STEM)..."
           className="h-12 pl-12 pr-4 text-base rounded-md border-border/80 bg-background/90 shadow-2xs transition-all focus-visible:border-pak-green focus-visible:ring-3 focus-visible:ring-pak-green/20"
           aria-label="Search schemes"
@@ -63,7 +66,7 @@ export function SchemeFilters({ filters, categories, onChange, onReset }: Scheme
 
         <Select
           value={filters.eligibID === null ? ALL : String(filters.eligibID)}
-          onValueChange={(v) => onChange({ eligibID: v === ALL ? null : Number(v) })}
+          onValueChange={(v) => onChange({ eligibID: !v || v === ALL ? null : Number(v) })}
         >
           <SelectTrigger className="h-10 w-[195px] text-sm font-medium">
             <SelectValue placeholder="Eligibility">
@@ -107,19 +110,45 @@ export function SchemeFilters({ filters, categories, onChange, onReset }: Scheme
           </SelectContent>
         </Select>
 
-        <Select value={filters.sortBy} onValueChange={(v) => onChange({ sortBy: v as SortBy })}>
-          <SelectTrigger className="h-10 w-[165px] text-sm font-medium">
+        <Select
+          value={
+            filters.sortBy === "deadline"
+              ? "deadline-asc"
+              : filters.sortBy === "title"
+              ? "title-asc"
+              : filters.sortBy
+          }
+          onValueChange={(v) => onChange({ sortBy: v as SortBy })}
+        >
+          <SelectTrigger className="h-10 w-[205px] text-sm font-medium">
             <SelectValue placeholder="Sort by">
-              {(val: string) =>
-                val === "deadline" ? "Deadline" : val === "recent" ? "Recently added" : "Title A–Z"
-              }
+              {(val: string) => {
+                switch (val) {
+                  case "deadline-asc":
+                  case "deadline":
+                    return "Deadline: Soonest first"
+                  case "deadline-desc":
+                    return "Deadline: Furthest first"
+                  case "recent":
+                    return "Recently added"
+                  case "title-asc":
+                  case "title":
+                    return "Title: A to Z"
+                  case "title-desc":
+                    return "Title: Z to A"
+                  default:
+                    return "Sort by"
+                }
+              }}
             </SelectValue>
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
-              <SelectItem value="deadline" className="text-sm">Deadline</SelectItem>
+              <SelectItem value="deadline-asc" className="text-sm">Deadline: Soonest first</SelectItem>
+              <SelectItem value="deadline-desc" className="text-sm">Deadline: Furthest first</SelectItem>
               <SelectItem value="recent" className="text-sm">Recently added</SelectItem>
-              <SelectItem value="title" className="text-sm">Title A–Z</SelectItem>
+              <SelectItem value="title-asc" className="text-sm">Title: A to Z</SelectItem>
+              <SelectItem value="title-desc" className="text-sm">Title: Z to A</SelectItem>
             </SelectGroup>
           </SelectContent>
         </Select>

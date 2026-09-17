@@ -70,7 +70,7 @@ export default function BookmarksPage() {
             </EmptyDescription>
           </EmptyHeader>
           <EmptyContent>
-            <Button render={<Link href="/" />}>
+            <Button render={<Link href="/browse" />}>
               <SearchIcon data-icon="inline-start" />
               Browse schemes
             </Button>

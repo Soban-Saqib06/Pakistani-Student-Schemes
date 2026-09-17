@@ -265,7 +265,13 @@ function write<T>(key: string, value: T) {
 
 function getSchemes(): Scheme[] {
   const s = read<Scheme[] | null>(LS.schemes, null)
-  if (s) return s
+  if (s && s.length > 0) {
+    const now = Date.now()
+    const activeCount = s.filter((item) => new Date(item.deadline).getTime() >= now).length
+    if (activeCount >= 5) {
+      return s
+    }
+  }
   write(LS.schemes, seedSchemes)
   return seedSchemes
 }
@@ -317,16 +323,47 @@ export const mockApi = {
     if (params.organization) list = list.filter((s) => s.organization === params.organization)
     if (params.activeOnly) list = list.filter(isActive)
 
+    const getTime = (d: string | undefined | null) => {
+      if (!d) return Infinity
+      const t = new Date(d).getTime()
+      return isNaN(t) ? Infinity : t
+    }
+
+    const now = Date.now()
+
     switch (params.sortBy) {
       case "title":
+      case "title-asc":
         list.sort((a, b) => a.title.localeCompare(b.title))
+        break
+      case "title-desc":
+        list.sort((a, b) => b.title.localeCompare(a.title))
         break
       case "recent":
         list.sort((a, b) => (b.createdAt ?? "").localeCompare(a.createdAt ?? ""))
         break
+      case "deadline-desc":
+        // Furthest deadline first
+        list.sort((a, b) => {
+          const tA = getTime(a.deadline)
+          const tB = getTime(b.deadline)
+          return tB - tA
+        })
+        break
       case "deadline":
+      case "deadline-asc":
       default:
-        list.sort((a, b) => new Date(a.deadline).getTime() - new Date(b.deadline).getTime())
+        // Soonest deadline first. Active schemes prioritized before expired schemes if activeOnly is false.
+        list.sort((a, b) => {
+          const tA = getTime(a.deadline)
+          const tB = getTime(b.deadline)
+          const aExpired = tA < now
+          const bExpired = tB < now
+          if (aExpired !== bExpired) {
+            return aExpired ? 1 : -1
+          }
+          return tA - tB
+        })
         break
     }
 

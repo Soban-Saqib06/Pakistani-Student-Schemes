@@ -83,13 +83,25 @@ public class SchemeService : ISchemeService
         // 4. Sorting
         if (!string.IsNullOrWhiteSpace(sortBy))
         {
-            if (sortBy.Equals("deadline", StringComparison.OrdinalIgnoreCase))
+            if (sortBy.Equals("deadline", StringComparison.OrdinalIgnoreCase) || sortBy.Equals("deadline-asc", StringComparison.OrdinalIgnoreCase))
             {
                 query = query.OrderBy(s => s.Deadline);
             }
-            else if (sortBy.Equals("newest", StringComparison.OrdinalIgnoreCase))
+            else if (sortBy.Equals("deadline-desc", StringComparison.OrdinalIgnoreCase))
             {
-                query = query.OrderBy(s => s.Id);
+                query = query.OrderByDescending(s => s.Deadline);
+            }
+            else if (sortBy.Equals("newest", StringComparison.OrdinalIgnoreCase) || sortBy.Equals("recent", StringComparison.OrdinalIgnoreCase))
+            {
+                query = query.OrderByDescending(s => s.Id);
+            }
+            else if (sortBy.Equals("title", StringComparison.OrdinalIgnoreCase) || sortBy.Equals("title-asc", StringComparison.OrdinalIgnoreCase))
+            {
+                query = query.OrderBy(s => s.Title);
+            }
+            else if (sortBy.Equals("title-desc", StringComparison.OrdinalIgnoreCase))
+            {
+                query = query.OrderByDescending(s => s.Title);
             }
         }
 

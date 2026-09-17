@@ -16,45 +16,61 @@ import { BookmarkButton } from "@/components/bookmark-button"
 
 export function SchemeCard({ scheme }: { scheme: Scheme }) {
   return (
-    <Card className="group/scheme relative flex flex-col justify-between overflow-hidden rounded-2xl border border-border/70 bg-card/80 backdrop-blur-md shadow-xs transition-all duration-200 hover:-translate-y-0.5 hover:border-pak-green/40 hover:shadow-lg dark:bg-card/70 dark:hover:border-pak-green/50">
-      <CardHeader className="pb-3">
-        <div className="flex items-start justify-between gap-2">
-          <div className="flex flex-wrap items-center gap-1.5">
-            {scheme.eligibilityName ? (
-              <Badge variant="outline" className="border-border/80 bg-background/80 text-foreground text-[11px] font-medium">
-                {scheme.eligibilityName}
-              </Badge>
-            ) : null}
-            <DeadlineBadge deadline={scheme.deadline} />
+    <div className="glass-card-container group/scheme flex w-full">
+      <div className="glass-box relative z-10 flex w-full flex-col justify-between overflow-hidden rounded-2xl p-5">
+        {/* Top Header Row */}
+        <div>
+          <div className="flex items-start justify-between gap-2">
+            <div className="flex flex-wrap items-center gap-1.5">
+              {scheme.eligibilityName ? (
+                <Badge variant="outline" className="border-white/15 bg-white/10 text-white text-[11px] font-medium backdrop-blur-xs">
+                  {scheme.eligibilityName}
+                </Badge>
+              ) : null}
+              <DeadlineBadge deadline={scheme.deadline} />
+            </div>
+            <span className="relative z-20">
+              <BookmarkButton scheme={scheme} />
+            </span>
           </div>
-          <span className="relative z-10">
-            <BookmarkButton scheme={scheme} />
-          </span>
+
+          {/* Scheme Title */}
+          <h3 className="mt-3 text-base font-bold tracking-tight leading-snug text-white">
+            <Link
+              href={`/schemes/${scheme.id}`}
+              className="before:absolute before:inset-0 text-white"
+            >
+              {scheme.title}
+            </Link>
+          </h3>
+
+          {/* Description - crisp white/silver */}
+          <p className="mt-2 text-xs font-normal leading-relaxed text-neutral-200/90 line-clamp-3">
+            {scheme.description}
+          </p>
         </div>
-        <CardTitle className="mt-2.5 text-base font-semibold text-pretty leading-snug">
-          <Link href={`/schemes/${scheme.id}`} className="before:absolute before:inset-0 hover:text-pak-green transition-colors">
-            {scheme.title}
-          </Link>
-        </CardTitle>
-      </CardHeader>
-      <CardContent className="flex flex-1 flex-col gap-3.5 pb-4">
-        <CardDescription className="line-clamp-3 text-sm leading-relaxed text-muted-foreground">{scheme.description}</CardDescription>
-        <div className="mt-auto flex flex-col gap-1.5 text-xs text-muted-foreground pt-2 border-t border-border/40">
-          <span className="flex items-center gap-2">
-            <BuildingIcon className="size-3.5 shrink-0 text-pak-green" />
-            <span className="truncate font-medium text-foreground/80">{scheme.organization}</span>
-          </span>
-          <span className="flex items-center gap-2">
-            <MapPinIcon className="size-3.5 shrink-0 text-muted-foreground" />
-            <span className="truncate">{scheme.province}</span>
-          </span>
+
+        {/* Bottom Details & Meta */}
+        <div className="mt-4 pt-3 border-t border-white/10">
+          <div className="flex flex-col gap-1.5 text-xs text-neutral-300">
+            <span className="flex items-center gap-2">
+              <BuildingIcon className="size-3.5 shrink-0 text-emerald-400" />
+              <span className="truncate font-medium text-white">{scheme.organization}</span>
+            </span>
+            <span className="flex items-center gap-2">
+              <MapPinIcon className="size-3.5 shrink-0 text-neutral-400" />
+              <span className="truncate text-neutral-300">{scheme.province}</span>
+            </span>
+          </div>
+
+          <div className="mt-3 flex items-center justify-between rounded-lg bg-white/5 px-3 py-2 text-xs text-neutral-200 border border-white/10 backdrop-blur-xs">
+            <span className="truncate">
+              <strong className="font-semibold text-white">Benefit: </strong>
+              <span className="text-neutral-200">{scheme.benefits}</span>
+            </span>
+          </div>
         </div>
-      </CardContent>
-      <CardFooter className="border-t border-border/50 bg-muted/25 px-5 py-3 text-xs text-muted-foreground">
-        <span className="line-clamp-1">
-          <span className="font-semibold text-foreground">Benefit:</span> {scheme.benefits}
-        </span>
-      </CardFooter>
-    </Card>
+      </div>
+    </div>
   )
 }

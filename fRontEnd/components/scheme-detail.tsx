@@ -22,17 +22,15 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Empty, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from "@/components/ui/empty"
 import { DeadlineBadge } from "@/components/deadline-badge"
 import { BookmarkButton } from "@/components/bookmark-button"
+import { CubeLoader } from "@/components/cube-loader"
 
 export function SchemeDetail({ id }: { id: number }) {
   const { scheme, isLoading, error } = useScheme(id)
 
   if (isLoading) {
     return (
-      <div className="mx-auto max-w-3xl px-4 py-8">
-        <Skeleton className="h-5 w-28" />
-        <Skeleton className="mt-6 h-9 w-3/4" />
-        <Skeleton className="mt-4 h-5 w-1/2" />
-        <Skeleton className="mt-8 h-40 w-full" />
+      <div className="mx-auto flex min-h-[50vh] max-w-3xl items-center justify-center px-4 py-16">
+        <CubeLoader size="md" label="Loading Scheme Details..." />
       </div>
     )
   }

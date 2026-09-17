@@ -12,9 +12,9 @@ export function useCategories() {
 }
 
 export function useSchemes(params: SchemeSearchParams) {
-  const key = ["schemes", params] as const
-  const { data, error, isLoading, mutate } = useSWR(key, ([, p]) => api.searchSchemes(p), {
-    keepPreviousData: true,
+  const serialized = JSON.stringify(params)
+  const key = ["schemes", serialized] as const
+  const { data, error, isLoading, mutate } = useSWR(key, () => api.searchSchemes(params), {
     revalidateOnFocus: false,
   })
   return { result: data, error, isLoading, mutate }

@@ -48,13 +48,11 @@ export default function RootLayout({
           <div className="flex min-h-dvh flex-col">
             <SiteHeader />
             <main className="flex-1">{children}</main>
-            <footer className="border-t border-border/60 py-8 bg-muted/20">
+            <footer className="border-t border-border/60 py-6 bg-muted/20">
               <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-4 sm:flex-row text-sm text-muted-foreground">
                 <p>TaleemHub · Pakistan Scholarships &amp; Youth Opportunities Portal</p>
-                <div className="flex gap-6">
-                  <a href="/about" className="hover:text-foreground transition-colors">About</a>
-                  <a href="/categories" className="hover:text-foreground transition-colors">Eligibility Categories</a>
-                  <a href="/bookmarks" className="hover:text-foreground transition-colors">Saved Schemes</a>
+                <div>
+                  <a href="/about" className="text-sm font-medium hover:text-foreground transition-colors">About Us</a>
                 </div>
               </div>
             </footer>

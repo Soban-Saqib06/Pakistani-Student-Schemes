@@ -310,8 +310,10 @@ export const mockApi = {
         (s) => s.title.toLowerCase().includes(q) || s.description.toLowerCase().includes(q),
       )
     }
-    if (params.eligibID) list = list.filter((s) => s.eligibilityID === params.eligibID)
-    if (params.province) list = list.filter((s) => s.province === params.province)
+    if (params.eligibID !== undefined && params.eligibID !== null && params.eligibID !== ("" as unknown)) {
+      list = list.filter((s) => Number(s.eligibilityID) === Number(params.eligibID))
+    }
+    if (params.province && params.province !== "all") list = list.filter((s) => s.province === params.province)
     if (params.organization) list = list.filter((s) => s.organization === params.organization)
     if (params.activeOnly) list = list.filter(isActive)
 

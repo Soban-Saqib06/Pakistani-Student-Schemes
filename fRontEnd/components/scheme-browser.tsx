@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useMemo, useState } from "react"
+import { useRouter, useSearchParams } from "next/navigation"
 import { ChevronLeftIcon, ChevronRightIcon, SearchXIcon } from "lucide-react"
 
 import { useCategories, useSchemes } from "@/lib/use-data"
@@ -9,6 +10,7 @@ import { Skeleton } from "@/components/ui/skeleton"
 import { Empty, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from "@/components/ui/empty"
 import { SchemeCard } from "@/components/scheme-card"
 import { SchemeFilters, type FilterState } from "@/components/scheme-filters"
+import { CubeLoader } from "@/components/cube-loader"
 
 const PAGE_SIZE = 9
 
@@ -21,10 +23,48 @@ const defaultFilters: FilterState = {
 }
 
 export function SchemeBrowser() {
+  const router = useRouter()
+  const searchParams = useSearchParams()
   const { categories } = useCategories()
-  const [filters, setFilters] = useState<FilterState>(defaultFilters)
-  const [debouncedSearch, setDebouncedSearch] = useState("")
+
+  const eligibParam = searchParams.get("eligibID")
+  const searchParam = searchParams.get("search") || searchParams.get("textQuery")
+  const provinceParam = searchParams.get("province")
+
+  const [filters, setFilters] = useState<FilterState>(() => ({
+    ...defaultFilters,
+    eligibID: eligibParam ? Number(eligibParam) : null,
+    search: searchParam || "",
+    province: provinceParam || null,
+  }))
+
   const [page, setPage] = useState(1)
+
+  // Keep filters synced whenever URL parameters change (e.g. clicking a category card or browser nav)
+  useEffect(() => {
+    const nextEligib = eligibParam ? Number(eligibParam) : null
+    const nextSearch = searchParam || ""
+    const nextProvince = provinceParam || null
+
+    setFilters((prev) => {
+      if (
+        prev.eligibID === nextEligib &&
+        prev.search === nextSearch &&
+        prev.province === nextProvince
+      ) {
+        return prev
+      }
+      return {
+        ...prev,
+        eligibID: nextEligib,
+        search: nextSearch,
+        province: nextProvince,
+      }
+    })
+    setPage(1)
+  }, [eligibParam, searchParam, provinceParam])
+
+  const [debouncedSearch, setDebouncedSearch] = useState(() => filters.search.trim())
 
   useEffect(() => {
     const t = setTimeout(() => setDebouncedSearch(filters.search.trim()), 300)
@@ -42,13 +82,25 @@ export function SchemeBrowser() {
   })
 
   function handleChange(patch: Partial<FilterState>) {
-    setFilters((prev) => ({ ...prev, ...patch }))
+    const next = { ...filters, ...patch }
+    setFilters(next)
     setPage(1)
+
+    // Sync to URL so filters are persistent, shareable, and reflect in history
+    const params = new URLSearchParams()
+    if (next.eligibID !== null && next.eligibID !== undefined) {
+      params.set("eligibID", String(next.eligibID))
+    }
+    if (next.search) params.set("search", next.search)
+    if (next.province) params.set("province", next.province)
+    const qs = params.toString()
+    router.replace(qs ? `/?${qs}` : "/", { scroll: false })
   }
 
   function handleReset() {
     setFilters(defaultFilters)
     setPage(1)
+    router.replace("/", { scroll: false })
   }
 
   const totalCount = result?.totalCount ?? 0
@@ -72,16 +124,8 @@ export function SchemeBrowser() {
       </p>
 
       {showSkeleton ? (
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {Array.from({ length: 6 }).map((_, i) => (
-            <div key={i} className="flex flex-col gap-3 rounded-xl border p-6">
-              <Skeleton className="h-5 w-24" />
-              <Skeleton className="h-6 w-full" />
-              <Skeleton className="h-4 w-full" />
-              <Skeleton className="h-4 w-3/4" />
-              <Skeleton className="mt-2 h-4 w-1/2" />
-            </div>
-          ))}
+        <div className="flex min-h-[320px] flex-col items-center justify-center rounded-2xl border border-border/60 bg-card/40 p-12 backdrop-blur-xs">
+          <CubeLoader size="md" label="Loading verified opportunities..." />
         </div>
       ) : schemes.length === 0 ? (
         <Empty className="rounded-xl border">

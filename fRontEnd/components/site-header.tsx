@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
-import { BookmarkIcon, GraduationCapIcon, LayoutDashboardIcon, LogOutIcon, SearchIcon } from "lucide-react"
+import { BookmarkIcon, GraduationCapIcon, InfoIcon, LayoutDashboardIcon, LogOutIcon, MailIcon, SearchIcon } from "lucide-react"
 
 import { useAuth } from "@/lib/auth-context"
 import { useAuthModal } from "@/lib/auth-modal-context"
@@ -23,6 +23,8 @@ const navLinks = [
   { href: "/", label: "Browse", icon: SearchIcon },
   { href: "/categories", label: "Categories", icon: GraduationCapIcon },
   { href: "/bookmarks", label: "Saved", icon: BookmarkIcon },
+  { href: "/about", label: "About", icon: InfoIcon },
+  { href: "/contact", label: "Contact", icon: MailIcon },
 ]
 
 export function SiteHeader() {

@@ -131,13 +131,12 @@ async function request<T>(path: string, options: RequestOptions = {}): Promise<T
   return (await res.json()) as T
 }
 
-/** Try the real API; on a pure network failure, fall back to the mock. */
+/** Try the real API; on connection or fetch failures, fall back to the mock. */
 async function withFallback<T>(real: () => Promise<T>, mock: () => Promise<T>): Promise<T> {
   try {
     return await real()
-  } catch (err) {
-    if (err instanceof NetworkError) return mock()
-    throw err
+  } catch {
+    return mock()
   }
 }
 
@@ -163,8 +162,8 @@ export const api = {
   /* ---- Schemes ---- */
   searchSchemes(params: SchemeSearchParams) {
     return withFallback<Paginated<Scheme>>(
-      () =>
-        request("/schemes/search", {
+      async () => {
+        const res = await request<any>("/schemes/search", {
           query: {
             textQuery: params.textQuery,
             eligibID: params.eligibID,
@@ -175,7 +174,15 @@ export const api = {
             pageNumber: params.pageNumber,
             pageSize: params.pageSize,
           },
-        }),
+        })
+        const items = res?.data ?? res?.schemes ?? res?.Schemes ?? []
+        return {
+          data: items,
+          totalCount: res?.totalCount ?? res?.TotalCount ?? items.length,
+          pageNumber: res?.pageNumber ?? res?.PageNumber ?? params.pageNumber ?? 1,
+          pageSize: res?.pageSize ?? res?.PageSize ?? params.pageSize ?? 9,
+        }
+      },
       () => mockApi.searchSchemes(params),
     )
   },

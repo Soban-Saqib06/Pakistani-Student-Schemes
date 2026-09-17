@@ -4,7 +4,6 @@ import Link from "next/link"
 import { ArrowRightIcon, BookOpenIcon, LayersIcon } from "lucide-react"
 import { useCategories } from "@/lib/use-data"
 import { Skeleton } from "@/components/ui/skeleton"
-import { Button } from "@/components/ui/button"
 
 export default function CategoriesPage() {
   const { categories, isLoading } = useCategories()
@@ -40,15 +39,16 @@ export default function CategoriesPage() {
           </div>
         ) : (
           categories.map((cat) => (
-            <div
+            <Link
               key={cat.id}
-              className="group flex flex-col justify-between rounded-xl border border-border/60 bg-card p-6 transition-all hover:border-primary/40 hover:shadow-md"
+              href={`/?eligibID=${cat.id}`}
+              className="group flex flex-col justify-between rounded-xl border border-border/60 bg-card p-6 transition-all duration-200 hover:border-pak-green/60 hover:shadow-lg hover:-translate-y-1 cursor-pointer"
             >
               <div>
-                <div className="mb-4 flex size-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                <div className="mb-4 flex size-10 items-center justify-center rounded-lg bg-pak-green/10 text-pak-green">
                   <BookOpenIcon className="size-5" />
                 </div>
-                <h2 className="text-xl font-semibold tracking-tight text-foreground group-hover:text-primary transition-colors">
+                <h2 className="text-xl font-semibold tracking-tight text-foreground">
                   {cat.name}
                 </h2>
                 <p className="mt-2 text-sm text-muted-foreground leading-relaxed line-clamp-3">
@@ -56,13 +56,11 @@ export default function CategoriesPage() {
                 </p>
               </div>
 
-              <div className="mt-6 pt-4 border-t border-border/40">
-                <Button variant="ghost" size="sm" className="w-full justify-between p-0 hover:bg-transparent" render={<Link href={`/?eligibID=${cat.id}`} />}>
-                  <span className="text-xs font-medium text-primary">Explore Schemes</span>
-                  <ArrowRightIcon className="size-3.5 text-primary transition-transform group-hover:translate-x-1" />
-                </Button>
+              <div className="mt-6 pt-4 border-t border-border/40 flex items-center justify-between">
+                <span className="text-xs font-semibold text-pak-green">Explore Schemes</span>
+                <ArrowRightIcon className="size-4 text-pak-green transition-transform group-hover:translate-x-1.5" />
               </div>
-            </div>
+            </Link>
           ))
         )}
       </div>

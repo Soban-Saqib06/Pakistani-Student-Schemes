@@ -67,9 +67,11 @@ export function SchemeFilters({ filters, categories, onChange, onReset }: Scheme
         >
           <SelectTrigger size="sm" className="w-[170px]">
             <SelectValue placeholder="Eligibility">
-              {(val: string) =>
-                val === ALL ? "All eligibility" : categories.find((c) => String(c.id) === val)?.name
-              }
+              {(val: string) => {
+                if (!val || val === ALL) return "All eligibility"
+                const found = categories.find((c) => String(c.id) === String(val))
+                return found ? found.name : "Eligibility"
+              }}
             </SelectValue>
           </SelectTrigger>
           <SelectContent>

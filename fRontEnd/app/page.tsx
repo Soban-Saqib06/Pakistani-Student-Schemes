@@ -1,35 +1,12 @@
 import Link from "next/link"
-import { redirect } from "next/navigation"
 import { ArrowRightIcon, LayersIcon } from "lucide-react"
-
-export const dynamic = "force-dynamic"
 
 export const metadata = {
   title: "TaleemHub — Pakistan's Scholarships & Education Schemes",
   description: "Connecting Pakistani students with verified government scholarships, laptop initiatives, and provincial grants before deadlines slip away.",
 }
 
-interface PageProps {
-  searchParams?: Promise<Record<string, string | string[] | undefined>>
-}
-
-export default async function HomePage({ searchParams }: PageProps) {
-  // If user hits "/" with filter query params (e.g. from bookmarked link, browser history, or category selection),
-  // seamlessly forward them to the live browse directory so they never get stranded on the landing hero.
-  const resolved = searchParams ? await searchParams : {}
-  const hasFilter = Boolean(
-    resolved.eligibID || resolved.search || resolved.province || resolved.textQuery || resolved.sortBy
-  )
-  if (hasFilter) {
-    const qs = new URLSearchParams()
-    for (const [k, v] of Object.entries(resolved)) {
-      if (typeof v === "string" && v && v !== "all") {
-        qs.set(k, v)
-      }
-    }
-    redirect(qs.toString() ? `/browse?${qs.toString()}` : "/browse")
-  }
-
+export default function HomePage() {
   return (
     <div className="flex flex-col min-h-[calc(100vh-5rem)] justify-center items-center bg-[#020b05] text-white selection:bg-pak-green selection:text-white p-2.5 sm:p-5 md:p-7">
       {/* Concentric Smooth Rounded Background Rectangles (Edge-to-Edge from Inspo) */}

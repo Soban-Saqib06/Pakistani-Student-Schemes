@@ -1,6 +1,11 @@
 import { notFound } from "next/navigation"
 import { SchemeDetail } from "@/components/scheme-detail"
 
+export function generateStaticParams() {
+  // Pre-render IDs 1 through 30 for static export
+  return Array.from({ length: 30 }, (_, i) => ({ id: String(i + 1) }))
+}
+
 export default async function SchemeDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
   const schemeId = Number(id)

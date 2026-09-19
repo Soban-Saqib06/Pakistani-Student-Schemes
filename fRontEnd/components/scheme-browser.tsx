@@ -93,36 +93,6 @@ export function SchemeBrowser() {
     }
   }
 
-  // Keep filters synced whenever URL parameters change (e.g. clicking a category card or browser nav)
-  useEffect(() => {
-    const nextEligib = parseEligib(eligibParam)
-    const nextSearch = searchParam || ""
-    const nextProvince = parseProvince(provinceParam)
-    const nextSort = sortByParam ? parseSortBy(sortByParam) : null
-    const nextActiveOnly = activeOnlyParam === "false" ? false : true
-
-    setFilters((prev) => {
-      const effectiveSort = nextSort ?? prev.sortBy
-      if (
-        prev.eligibID === nextEligib &&
-        prev.search === nextSearch &&
-        prev.province === nextProvince &&
-        prev.sortBy === effectiveSort &&
-        prev.activeOnly === nextActiveOnly
-      ) {
-        return prev
-      }
-      return {
-        ...prev,
-        eligibID: nextEligib,
-        search: nextSearch,
-        province: nextProvince,
-        sortBy: effectiveSort,
-        activeOnly: nextActiveOnly,
-      }
-    })
-  }, [eligibParam, searchParam, provinceParam, sortByParam, activeOnlyParam])
-
   // Handle browser Back / Forward history buttons
   useEffect(() => {
     function onPopState() {
@@ -166,67 +136,13 @@ export function SchemeBrowser() {
   })
 
   function handleChange(patch: Partial<FilterState>) {
-    // 1. If user explicitly chooses "All eligibility", redirect to /browse as requested
-    if ("eligibID" in patch && patch.eligibID === null) {
-      if (typeof window !== "undefined") {
-        window.location.href = "/browse"
-        return
-      }
-    }
-
-    // 2. If user explicitly chooses "All regions", redirect to /browse as requested
-    if ("province" in patch && patch.province === null) {
-      if (typeof window !== "undefined") {
-        window.location.href = "/browse"
-        return
-      }
-    }
-
-    // 3. If user changes sort order, reorder in-place without triggering any navigation or page reload
-    if ("sortBy" in patch && patch.sortBy) {
-      setFilters((prev) => ({ ...prev, sortBy: patch.sortBy! }))
-      setPage(1)
-      return
-    }
-
-    // 4. For other filter updates (search, activeOnly, specific category, specific region)
-    const next = { ...filters, ...patch }
-    setFilters(next)
+    setFilters((prev) => ({ ...prev, ...patch }))
     setPage(1)
-
-    // Safely reflect filters in the browser URL without triggering Next.js server route transitions
-    if (typeof window !== "undefined") {
-      const params = new URLSearchParams()
-      if (next.eligibID !== null && next.eligibID !== undefined && !isNaN(next.eligibID)) {
-        params.set("eligibID", String(next.eligibID))
-      }
-      if (next.search) params.set("search", next.search)
-      if (next.province && next.province !== "all") params.set("province", next.province)
-      if (!next.activeOnly) {
-        params.set("activeOnly", "false")
-      }
-      const qs = params.toString()
-      const targetUrl = qs ? `/browse?${qs}` : "/browse"
-
-      try {
-        window.history.replaceState(
-          { ...(window.history.state || {}), __NA: true },
-          "",
-          targetUrl
-        )
-      } catch {
-        // Safe fallback
-      }
-    }
   }
 
   function handleReset() {
-    if (typeof window !== "undefined") {
-      window.location.href = "/browse"
-    } else {
-      setFilters(defaultFilters)
-      setPage(1)
-    }
+    setFilters(defaultFilters)
+    setPage(1)
   }
 
   const totalCount = result?.totalCount ?? 0

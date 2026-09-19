@@ -5,8 +5,6 @@ import { SparklesIcon, MailIcon, ArrowRightIcon } from "lucide-react"
 import { SchemeBrowser } from "@/components/scheme-browser"
 import { CubeLoader } from "@/components/cube-loader"
 
-export const dynamic = "force-dynamic"
-
 export const metadata = {
   title: "Browse Scholarships & Student Schemes — TaleemHub",
   description: "Filter and search all verified government scholarships, laptop programs, and educational grants across Pakistan.",

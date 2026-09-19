@@ -9,8 +9,8 @@ import { BookmarkButton } from "@/components/bookmark-button"
 export function SchemeCard({ scheme, viewMode = "grid" }: { scheme: Scheme; viewMode?: "grid" | "list" }) {
   if (viewMode === "list") {
     return (
-      <div className="glass-card-container group/scheme flex w-full">
-        <div className="glass-box relative z-10 flex w-full flex-col justify-between gap-4 overflow-hidden rounded-2xl p-5 md:flex-row md:items-center">
+      <div className="glass-card-container group/scheme flex w-full min-w-0 max-w-full">
+        <div className="glass-box relative z-10 flex w-full min-w-0 max-w-full flex-col justify-between gap-4 overflow-hidden rounded-2xl p-4 sm:p-5 md:flex-row md:items-center">
           {/* Main Info */}
           <div className="flex-1 min-w-0">
             <div className="flex flex-wrap items-center gap-2 mb-2">
@@ -22,7 +22,7 @@ export function SchemeCard({ scheme, viewMode = "grid" }: { scheme: Scheme; view
               <DeadlineBadge deadline={scheme.deadline} />
             </div>
 
-            <h3 className="text-lg font-bold tracking-tight leading-snug text-white">
+            <h3 className="text-base sm:text-lg font-bold tracking-tight leading-snug text-white">
               <Link
                 href={`/schemes/${scheme.id}`}
                 className="before:absolute before:inset-0 text-white hover:text-white"
@@ -31,16 +31,16 @@ export function SchemeCard({ scheme, viewMode = "grid" }: { scheme: Scheme; view
               </Link>
             </h3>
 
-            <p className="mt-1.5 text-sm font-normal leading-relaxed text-neutral-200 line-clamp-2 max-w-3xl">
+            <p className="mt-1.5 text-xs sm:text-sm font-normal leading-relaxed text-neutral-200 line-clamp-2 max-w-3xl">
               {scheme.description}
             </p>
 
-            <div className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-1.5 text-sm text-neutral-300">
-              <span className="flex items-center gap-1.5">
+            <div className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-1.5 text-xs sm:text-sm text-neutral-300">
+              <span className="flex items-center gap-1.5 min-w-0">
                 <BuildingIcon className="size-4 shrink-0 text-emerald-400" />
                 <span className="truncate font-medium text-white">{scheme.organization}</span>
               </span>
-              <span className="flex items-center gap-1.5">
+              <span className="flex items-center gap-1.5 min-w-0">
                 <MapPinIcon className="size-4 shrink-0 text-neutral-400" />
                 <span className="truncate text-neutral-300">{scheme.province}</span>
               </span>
@@ -49,7 +49,7 @@ export function SchemeCard({ scheme, viewMode = "grid" }: { scheme: Scheme; view
 
           {/* Right Side / Meta & Actions */}
           <div className="flex items-center justify-between gap-3 pt-3 border-t border-white/10 md:pt-0 md:border-t-0 md:flex-col md:items-end md:justify-center shrink-0">
-            <div className="rounded-xl bg-white/5 px-3 py-1.5 text-sm text-neutral-200 border border-white/10 backdrop-blur-xs max-w-xs truncate">
+            <div className="rounded-xl bg-white/5 px-3 py-1.5 text-xs sm:text-sm text-neutral-200 border border-white/10 backdrop-blur-xs max-w-xs truncate">
               <strong className="font-semibold text-white">Benefit: </strong>
               <span className="text-neutral-200">{scheme.benefits}</span>
             </div>
@@ -70,13 +70,16 @@ export function SchemeCard({ scheme, viewMode = "grid" }: { scheme: Scheme; view
     )
   }
 
+  // When viewMode is "grid":
+  // On mobile (< md / vertical mode): Render as clean, non-overflowing single-column list card
+  // On desktop (md+): Render as multi-column card
   return (
-    <div className="glass-card-container group/scheme flex w-full">
-      <div className="glass-box relative z-10 flex w-full flex-col justify-between overflow-hidden rounded-2xl p-5">
-        {/* Top Header Row */}
-        <div>
-          <div className="flex items-start justify-between gap-2">
-            <div className="flex flex-wrap items-center gap-2">
+    <>
+      {/* Mobile/Vertical Mode (< md): Auto-switches to full-width card so it never extends beyond screen */}
+      <div className="md:hidden glass-card-container group/scheme flex w-full min-w-0 max-w-full">
+        <div className="glass-box relative z-10 flex w-full min-w-0 max-w-full flex-col justify-between gap-3.5 overflow-hidden rounded-2xl p-4">
+          <div className="flex-1 min-w-0">
+            <div className="flex flex-wrap items-center gap-2 mb-2">
               {scheme.eligibilityName ? (
                 <Badge variant="outline" className="border-white/15 bg-white/10 text-white text-xs font-semibold px-2.5 py-0.5 backdrop-blur-xs">
                   {scheme.eligibilityName}
@@ -84,48 +87,109 @@ export function SchemeCard({ scheme, viewMode = "grid" }: { scheme: Scheme; view
               ) : null}
               <DeadlineBadge deadline={scheme.deadline} />
             </div>
-            <span className="relative z-20">
-              <BookmarkButton scheme={scheme} />
-            </span>
+
+            <h3 className="text-base font-bold tracking-tight leading-snug text-white">
+              <Link
+                href={`/schemes/${scheme.id}`}
+                className="before:absolute before:inset-0 text-white hover:text-white"
+              >
+                {scheme.title}
+              </Link>
+            </h3>
+
+            <p className="mt-1.5 text-xs font-normal leading-relaxed text-neutral-200 line-clamp-2">
+              {scheme.description}
+            </p>
+
+            <div className="mt-2.5 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-neutral-300">
+              <span className="flex items-center gap-1.5 min-w-0">
+                <BuildingIcon className="size-3.5 shrink-0 text-emerald-400" />
+                <span className="truncate font-medium text-white">{scheme.organization}</span>
+              </span>
+              <span className="flex items-center gap-1.5 min-w-0">
+                <MapPinIcon className="size-3.5 shrink-0 text-neutral-400" />
+                <span className="truncate text-neutral-300">{scheme.province}</span>
+              </span>
+            </div>
           </div>
 
-          {/* Scheme Title */}
-          <h3 className="mt-3.5 text-lg font-bold tracking-tight leading-snug text-white">
-            <Link
-              href={`/schemes/${scheme.id}`}
-              className="before:absolute before:inset-0 text-white hover:text-white"
-            >
-              {scheme.title}
-            </Link>
-          </h3>
-
-          {/* Description - crisp readable white/silver */}
-          <p className="mt-2.5 text-sm font-normal leading-relaxed text-neutral-200 line-clamp-3">
-            {scheme.description}
-          </p>
-        </div>
-
-        {/* Bottom Details & Meta */}
-        <div className="mt-5 pt-3.5 border-t border-white/10">
-          <div className="flex flex-col gap-2 text-sm text-neutral-300">
-            <span className="flex items-center gap-2">
-              <BuildingIcon className="size-4 shrink-0 text-emerald-400" />
-              <span className="truncate font-medium text-white">{scheme.organization}</span>
-            </span>
-            <span className="flex items-center gap-2">
-              <MapPinIcon className="size-4 shrink-0 text-neutral-400" />
-              <span className="truncate text-neutral-300">{scheme.province}</span>
-            </span>
-          </div>
-
-          <div className="mt-3.5 flex items-center justify-between rounded-xl bg-white/5 px-3.5 py-2.5 text-sm text-neutral-200 border border-white/10 backdrop-blur-xs">
-            <span className="truncate">
+          <div className="flex items-center justify-between gap-2 pt-3 border-t border-white/10">
+            <div className="rounded-lg bg-white/5 px-2.5 py-1 text-xs text-neutral-200 border border-white/10 backdrop-blur-xs max-w-[55%] truncate">
               <strong className="font-semibold text-white">Benefit: </strong>
               <span className="text-neutral-200">{scheme.benefits}</span>
-            </span>
+            </div>
+
+            <div className="flex items-center gap-2 relative z-20">
+              <BookmarkButton scheme={scheme} />
+              <Link
+                href={`/schemes/${scheme.id}`}
+                className="inline-flex items-center gap-1 rounded-md bg-pak-green px-3 py-1.5 text-xs font-semibold text-white shadow-xs transition-colors hover:bg-pak-green/90 cursor-pointer"
+              >
+                <span>Details</span>
+                <ArrowRightIcon className="size-3" />
+              </Link>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+
+      {/* Desktop/Tablet Mode (md+): Grid card */}
+      <div className="hidden md:flex glass-card-container group/scheme w-full min-w-0 max-w-full">
+        <div className="glass-box relative z-10 flex w-full min-w-0 max-w-full flex-col justify-between overflow-hidden rounded-2xl p-5">
+          {/* Top Header Row */}
+          <div className="min-w-0">
+            <div className="flex items-start justify-between gap-2">
+              <div className="flex flex-wrap items-center gap-2">
+                {scheme.eligibilityName ? (
+                  <Badge variant="outline" className="border-white/15 bg-white/10 text-white text-xs font-semibold px-2.5 py-0.5 backdrop-blur-xs">
+                    {scheme.eligibilityName}
+                  </Badge>
+                ) : null}
+                <DeadlineBadge deadline={scheme.deadline} />
+              </div>
+              <span className="relative z-20 shrink-0">
+                <BookmarkButton scheme={scheme} />
+              </span>
+            </div>
+
+            {/* Scheme Title */}
+            <h3 className="mt-3.5 text-lg font-bold tracking-tight leading-snug text-white">
+              <Link
+                href={`/schemes/${scheme.id}`}
+                className="before:absolute before:inset-0 text-white hover:text-white"
+              >
+                {scheme.title}
+              </Link>
+            </h3>
+
+            {/* Description */}
+            <p className="mt-2.5 text-sm font-normal leading-relaxed text-neutral-200 line-clamp-3">
+              {scheme.description}
+            </p>
+          </div>
+
+          {/* Bottom Details & Meta */}
+          <div className="mt-5 pt-3.5 border-t border-white/10 min-w-0">
+            <div className="flex flex-col gap-2 text-sm text-neutral-300">
+              <span className="flex items-center gap-2 min-w-0">
+                <BuildingIcon className="size-4 shrink-0 text-emerald-400" />
+                <span className="truncate font-medium text-white">{scheme.organization}</span>
+              </span>
+              <span className="flex items-center gap-2 min-w-0">
+                <MapPinIcon className="size-4 shrink-0 text-neutral-400" />
+                <span className="truncate text-neutral-300">{scheme.province}</span>
+              </span>
+            </div>
+
+            <div className="mt-3.5 flex items-center justify-between rounded-xl bg-white/5 px-3.5 py-2.5 text-sm text-neutral-200 border border-white/10 backdrop-blur-xs min-w-0">
+              <span className="truncate">
+                <strong className="font-semibold text-white">Benefit: </strong>
+                <span className="text-neutral-200">{scheme.benefits}</span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
   )
 }

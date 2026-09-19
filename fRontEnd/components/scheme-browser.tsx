@@ -166,8 +166,8 @@ export function SchemeBrowser() {
           {rangeLabel}
         </p>
 
-        {/* View Switcher: Cards vs List */}
-        <div className="flex items-center gap-1 rounded-md border border-border/70 bg-card/75 p-1 shadow-2xs">
+        {/* View Switcher: Cards vs List (Hidden in vertical/mobile mode, only visible on desktop md+) */}
+        <div className="hidden md:flex items-center gap-1 rounded-md border border-border/70 bg-card/75 p-1 shadow-2xs">
           <Button
             variant={viewMode === "grid" ? "secondary" : "ghost"}
             size="sm"
@@ -224,7 +224,7 @@ export function SchemeBrowser() {
         <div
           className={
             viewMode === "grid"
-              ? "grid gap-4 transition-opacity sm:grid-cols-2 lg:grid-cols-3 " +
+              ? "flex flex-col gap-3.5 md:grid md:gap-4 md:grid-cols-2 lg:grid-cols-3 transition-opacity " +
                 (isLoading ? "opacity-60" : "opacity-100")
               : "flex flex-col gap-3.5 transition-opacity " +
                 (isLoading ? "opacity-60" : "opacity-100")

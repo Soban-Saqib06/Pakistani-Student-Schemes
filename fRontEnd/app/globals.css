@@ -172,8 +172,6 @@
 .glass-card-container {
   position: relative;
   isolation: isolate;
-  overflow: hidden;
-  border-radius: 1rem;
 }
 
 .glass-card-container::before {

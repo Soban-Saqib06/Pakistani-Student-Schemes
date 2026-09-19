@@ -43,7 +43,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="antialiased">
+      <body className="antialiased overflow-x-clip">
         <Providers>
           <div className="flex min-h-dvh flex-col">
             <SiteHeader />

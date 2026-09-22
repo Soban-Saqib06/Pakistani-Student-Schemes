@@ -7,8 +7,7 @@ import { SiteHeader } from '@/components/site-header'
 export const metadata: Metadata = {
   title: 'TaleemHub Pakistan — Scholarships & Student Schemes Portal',
   description:
-    'Discover, filter and bookmark government scholarships, grants and education schemes across Pakistan. Track deadlines and eligibility in one place.',
-  generator: 'v0.app',
+    'Real-time directory of verified Pakistani government scholarships, laptop programs, and provincial education grants with deadline tracking.',
   icons: {
     icon: [
       {

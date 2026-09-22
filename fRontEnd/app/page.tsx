@@ -3,44 +3,45 @@ import { ArrowRightIcon, LayersIcon } from "lucide-react"
 
 export const metadata = {
   title: "TaleemHub — Pakistan's Scholarships & Education Schemes",
-  description: "Connecting Pakistani students with verified government scholarships, laptop initiatives, and provincial grants before deadlines slip away.",
+  description:
+    "Real-time directory of verified Pakistani government scholarships, laptop programs, and provincial grants before deadlines expire.",
 }
 
 export default function HomePage() {
   return (
-    <div className="flex flex-col min-h-[calc(100vh-5rem)] justify-center items-center bg-[#020b05] text-white selection:bg-pak-green selection:text-white p-2.5 sm:p-5 md:p-7">
-      {/* Concentric Smooth Rounded Background Rectangles (Edge-to-Edge from Inspo) */}
+    <div className="flex flex-col min-h-[calc(100vh-5rem)] justify-center items-center bg-[#092328] text-white selection:bg-[#2a835f] selection:text-white p-2.5 sm:p-5 md:p-7">
+      {/* Concentric Smooth Rounded Background Rectangles */}
       <div className="w-full flex-1 flex flex-col justify-center">
-        {/* Outermost Rounded Rectangle Outline - expands to screen edge */}
-        <div className="w-full rounded-[34px] sm:rounded-[46px] md:rounded-[56px] border border-emerald-500/20 p-2 sm:p-3 md:p-4 transition-all duration-300">
+        {/* Outermost Rounded Rectangle Outline */}
+        <div className="w-full rounded-[34px] sm:rounded-[46px] md:rounded-[56px] border border-[#8bbb92]/15 p-2 sm:p-3 md:p-4 transition-all duration-300">
           {/* Middle Rounded Rectangle Outline */}
-          <div className="w-full rounded-[26px] sm:rounded-[38px] md:rounded-[48px] border border-emerald-500/30 p-2 sm:p-3 md:p-4 transition-all duration-300">
+          <div className="w-full rounded-[26px] sm:rounded-[38px] md:rounded-[48px] border border-[#8bbb92]/25 p-2 sm:p-3 md:p-4 transition-all duration-300">
             {/* Core Hero Rounded Rectangle Card */}
-            <div className="relative w-full overflow-hidden rounded-[20px] sm:rounded-[30px] md:rounded-[40px] border border-emerald-500/40 bg-gradient-to-b from-emerald-950/60 via-[#031d0f]/75 to-[#010e06]/95 px-6 py-20 sm:px-12 sm:py-28 md:py-36 text-center shadow-[0_0_100px_-20px_rgba(16,185,129,0.3)] backdrop-blur-xl">
-              {/* Subtle Dark Green Ambient Inner Glow */}
-              <div
-                aria-hidden="true"
-                className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
-              >
-                <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[450px] w-[700px] rounded-full bg-emerald-500/18 blur-[130px]" />
+            <div className="relative w-full overflow-hidden rounded-[20px] sm:rounded-[30px] md:rounded-[40px] border border-[#8bbb92]/35 bg-gradient-to-b from-[#12544f]/85 via-[#0d343b]/90 to-[#092328]/95 px-6 py-16 sm:px-12 sm:py-24 md:py-28 text-center shadow-[0_16px_50px_rgba(4,18,20,0.6)] backdrop-blur-xl">
+              
+              {/* Authentic Status Tag (No generic sparkles) */}
+              <div className="inline-flex items-center gap-2 rounded-full border border-[#8bbb92]/30 bg-[#12544f]/60 px-3.5 py-1 text-xs font-semibold text-[#8bbb92] mb-6 tracking-wide shadow-2xs">
+                <span className="size-2 rounded-full bg-[#8bbb92] animate-pulse" />
+                <span>Verified Schemes · 2026/2027 Academic Year</span>
               </div>
 
               {/* Brand Display Title */}
-              <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black tracking-tight leading-[0.95] text-white select-none">
-                Taleem<span className="text-pak-green">Hub</span>
+              <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight leading-[1.02] text-white select-none">
+                Every government scholarship in Pakistan.
+                <span className="block mt-2 text-[#8bbb92]">Before the deadline passes.</span>
               </h1>
 
-              {/* Mission Statement */}
-              <p className="mx-auto mt-6 sm:mt-8 max-w-2xl text-base sm:text-lg md:text-xl font-normal leading-relaxed text-neutral-300 text-pretty">
-                Connecting Pakistani students with verified government scholarships, laptop initiatives, and provincial grants &mdash;{" "}
-                <span className="text-white font-medium">before deadlines slip away.</span>
+              {/* Concrete Problem-Solving Subheadline */}
+              <p className="mx-auto mt-6 sm:mt-8 max-w-2xl text-base sm:text-lg md:text-xl font-normal leading-relaxed text-[#f2f7f4]/90 text-pretty">
+                We monitor active funding, laptop initiatives, and provincial grants from HEC, PEEF, BEEF, and Ihsaas in one live directory &mdash;{" "}
+                <span className="text-white font-medium">with verified closing dates and direct portal links.</span>
               </p>
 
-              {/* Clean, Non-AI Rectangular Action Buttons */}
-              <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-3.5">
+              {/* Custom Action Buttons with Micro-Borders */}
+              <div className="mt-9 flex flex-col sm:flex-row items-center justify-center gap-3.5">
                 <Link
                   href="/browse"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-md bg-pak-green px-7 py-3.5 text-base font-semibold text-white shadow-xs transition-all hover:bg-pak-green/90 active:translate-y-px cursor-pointer"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-md bg-[#2a835f] border border-[#8bbb92]/40 px-7 py-3.5 text-base font-semibold text-white shadow-xs transition-all hover:bg-[#2a835f]/90 hover:border-[#8bbb92]/70 active:translate-y-px cursor-pointer"
                 >
                   <span>Explore All Schemes</span>
                   <ArrowRightIcon className="size-4.5" />
@@ -48,21 +49,33 @@ export default function HomePage() {
 
                 <Link
                   href="/categories"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-md border border-white/20 bg-white/5 px-6 py-3.5 text-base font-semibold text-white transition-all hover:bg-white/10 hover:border-white/30 active:translate-y-px cursor-pointer"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-md border border-[#8bbb92]/25 bg-[#12544f]/60 px-6 py-3.5 text-base font-semibold text-[#f2f7f4] transition-all hover:bg-[#12544f] hover:border-[#8bbb92]/50 active:translate-y-px cursor-pointer"
                 >
-                  <LayersIcon className="size-4.5 text-pak-green" />
+                  <LayersIcon className="size-4.5 text-[#8bbb92]" />
                   <span>Browse by Category</span>
                 </Link>
               </div>
 
-              {/* Quiet, minimalist trust note */}
-              <div className="mt-10 text-xs sm:text-sm text-neutral-400/90 tracking-wide">
-                <span>100% Free</span>
-                <span className="mx-2.5 text-neutral-600">·</span>
-                <span>Official Portals (HEC, PEEF, BEEF)</span>
-                <span className="mx-2.5 text-neutral-600">·</span>
-                <span>Live Deadlines</span>
+              {/* Concrete Proof Metrics (Replaces template middot trust line) */}
+              <div className="mt-12 pt-8 border-t border-[#8bbb92]/15 grid grid-cols-2 sm:grid-cols-4 gap-3.5 max-w-3xl mx-auto text-left">
+                <div className="p-3.5 rounded-lg bg-[#092328]/50 border border-[#8bbb92]/15">
+                  <span className="block text-2xl font-black text-white">12+</span>
+                  <span className="text-xs text-[#8bbb92] font-semibold">Active Opportunities</span>
+                </div>
+                <div className="p-3.5 rounded-lg bg-[#092328]/50 border border-[#8bbb92]/15">
+                  <span className="block text-2xl font-black text-white">8</span>
+                  <span className="text-xs text-[#8bbb92] font-semibold">Academic Categories</span>
+                </div>
+                <div className="p-3.5 rounded-lg bg-[#092328]/50 border border-[#8bbb92]/15">
+                  <span className="block text-2xl font-black text-white">7</span>
+                  <span className="text-xs text-[#8bbb92] font-semibold">Provinces &amp; Regions</span>
+                </div>
+                <div className="p-3.5 rounded-lg bg-[#092328]/50 border border-[#8bbb92]/15">
+                  <span className="block text-2xl font-black text-white">100%</span>
+                  <span className="text-xs text-[#8bbb92] font-semibold">Direct Official Links</span>
+                </div>
               </div>
+
             </div>
           </div>
         </div>

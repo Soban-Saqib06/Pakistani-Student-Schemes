@@ -1,6 +1,6 @@
 import { Suspense } from "react"
 import Link from "next/link"
-import { SparklesIcon, MailIcon, ArrowRightIcon } from "lucide-react"
+import { ShieldCheckIcon, MailIcon, ArrowRightIcon, PlusCircleIcon } from "lucide-react"
 
 import { SchemeBrowser } from "@/components/scheme-browser"
 import { CubeLoader } from "@/components/cube-loader"
@@ -20,8 +20,8 @@ export default function BrowsePage() {
           {/* Left Column: Heading & Directory Info */}
           <div className="flex flex-col items-start gap-3 lg:col-span-7">
             <span className="inline-flex items-center gap-2 rounded-md border border-pak-green/30 bg-pak-green/10 px-3 py-1 text-xs font-semibold text-pak-green shadow-2xs">
-              <SparklesIcon className="size-3.5" />
-              Live Scheme Directory
+              <ShieldCheckIcon className="size-3.5" />
+              Verified Opportunities
             </span>
             <h1 className="text-3xl font-extrabold tracking-tight md:text-4xl text-foreground">
               Browse All Student Schemes
@@ -45,7 +45,7 @@ export default function BrowsePage() {
             <div className="relative overflow-hidden rounded-lg border border-border/80 bg-card/95 p-5 shadow-xs backdrop-blur-xs transition-all hover:border-pak-green/50 hover:shadow-md">
               <div className="flex items-start gap-3.5">
                 <div className="flex size-10 shrink-0 items-center justify-center rounded-md bg-pak-green/10 text-pak-green">
-                  <SparklesIcon className="size-5" />
+                  <PlusCircleIcon className="size-5" />
                 </div>
                 <div className="flex-1 min-w-0">
                   <span className="inline-block rounded-md bg-pak-green/10 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-pak-green">

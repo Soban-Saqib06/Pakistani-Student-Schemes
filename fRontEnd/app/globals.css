@@ -101,14 +101,14 @@
   --secondary-foreground: #f1f5f2;
   --muted: #152718;
   --muted-foreground: #97aea0;
-  --accent: #4b612f;
-  --accent-foreground: #c7e8d0;
+  --accent: #f5b738;
+  --accent-foreground: #0e1b11;
   --destructive: oklch(0.704 0.191 22.216);
   --border: rgba(60, 98, 88, 0.4);
   --input: rgba(60, 98, 88, 0.45);
   --ring: #3c6258;
   --chart-1: #3c6258;
-  --chart-2: #8ebf9e;
+  --chart-2: #f5b738;
   --chart-3: #4b612f;
   --chart-4: #194c0b;
   --chart-5: #1f3821;
@@ -117,7 +117,7 @@
   --sidebar-primary: #3c6258;
   --sidebar-primary-foreground: #ffffff;
   --sidebar-accent: #1f3821;
-  --sidebar-accent-foreground: #c7e8d0;
+  --sidebar-accent-foreground: #f5b738;
   --sidebar-border: rgba(60, 98, 88, 0.35);
   --sidebar-ring: #3c6258;
 }
@@ -137,14 +137,14 @@
     --secondary-foreground: #f1f5f2;
     --muted: #152718;
     --muted-foreground: #97aea0;
-    --accent: #4b612f;
-    --accent-foreground: #c7e8d0;
+    --accent: #f5b738;
+    --accent-foreground: #0e1b11;
     --destructive: oklch(0.704 0.191 22.216);
     --border: rgba(60, 98, 88, 0.4);
     --input: rgba(60, 98, 88, 0.45);
     --ring: #3c6258;
     --chart-1: #3c6258;
-    --chart-2: #8ebf9e;
+    --chart-2: #f5b738;
     --chart-3: #4b612f;
     --chart-4: #194c0b;
     --chart-5: #1f3821;
@@ -153,7 +153,7 @@
     --sidebar-primary: #3c6258;
     --sidebar-primary-foreground: #ffffff;
     --sidebar-accent: #1f3821;
-    --sidebar-accent-foreground: #c7e8d0;
+    --sidebar-accent-foreground: #f5b738;
     --sidebar-border: rgba(60, 98, 88, 0.35);
     --sidebar-ring: #3c6258;
   }
@@ -196,7 +196,7 @@
   height: 2.25rem;
   top: 10%;
   right: 7%;
-  background: linear-gradient(to bottom, rgba(142, 191, 158, 0.7), transparent);
+  background: linear-gradient(to bottom, rgba(245, 183, 56, 0.75), transparent);
   border-radius: 9999px;
   pointer-events: none;
   z-index: 0;
@@ -211,7 +211,7 @@
 
 .glass-card-container:hover::after {
   height: 2.75rem;
-  background: linear-gradient(to bottom, rgba(142, 191, 158, 0.95), transparent);
+  background: linear-gradient(to bottom, rgba(245, 183, 56, 0.95), transparent);
 }
 
 /* Elevated Card Box: #1f3821 sits prominently above #0e1b11 background */

@@ -15,17 +15,17 @@ export function SchemeCard({ scheme, viewMode = "grid" }: { scheme: Scheme; view
           <div className="flex-1 min-w-0">
             <div className="flex flex-wrap items-center gap-2 mb-2">
               {scheme.eligibilityName ? (
-                <Badge variant="outline" className="border-[#3c6258]/50 bg-[#0e1b11]/80 text-[#8ebf9e] text-xs font-bold px-2.5 py-0.5 shadow-2xs">
+                <Badge variant="outline" className="border-[#f5b738]/40 bg-[#0e1b11]/80 text-[#f5b738] text-xs font-bold px-2.5 py-0.5 shadow-2xs">
                   {scheme.eligibilityName}
                 </Badge>
               ) : null}
               <DeadlineBadge deadline={scheme.deadline} />
             </div>
 
-            <h3 className="text-base sm:text-lg font-bold tracking-tight leading-snug text-white group-hover/scheme:text-[#8ebf9e] transition-colors">
+            <h3 className="text-base sm:text-lg font-bold tracking-tight leading-snug text-white group-hover/scheme:text-[#f5b738] transition-colors">
               <Link
                 href={`/schemes/${scheme.id}`}
-                className="before:absolute before:inset-0 text-white group-hover/scheme:text-[#8ebf9e] transition-colors"
+                className="before:absolute before:inset-0 text-white group-hover/scheme:text-[#f5b738] transition-colors"
               >
                 {scheme.title}
               </Link>
@@ -37,11 +37,11 @@ export function SchemeCard({ scheme, viewMode = "grid" }: { scheme: Scheme; view
 
             <div className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-1.5 text-xs sm:text-sm text-[#97aea0]">
               <span className="flex items-center gap-1.5 min-w-0">
-                <BuildingIcon className="size-4 shrink-0 text-[#8ebf9e]" />
+                <BuildingIcon className="size-4 shrink-0 text-[#f5b738]" />
                 <span className="truncate font-semibold text-white">{scheme.organization}</span>
               </span>
               <span className="flex items-center gap-1.5 min-w-0">
-                <MapPinIcon className="size-4 shrink-0 text-[#8ebf9e]" />
+                <MapPinIcon className="size-4 shrink-0 text-[#f5b738]" />
                 <span className="truncate text-[#d0ddd3]">{scheme.province}</span>
               </span>
             </div>
@@ -50,7 +50,7 @@ export function SchemeCard({ scheme, viewMode = "grid" }: { scheme: Scheme; view
           {/* Right Side / Meta & Actions */}
           <div className="flex items-center justify-between gap-3 pt-3 border-t border-[#3c6258]/35 md:pt-0 md:border-t-0 md:flex-col md:items-end md:justify-center shrink-0">
             <div className="rounded-xl bg-[#0e1b11]/80 px-3 py-1.5 text-xs sm:text-sm text-[#f1f5f2] border border-[#3c6258]/45 shadow-2xs max-w-xs truncate">
-              <strong className="font-bold text-[#8ebf9e]">Benefit: </strong>
+              <strong className="font-bold text-[#f5b738]">Benefit: </strong>
               <span className="text-[#f1f5f2]">{scheme.benefits}</span>
             </div>
 
@@ -81,17 +81,17 @@ export function SchemeCard({ scheme, viewMode = "grid" }: { scheme: Scheme; view
           <div className="flex-1 min-w-0">
             <div className="flex flex-wrap items-center gap-2 mb-2">
               {scheme.eligibilityName ? (
-                <Badge variant="outline" className="border-[#3c6258]/50 bg-[#0e1b11]/80 text-[#8ebf9e] text-xs font-bold px-2.5 py-0.5 shadow-2xs">
+                <Badge variant="outline" className="border-[#f5b738]/40 bg-[#0e1b11]/80 text-[#f5b738] text-xs font-bold px-2.5 py-0.5 shadow-2xs">
                   {scheme.eligibilityName}
                 </Badge>
               ) : null}
               <DeadlineBadge deadline={scheme.deadline} />
             </div>
 
-            <h3 className="text-base font-bold tracking-tight leading-snug text-white group-hover/scheme:text-[#8ebf9e] transition-colors">
+            <h3 className="text-base font-bold tracking-tight leading-snug text-white group-hover/scheme:text-[#f5b738] transition-colors">
               <Link
                 href={`/schemes/${scheme.id}`}
-                className="before:absolute before:inset-0 text-white group-hover/scheme:text-[#8ebf9e] transition-colors"
+                className="before:absolute before:inset-0 text-white group-hover/scheme:text-[#f5b738] transition-colors"
               >
                 {scheme.title}
               </Link>
@@ -103,11 +103,11 @@ export function SchemeCard({ scheme, viewMode = "grid" }: { scheme: Scheme; view
 
             <div className="mt-2.5 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-[#97aea0]">
               <span className="flex items-center gap-1.5 min-w-0">
-                <BuildingIcon className="size-3.5 shrink-0 text-[#8ebf9e]" />
+                <BuildingIcon className="size-3.5 shrink-0 text-[#f5b738]" />
                 <span className="truncate font-semibold text-white">{scheme.organization}</span>
               </span>
               <span className="flex items-center gap-1.5 min-w-0">
-                <MapPinIcon className="size-3.5 shrink-0 text-[#8ebf9e]" />
+                <MapPinIcon className="size-3.5 shrink-0 text-[#f5b738]" />
                 <span className="truncate text-[#d0ddd3]">{scheme.province}</span>
               </span>
             </div>
@@ -115,7 +115,7 @@ export function SchemeCard({ scheme, viewMode = "grid" }: { scheme: Scheme; view
 
           <div className="flex items-center justify-between gap-2 pt-3 border-t border-[#3c6258]/35">
             <div className="rounded-lg bg-[#0e1b11]/80 px-2.5 py-1 text-xs text-[#f1f5f2] border border-[#3c6258]/45 shadow-2xs max-w-[55%] truncate">
-              <strong className="font-bold text-[#8ebf9e]">Benefit: </strong>
+              <strong className="font-bold text-[#f5b738]">Benefit: </strong>
               <span className="text-[#f1f5f2]">{scheme.benefits}</span>
             </div>
 
@@ -141,7 +141,7 @@ export function SchemeCard({ scheme, viewMode = "grid" }: { scheme: Scheme; view
             <div className="flex items-start justify-between gap-2">
               <div className="flex flex-wrap items-center gap-2">
                 {scheme.eligibilityName ? (
-                  <Badge variant="outline" className="border-[#3c6258]/50 bg-[#0e1b11]/80 text-[#8ebf9e] text-xs font-bold px-2.5 py-0.5 shadow-2xs">
+                  <Badge variant="outline" className="border-[#f5b738]/40 bg-[#0e1b11]/80 text-[#f5b738] text-xs font-bold px-2.5 py-0.5 shadow-2xs">
                     {scheme.eligibilityName}
                   </Badge>
                 ) : null}
@@ -153,10 +153,10 @@ export function SchemeCard({ scheme, viewMode = "grid" }: { scheme: Scheme; view
             </div>
 
             {/* Scheme Title */}
-            <h3 className="mt-3.5 text-lg font-bold tracking-tight leading-snug text-white group-hover/scheme:text-[#8ebf9e] transition-colors">
+            <h3 className="mt-3.5 text-lg font-bold tracking-tight leading-snug text-white group-hover/scheme:text-[#f5b738] transition-colors">
               <Link
                 href={`/schemes/${scheme.id}`}
-                className="before:absolute before:inset-0 text-white group-hover/scheme:text-[#8ebf9e] transition-colors"
+                className="before:absolute before:inset-0 text-white group-hover/scheme:text-[#f5b738] transition-colors"
               >
                 {scheme.title}
               </Link>
@@ -172,18 +172,18 @@ export function SchemeCard({ scheme, viewMode = "grid" }: { scheme: Scheme; view
           <div className="mt-5 pt-3.5 border-t border-[#3c6258]/35 min-w-0">
             <div className="flex flex-col gap-2 text-sm text-[#97aea0]">
               <span className="flex items-center gap-2 min-w-0">
-                <BuildingIcon className="size-4 shrink-0 text-[#8ebf9e]" />
+                <BuildingIcon className="size-4 shrink-0 text-[#f5b738]" />
                 <span className="truncate font-semibold text-white">{scheme.organization}</span>
               </span>
               <span className="flex items-center gap-2 min-w-0">
-                <MapPinIcon className="size-4 shrink-0 text-[#8ebf9e]" />
+                <MapPinIcon className="size-4 shrink-0 text-[#f5b738]" />
                 <span className="truncate text-[#d0ddd3]">{scheme.province}</span>
               </span>
             </div>
 
             <div className="mt-3.5 flex items-center justify-between rounded-xl bg-[#0e1b11]/80 px-3.5 py-2.5 text-sm text-[#f1f5f2] border border-[#3c6258]/45 shadow-2xs min-w-0">
               <span className="truncate">
-                <strong className="font-bold text-[#8ebf9e]">Benefit: </strong>
+                <strong className="font-bold text-[#f5b738]">Benefit: </strong>
                 <span className="text-[#f1f5f2]">{scheme.benefits}</span>
               </span>
             </div>

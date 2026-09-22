@@ -18,15 +18,15 @@ export default function HomePage() {
           <div className="pointer-events-none absolute -top-24 left-1/2 -translate-x-1/2 size-96 rounded-full bg-[#3c6258]/20 blur-3xl" />
 
           {/* Status Tag */}
-          <div className="relative inline-flex items-center gap-2 rounded-full border border-[#3c6258]/60 bg-[#0e1b11]/80 px-4 py-1.5 text-xs font-semibold text-[#8ebf9e] mb-8 tracking-wide shadow-2xs">
-            <span className="size-2 rounded-full bg-[#8ebf9e] animate-pulse" />
+          <div className="relative inline-flex items-center gap-2 rounded-full border border-[#f5b738]/40 bg-[#0e1b11]/80 px-4 py-1.5 text-xs font-semibold text-[#f5b738] mb-8 tracking-wide shadow-2xs">
+            <span className="size-2 rounded-full bg-[#f5b738] animate-pulse" />
             <span>Verified Schemes · 2026/2027 Academic Year</span>
           </div>
 
           {/* Brand Display Title */}
           <h1 className="relative text-4xl sm:text-6xl md:text-7xl font-black tracking-tight leading-[1.05] text-white select-none">
             Every government scholarship in Pakistan.
-            <span className="block mt-2 text-[#8ebf9e]">Before the deadline passes.</span>
+            <span className="block mt-2 text-[#f5b738]">Before the deadline passes.</span>
           </h1>
 
           {/* Concrete Problem-Solving Subheadline */}
@@ -39,7 +39,7 @@ export default function HomePage() {
           <div className="relative mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
               href="/browse"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-xl bg-[#3c6258] hover:bg-[#48776b] px-8 py-3.5 text-base font-bold text-white shadow-md transition-all active:translate-y-px cursor-pointer"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-xl bg-[#3c6258] hover:bg-[#48776b] border border-[#528477]/40 px-8 py-3.5 text-base font-bold text-white shadow-md transition-all active:translate-y-px cursor-pointer"
             >
               <span>Explore All Schemes</span>
               <ArrowRightIcon className="size-4.5" />
@@ -49,7 +49,7 @@ export default function HomePage() {
               href="/categories"
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-xl border border-[#3c6258]/60 bg-[#0e1b11]/60 hover:bg-[#0e1b11] px-7 py-3.5 text-base font-semibold text-[#f1f5f2] transition-all active:translate-y-px cursor-pointer"
             >
-              <LayersIcon className="size-4.5 text-[#8ebf9e]" />
+              <LayersIcon className="size-4.5 text-[#f5b738]" />
               <span>Browse by Category</span>
             </Link>
           </div>
@@ -57,19 +57,19 @@ export default function HomePage() {
           {/* Metrics Row */}
           <div className="relative mt-14 pt-8 border-t border-[#3c6258]/35 grid grid-cols-2 sm:grid-cols-4 gap-3.5 max-w-3xl mx-auto text-left">
             <div className="p-4 rounded-xl bg-[#0e1b11]/70 border border-[#3c6258]/40 shadow-xs">
-              <span className="block text-2xl sm:text-3xl font-black text-[#8ebf9e]">12+</span>
+              <span className="block text-2xl sm:text-3xl font-black text-[#f5b738]">12+</span>
               <span className="mt-1 block text-xs text-[#97aea0] font-medium">Active Opportunities</span>
             </div>
             <div className="p-4 rounded-xl bg-[#0e1b11]/70 border border-[#3c6258]/40 shadow-xs">
-              <span className="block text-2xl sm:text-3xl font-black text-[#8ebf9e]">8</span>
+              <span className="block text-2xl sm:text-3xl font-black text-[#f5b738]">8</span>
               <span className="mt-1 block text-xs text-[#97aea0] font-medium">Academic Categories</span>
             </div>
             <div className="p-4 rounded-xl bg-[#0e1b11]/70 border border-[#3c6258]/40 shadow-xs">
-              <span className="block text-2xl sm:text-3xl font-black text-[#8ebf9e]">7</span>
+              <span className="block text-2xl sm:text-3xl font-black text-[#f5b738]">7</span>
               <span className="mt-1 block text-xs text-[#97aea0] font-medium">Provinces &amp; Regions</span>
             </div>
             <div className="p-4 rounded-xl bg-[#0e1b11]/70 border border-[#3c6258]/40 shadow-xs">
-              <span className="block text-2xl sm:text-3xl font-black text-[#8ebf9e]">100%</span>
+              <span className="block text-2xl sm:text-3xl font-black text-[#f5b738]">100%</span>
               <span className="mt-1 block text-xs text-[#97aea0] font-medium">Direct Official Links</span>
             </div>
           </div>

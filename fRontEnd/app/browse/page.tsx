@@ -32,7 +32,7 @@ export default function BrowsePage() {
             <div className="mt-2 flex flex-wrap items-center gap-3">
               <Link
                 href="/categories"
-                className="inline-flex items-center gap-2 rounded-md bg-pak-green px-4 py-2.5 text-sm font-semibold text-white transition-all hover:bg-pak-green/90 shadow-2xs"
+                className="inline-flex items-center gap-2 rounded-md bg-pak-green px-4 py-2.5 text-sm font-bold text-white dark:text-[#063b00] transition-all hover:bg-pak-green/90 shadow-2xs"
               >
                 <span>Browse by Category</span>
                 <ArrowRightIcon className="size-4" />
@@ -63,7 +63,7 @@ export default function BrowsePage() {
               <div className="mt-4 pt-3.5 border-t border-border/50 flex items-center justify-between">
                 <Link
                   href="/contact"
-                  className="inline-flex items-center gap-2 rounded-md bg-pak-green px-3.5 py-2 text-xs font-semibold text-white transition-all hover:bg-pak-green/90 shadow-2xs"
+                  className="inline-flex items-center gap-2 rounded-md bg-pak-green px-3.5 py-2 text-xs font-bold text-white dark:text-[#063b00] transition-all hover:bg-pak-green/90 shadow-2xs"
                 >
                   <MailIcon className="size-3.5" />
                   <span>Contact &amp; Submit Scheme</span>

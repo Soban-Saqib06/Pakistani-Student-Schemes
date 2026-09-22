@@ -96,7 +96,7 @@ export function SchemeDetail({ id }: { id: number }) {
       <div className="mt-6 flex flex-wrap items-center gap-3">
         <Button
           size="lg"
-          className="h-11 px-5 font-bold bg-pak-green hover:bg-pak-green/90 text-white dark:text-[#063b00] cursor-pointer shadow-xs transition-colors"
+          className="h-11 px-5 font-bold bg-pak-green hover:bg-pak-green/90 text-white cursor-pointer shadow-xs transition-colors"
           render={<a href={scheme.officialUrl} target="_blank" rel="noopener noreferrer" />}
           disabled={expired}
         >

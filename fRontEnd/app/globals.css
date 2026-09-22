@@ -86,76 +86,76 @@
 }
 
 .dark {
-  --pak-green: #90b800;
-  --pak-green-muted: #266210;
+  --pak-green: #1f7d53;
+  --pak-green-muted: #255f38;
   color-scheme: dark;
-  --background: #063b00;
-  --foreground: #f6faf4;
-  --card: #114708;
-  --card-foreground: #f6faf4;
-  --popover: #114708;
-  --popover-foreground: #f6faf4;
-  --primary: #90b800;
-  --primary-foreground: #063b00;
-  --secondary: #266210;
-  --secondary-foreground: #f6faf4;
-  --muted: #0d3d05;
-  --muted-foreground: #a6cc33;
-  --accent: #266210;
-  --accent-foreground: #e1e100;
+  --background: #18230f;
+  --foreground: #f3f7f4;
+  --card: #27391c;
+  --card-foreground: #f3f7f4;
+  --popover: #27391c;
+  --popover-foreground: #f3f7f4;
+  --primary: #1f7d53;
+  --primary-foreground: #ffffff;
+  --secondary: #255f38;
+  --secondary-foreground: #f3f7f4;
+  --muted: #202f17;
+  --muted-foreground: #9ebaa6;
+  --accent: #255f38;
+  --accent-foreground: #34d399;
   --destructive: oklch(0.704 0.191 22.216);
-  --border: rgba(144, 184, 0, 0.28);
-  --input: rgba(144, 184, 0, 0.32);
-  --ring: #90b800;
-  --chart-1: #90b800;
-  --chart-2: #e1e100;
-  --chart-3: #266210;
-  --chart-4: #063b00;
-  --chart-5: #5c8c00;
-  --sidebar: #093f03;
-  --sidebar-foreground: #f6faf4;
-  --sidebar-primary: #90b800;
-  --sidebar-primary-foreground: #063b00;
-  --sidebar-accent: #266210;
-  --sidebar-accent-foreground: #e1e100;
-  --sidebar-border: rgba(144, 184, 0, 0.25);
-  --sidebar-ring: #90b800;
+  --border: rgba(37, 95, 56, 0.45);
+  --input: rgba(37, 95, 56, 0.5);
+  --ring: #1f7d53;
+  --chart-1: #1f7d53;
+  --chart-2: #34d399;
+  --chart-3: #255f38;
+  --chart-4: #27391c;
+  --chart-5: #18230f;
+  --sidebar: #1e2c15;
+  --sidebar-foreground: #f3f7f4;
+  --sidebar-primary: #1f7d53;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #255f38;
+  --sidebar-accent-foreground: #34d399;
+  --sidebar-border: rgba(37, 95, 56, 0.35);
+  --sidebar-ring: #1f7d53;
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not(.light) {
     color-scheme: dark;
-    --background: #063b00;
-    --foreground: #f6faf4;
-    --card: #114708;
-    --card-foreground: #f6faf4;
-    --popover: #114708;
-    --popover-foreground: #f6faf4;
-    --primary: #90b800;
-    --primary-foreground: #063b00;
-    --secondary: #266210;
-    --secondary-foreground: #f6faf4;
-    --muted: #0d3d05;
-    --muted-foreground: #a6cc33;
-    --accent: #266210;
-    --accent-foreground: #e1e100;
+    --background: #18230f;
+    --foreground: #f3f7f4;
+    --card: #27391c;
+    --card-foreground: #f3f7f4;
+    --popover: #27391c;
+    --popover-foreground: #f3f7f4;
+    --primary: #1f7d53;
+    --primary-foreground: #ffffff;
+    --secondary: #255f38;
+    --secondary-foreground: #f3f7f4;
+    --muted: #202f17;
+    --muted-foreground: #9ebaa6;
+    --accent: #255f38;
+    --accent-foreground: #34d399;
     --destructive: oklch(0.704 0.191 22.216);
-    --border: rgba(144, 184, 0, 0.28);
-    --input: rgba(144, 184, 0, 0.32);
-    --ring: #90b800;
-    --chart-1: #90b800;
-    --chart-2: #e1e100;
-    --chart-3: #266210;
-    --chart-4: #063b00;
-    --chart-5: #5c8c00;
-    --sidebar: #093f03;
-    --sidebar-foreground: #f6faf4;
-    --sidebar-primary: #90b800;
-    --sidebar-primary-foreground: #063b00;
-    --sidebar-accent: #266210;
-    --sidebar-accent-foreground: #e1e100;
-    --sidebar-border: rgba(144, 184, 0, 0.25);
-    --sidebar-ring: #90b800;
+    --border: rgba(37, 95, 56, 0.45);
+    --input: rgba(37, 95, 56, 0.5);
+    --ring: #1f7d53;
+    --chart-1: #1f7d53;
+    --chart-2: #34d399;
+    --chart-3: #255f38;
+    --chart-4: #27391c;
+    --chart-5: #18230f;
+    --sidebar: #1e2c15;
+    --sidebar-foreground: #f3f7f4;
+    --sidebar-primary: #1f7d53;
+    --sidebar-primary-foreground: #ffffff;
+    --sidebar-accent: #255f38;
+    --sidebar-accent-foreground: #34d399;
+    --sidebar-border: rgba(37, 95, 56, 0.35);
+    --sidebar-ring: #1f7d53;
   }
 }
 
@@ -182,7 +182,7 @@
   height: 4.5rem;
   top: 25%;
   right: 6%;
-  background-color: rgba(144, 184, 0, 0.22);
+  background-color: rgba(31, 125, 83, 0.2);
   filter: blur(18px);
   pointer-events: none;
   z-index: 0;
@@ -196,7 +196,7 @@
   height: 2.25rem;
   top: 10%;
   right: 7%;
-  background: linear-gradient(to bottom, rgba(225, 225, 0, 0.8), transparent);
+  background: linear-gradient(to bottom, rgba(52, 211, 153, 0.7), transparent);
   border-radius: 9999px;
   pointer-events: none;
   z-index: 0;
@@ -205,45 +205,45 @@
 
 .glass-card-container:hover::before {
   transform: scale(1.15) translate(3px, -2px);
-  background-color: rgba(144, 184, 0, 0.35);
+  background-color: rgba(31, 125, 83, 0.32);
   filter: blur(16px);
 }
 
 .glass-card-container:hover::after {
   height: 2.75rem;
-  background: linear-gradient(to bottom, rgba(225, 225, 0, 1), transparent);
+  background: linear-gradient(to bottom, rgba(52, 211, 153, 0.95), transparent);
 }
 
-/* Elevated Card Box with Strong Contrast */
+/* Elevated Card Box: #27391c sits prominently above #18230f background */
 .glass-box {
-  background-color: #124809;
-  border: 1px solid rgba(144, 184, 0, 0.32);
+  background-color: #27391c;
+  border: 1px solid rgba(37, 95, 56, 0.5);
   -webkit-backdrop-filter: blur(20px);
   backdrop-filter: blur(20px);
-  box-shadow: 0 10px 30px -5px rgba(2, 20, 0, 0.6);
+  box-shadow: 0 8px 24px -4px rgba(10, 16, 8, 0.65);
   border-radius: 1rem;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   color: #ffffff;
 }
 
 .glass-card-container:hover .glass-box {
-  background-color: #16560c;
-  box-shadow: 0px 0px 22px 2px rgba(144, 184, 0, 0.35), 0 14px 38px 0 rgba(2, 20, 0, 0.7);
-  border: 1px solid rgba(225, 225, 0, 0.6);
+  background-color: #2f4422;
+  box-shadow: 0px 0px 20px 2px rgba(31, 125, 83, 0.25), 0 12px 30px 0 rgba(10, 16, 8, 0.75);
+  border: 1px solid rgba(31, 125, 83, 0.65);
   transform: translateY(-3px);
 }
 
 /* Kinetic Dual-Cube Loader */
 .kinetic-spinner {
   --size: 26px;
-  --color: #90b800;
+  --color: #1f7d53;
   width: 90px;
   height: 90px;
   position: relative;
 }
 
 .dark .kinetic-spinner {
-  --color: #90b800;
+  --color: #1f7d53;
 }
 
 .kinetic-spinner-white {

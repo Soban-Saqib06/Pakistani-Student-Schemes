@@ -289,7 +289,7 @@ export function SiteHeader() {
               <Button variant="ghost" size="default" className="h-10 px-4 text-sm font-semibold" onClick={() => promptAuth("login")}>
                 Log in
               </Button>
-              <Button size="default" className="h-10 px-4.5 text-sm font-bold bg-pak-green hover:bg-pak-green/90 text-white dark:text-[#063b00] shadow-xs cursor-pointer" onClick={() => promptAuth("register")}>
+              <Button size="default" className="h-10 px-4.5 text-sm font-bold bg-pak-green hover:bg-pak-green/90 text-white shadow-xs cursor-pointer" onClick={() => promptAuth("register")}>
                 Sign up
               </Button>
             </div>
@@ -352,7 +352,7 @@ export function SiteHeader() {
               </Button>
               <Button
                 size="sm"
-                className="h-9 px-3.5 text-xs font-bold bg-pak-green hover:bg-pak-green/90 text-white dark:text-[#063b00] shadow-2xs"
+                className="h-9 px-3.5 text-xs font-bold bg-pak-green hover:bg-pak-green/90 text-white shadow-2xs"
                 onClick={() => promptAuth("register")}
               >
                 Sign up

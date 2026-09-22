@@ -19,11 +19,7 @@ export default function BrowsePage() {
           <div className="grid gap-8 lg:grid-cols-12 lg:items-center">
           {/* Left Column: Heading & Directory Info */}
           <div className="flex flex-col items-start gap-3 lg:col-span-7">
-            <span className="inline-flex items-center gap-2 rounded-md border border-pak-green/30 bg-pak-green/10 px-3 py-1 text-xs font-semibold text-pak-green shadow-2xs">
-              <ShieldCheckIcon className="size-3.5" />
-              Verified Opportunities
-            </span>
-            <h1 className="text-3xl font-extrabold tracking-tight md:text-4xl text-foreground">
+            <h1 className="text-4xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-foreground">
               Browse All Student Schemes
             </h1>
             <p className="mt-1 text-base md:text-lg text-muted-foreground max-w-2xl leading-relaxed">
@@ -32,7 +28,7 @@ export default function BrowsePage() {
             <div className="mt-2 flex flex-wrap items-center gap-3">
               <Link
                 href="/categories"
-                className="inline-flex items-center gap-2 rounded-md bg-pak-green px-4 py-2.5 text-sm font-bold text-white transition-all hover:bg-pak-green/90 shadow-2xs"
+                className="inline-flex items-center gap-2 rounded-md bg-[#2e7d32] px-4 py-2.5 text-sm font-bold text-white transition-all hover:bg-[#256b2a] shadow-2xs"
               >
                 <span>Browse by Category</span>
                 <ArrowRightIcon className="size-4" />
@@ -42,7 +38,7 @@ export default function BrowsePage() {
 
           {/* Right Column: Submission & Contact Us Callout Box */}
           <div className="lg:col-span-5">
-            <div className="relative overflow-hidden rounded-lg border border-border/80 bg-card/95 p-5 shadow-xs backdrop-blur-xs transition-all hover:border-pak-green/50 hover:shadow-md">
+            <div className="relative overflow-hidden rounded-xl border border-[#588157]/45 bg-[#23372e] p-5 shadow-xs backdrop-blur-xs transition-all hover:border-pak-green/50 hover:shadow-md">
               <div className="flex items-start gap-3.5">
                 <div className="flex size-10 shrink-0 items-center justify-center rounded-md bg-pak-green/10 text-pak-green">
                   <PlusCircleIcon className="size-5" />
@@ -63,7 +59,7 @@ export default function BrowsePage() {
               <div className="mt-4 pt-3.5 border-t border-border/50 flex items-center justify-between">
                 <Link
                   href="/contact"
-                  className="inline-flex items-center gap-2 rounded-md bg-pak-green px-3.5 py-2 text-xs font-bold text-white transition-all hover:bg-pak-green/90 shadow-2xs"
+                  className="inline-flex items-center gap-2 rounded-md bg-[#2e7d32] px-3.5 py-2 text-xs font-bold text-white transition-all hover:bg-[#256b2a] shadow-2xs"
                 >
                   <MailIcon className="size-3.5" />
                   <span>Contact &amp; Submit Scheme</span>

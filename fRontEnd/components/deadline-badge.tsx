@@ -15,11 +15,11 @@ export function DeadlineBadge({ deadline, className }: { deadline: string; class
         isClosing
           ? "border-red-500/50 bg-red-950/40 text-red-300 border-red-800/60"
           : isExpired
-          ? "border-white/10 bg-white/5 text-neutral-400"
-          : "border-white/15 bg-white/10 text-neutral-200"
+          ? "border-[#588157]/20 bg-[#1c2b24]/40 text-[#a3b18a]/60 line-through"
+          : "border-[#588157]/45 bg-[#1c2b24]/70 text-[#dad7cd]"
       } ${className ?? ""}`}
     >
-      <CalendarClockIcon className="size-3.5 mr-1" />
+      <CalendarClockIcon className="size-3.5 mr-1 text-[#35a333]" />
       {info.label}
     </Badge>
   )

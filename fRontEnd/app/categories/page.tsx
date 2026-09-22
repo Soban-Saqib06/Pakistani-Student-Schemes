@@ -11,10 +11,6 @@ export default function CategoriesPage() {
   return (
     <div className="mx-auto max-w-6xl px-4 py-12">
       <div className="mb-10 flex flex-col items-start gap-3">
-        <span className="inline-flex items-center gap-2 rounded-md border border-pak-green/30 bg-pak-green/10 px-3 py-1.5 text-sm font-semibold text-pak-green">
-          <LayersIcon className="size-4" />
-          Education &amp; Eligibility
-        </span>
         <h1 className="text-3xl font-extrabold tracking-tight md:text-5xl">
           Browse by Eligibility Criteria
         </h1>

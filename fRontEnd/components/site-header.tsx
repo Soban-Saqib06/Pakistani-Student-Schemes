@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
+import { useState, useEffect } from "react"
 import { BookmarkIcon, EyeIcon, InfoIcon, LayersIcon, LayoutDashboardIcon, LogOutIcon, SearchIcon, TypeIcon } from "lucide-react"
 
 import { useAuth } from "@/lib/auth-context"
@@ -33,10 +34,26 @@ export function SiteHeader() {
   const { user, isAdmin, logout } = useAuth()
   const { promptAuth } = useAuthModal()
   const { fontScale, setFontScale, dyslexiaMode, toggleDyslexiaMode } = useAccessibility()
+  const [isScrolled, setIsScrolled] = useState(false)
+
+  useEffect(() => {
+    function handleScroll() {
+      setIsScrolled(window.scrollY > 20)
+    }
+    handleScroll()
+    window.addEventListener("scroll", handleScroll, { passive: true })
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
 
   return (
-    <header className="sticky top-0 z-40 border-b border-border/60 bg-background/85 backdrop-blur-md supports-backdrop-filter:bg-background/70">
-      <div className="mx-auto flex h-20 max-w-6xl items-center justify-between gap-4 px-4">
+    <header className={`sticky top-0 z-40 border-b border-[#588157]/30 transition-all duration-200 ${
+      isScrolled
+        ? "bg-[#14201a]/98 backdrop-blur-md shadow-[0_8px_20px_rgba(10,18,14,0.5)]"
+        : "bg-[#16221c]/95 backdrop-blur-sm"
+    }`}>
+      <div className={`mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 transition-all duration-200 ${
+        isScrolled ? "h-16" : "h-20"
+      }`}>
         {/* Brand */}
         <Link href="/" className="group flex flex-col justify-center select-none shrink-0">
           <span className="text-2xl font-black tracking-tight leading-none text-foreground transition-opacity group-hover:opacity-90">
@@ -298,7 +315,7 @@ export function SiteHeader() {
       </div>
 
       {/* Vertical / Mobile Bar: Out of header navigation and separate Sign up / Log in buttons */}
-      <div className="md:hidden border-t border-border/50 bg-background/95 px-4 py-2.5 backdrop-blur-md">
+      <div className="md:hidden border-t border-[#588157]/25 bg-[#15231b]/98 px-4 py-2.5 backdrop-blur-md">
         <div className="mx-auto flex items-center justify-between gap-3 max-w-6xl">
           {/* Mobile Navigation */}
           <nav className="flex items-center gap-1.5 overflow-x-auto scrollbar-none py-0.5">

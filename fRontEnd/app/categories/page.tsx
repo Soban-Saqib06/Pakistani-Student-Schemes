@@ -38,23 +38,28 @@ export default function CategoriesPage() {
             <Link
               key={cat.id}
               href={`/browse?eligibID=${cat.id}`}
-              className="group flex flex-col justify-between rounded-lg border border-border/60 bg-card p-6 transition-all duration-200 hover:border-pak-green/60 hover:shadow-lg hover:-translate-y-1 cursor-pointer"
+              className="group flex flex-col justify-between rounded-xl border border-[#588157]/35 bg-[#22362d] p-6 transition-all duration-200 hover:border-[#588157] hover:shadow-md cursor-pointer"
             >
               <div>
-                <div className="mb-4 flex size-12 items-center justify-center rounded-md bg-pak-green/10 text-pak-green">
-                  <BookOpenIcon className="size-6" />
+                <div className="mb-4 flex items-center justify-between">
+                  <BookOpenIcon className="size-5 text-[#a3b18a] group-hover:text-[#35a333] transition-colors" />
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-[#a3b18a] group-hover:text-[#dad7cd] transition-colors">
+                    Track 0{cat.id}
+                  </span>
                 </div>
-                <h2 className="text-2xl font-bold tracking-tight text-foreground">
+                <h2 className="text-xl font-bold tracking-tight text-[#dad7cd] group-hover:text-[#35a333] transition-colors">
                   {cat.name}
                 </h2>
-                <p className="mt-2.5 text-base text-muted-foreground leading-relaxed line-clamp-3">
+                <p className="mt-2 text-xs sm:text-sm text-[#a3b18a] leading-relaxed line-clamp-3">
                   {cat.description}
                 </p>
               </div>
 
-              <div className="mt-6 pt-4 border-t border-border/40 flex items-center justify-between">
-                <span className="text-sm font-bold text-pak-green">Explore Schemes</span>
-                <ArrowRightIcon className="size-4.5 text-pak-green transition-transform group-hover:translate-x-1.5" />
+              <div className="mt-6 pt-4 border-t border-[#588157]/20 flex items-center justify-between">
+                <span className="text-xs font-bold text-[#dad7cd] group-hover:text-[#35a333] transition-colors">
+                  Explore Schemes
+                </span>
+                <ArrowRightIcon className="size-3.5 text-[#35a333] transition-transform group-hover:translate-x-1" />
               </div>
             </Link>
           ))

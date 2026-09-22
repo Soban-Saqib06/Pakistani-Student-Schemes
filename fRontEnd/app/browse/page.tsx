@@ -38,19 +38,17 @@ export default function BrowsePage() {
 
           {/* Right Column: Submission & Contact Us Callout Box */}
           <div className="lg:col-span-5">
-            <div className="relative overflow-hidden rounded-xl border border-[#588157]/45 bg-[#23372e] p-5 shadow-xs backdrop-blur-xs transition-all hover:border-pak-green/50 hover:shadow-md">
-              <div className="flex items-start gap-3.5">
-                <div className="flex size-10 shrink-0 items-center justify-center rounded-md bg-pak-green/10 text-pak-green">
-                  <PlusCircleIcon className="size-5" />
-                </div>
+            <div className="relative overflow-hidden rounded-xl border border-[#588157]/45 bg-[#23372e] p-5 shadow-xs backdrop-blur-xs">
+              <div className="flex items-start gap-3">
+                <PlusCircleIcon className="size-5 text-[#a3b18a] shrink-0 mt-0.5" />
                 <div className="flex-1 min-w-0">
-                  <span className="inline-block rounded-md bg-pak-green/10 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-pak-green">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#a3b18a]">
                     Notice a missing scheme?
                   </span>
-                  <h3 className="mt-1 text-base font-bold text-foreground">
+                  <h3 className="mt-1 text-base font-bold text-[#dad7cd]">
                     Submit a New Opportunity
                   </h3>
-                  <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
+                  <p className="mt-1 text-xs leading-relaxed text-[#dad7cd]/80">
                     If you see an active scholarship, laptop scheme, or financial grant currently not mentioned on this site, reach out directly so we can add it for all students!
                   </p>
                 </div>

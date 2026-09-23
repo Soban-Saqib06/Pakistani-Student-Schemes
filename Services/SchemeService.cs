@@ -18,7 +18,8 @@ public class SchemeService : ISchemeService
     public async Task<Wrapper> GetSchemesAsync(int pageNumber, int pageSize)
     {
         if (pageNumber < 1) pageNumber = 1;
-        if (pageSize < 1 || pageSize > 50) pageSize = 10;
+        if (pageSize < 1) pageSize = 10;
+        if (pageSize > 500) pageSize = 500;
 
         var totalCount = await _context.Schemes.CountAsync();
 
@@ -118,7 +119,8 @@ public class SchemeService : ISchemeService
         }
 
         if (pageNumber < 1) pageNumber = 1;
-        if (pageSize < 1 || pageSize > 50) pageSize = 10;
+        if (pageSize < 1) pageSize = 10;
+        if (pageSize > 500) pageSize = 500;
 
         var totalCount = await query.CountAsync();
 

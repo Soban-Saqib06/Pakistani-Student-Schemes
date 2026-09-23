@@ -80,7 +80,9 @@ export function AdminSchemes() {
     <div className="flex flex-col gap-4">
       <div className="flex items-center justify-between gap-4">
         <p className="text-sm text-muted-foreground">
-          {isLoading ? "Loading schemes…" : `${schemes.length} scheme${schemes.length === 1 ? "" : "s"} total`}
+          {isLoading
+            ? "Loading schemes…"
+            : `${result?.totalCount ?? schemes.length} schemes total`}
         </p>
         <Button size="sm" onClick={openCreate}>
           <PlusIcon data-icon="inline-start" />

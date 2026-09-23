@@ -94,15 +94,26 @@ export function SchemeDetail({ id }: { id: number }) {
       </div>
 
       <div className="mt-6 flex flex-wrap items-center gap-3">
-        <Button
-          size="lg"
-          className="h-11 px-5 font-bold bg-pak-green hover:bg-pak-green/90 text-white cursor-pointer shadow-xs transition-colors"
-          render={<a href={scheme.officialUrl} target="_blank" rel="noopener noreferrer" />}
-          disabled={expired}
-        >
-          <ExternalLinkIcon data-icon="inline-start" className="size-4" />
-          {expired ? "Applications closed" : "Apply on official site"}
-        </Button>
+        {scheme.officialUrl && scheme.officialUrl !== "#" ? (
+          <Button
+            size="lg"
+            className="h-11 px-5 font-bold bg-pak-green hover:bg-pak-green/90 text-white cursor-pointer shadow-xs transition-colors"
+            render={<a href={scheme.officialUrl} target="_blank" rel="noopener noreferrer" />}
+            disabled={expired}
+          >
+            <ExternalLinkIcon data-icon="inline-start" className="size-4" />
+            {expired ? "Applications closed" : "Apply on official site"}
+          </Button>
+        ) : (
+          <Button
+            size="lg"
+            className="h-11 px-5 font-bold bg-muted text-muted-foreground cursor-not-allowed"
+            disabled
+          >
+            <ExternalLinkIcon data-icon="inline-start" className="size-4" />
+            Official Portal Unavailable
+          </Button>
+        )}
         <BookmarkButton scheme={scheme} withLabel size="lg" variant="outline" />
       </div>
 

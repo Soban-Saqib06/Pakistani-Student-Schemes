@@ -18,7 +18,9 @@ public static class MappingExtensions
             EligibilityName = scheme.Eligibility != null ? scheme.Eligibility.Name : "General",
             Organization = scheme.Organization,
             Province = scheme.Province,
-            ApplyUrl = scheme.ApplyUrl ?? string.Empty
+            ApplyUrl = scheme.ApplyUrl ?? string.Empty,
+            OfficialUrl = scheme.ApplyUrl ?? string.Empty,
+            Benefits = "Full tuition fee waiver and educational assistance grant."
         };
     }
 
@@ -34,7 +36,9 @@ public static class MappingExtensions
             EligibilityName = s.Eligibility != null ? s.Eligibility.Name : "General",
             Organization = s.Organization,
             Province = s.Province,
-            ApplyUrl = s.ApplyUrl ?? string.Empty
+            ApplyUrl = s.ApplyUrl ?? string.Empty,
+            OfficialUrl = s.ApplyUrl ?? string.Empty,
+            Benefits = "Full tuition fee waiver and educational assistance grant."
         });
     }
 

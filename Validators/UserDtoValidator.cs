@@ -16,10 +16,8 @@ public class RegisterUserDtoValidator : AbstractValidator<RegisterUserDto>
             .EmailAddress().WithMessage("A valid email address is required.");
 
         RuleFor(x => x.Password)
-            .NotEmpty().WithMessage("Password is Required")
-            .MinimumLength(6).WithMessage("Password must be atleast 6 characters.")
-            .Matches(@"[A-Z]").WithMessage("Password must contain atleast one upper case letter")
-            .Matches(@"[0-9]").WithMessage("Password must contain atleast one number");
+            .NotEmpty().WithMessage("Password is required.")
+            .MinimumLength(6).WithMessage("Password must be at least 6 characters.");
     }
 }
 

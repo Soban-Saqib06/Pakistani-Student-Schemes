@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { ArrowRightIcon, BuildingIcon, ClockIcon, ExternalLinkIcon, MapPinIcon } from "lucide-react"
 
-import { mockApi } from "@/lib/mock-data"
+import { api } from "@/lib/api"
 import { DeadlineBadge } from "@/components/deadline-badge"
 
 export const metadata = {
@@ -12,8 +12,8 @@ export const metadata = {
 
 export default async function HomePage() {
   const [schemesResult, categories] = await Promise.all([
-    mockApi.searchSchemes({ activeOnly: true, sortBy: "deadline-asc", pageSize: 4 }),
-    mockApi.listCategories(),
+    api.searchSchemes({ activeOnly: true, sortBy: "deadline-asc", pageSize: 4 }),
+    api.listCategories(),
   ])
 
   const urgentSchemes = schemesResult.data

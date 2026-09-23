@@ -32,12 +32,17 @@ var jwtAudience = builder.Configuration["Jwt:Audience"];
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(connectionString));
 
-// Add CORS Policy for React/Next.js frontend
+// Add CORS Policy for React/Next.js frontend (supports localhost & Vercel deployments)
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowReactApp", policy =>
     {
-        policy.WithOrigins("http://localhost:5173", "http://localhost:3000")
+        policy.SetIsOriginAllowed(origin =>
+            string.IsNullOrEmpty(origin) ||
+            origin.StartsWith("http://localhost:") ||
+            origin.StartsWith("https://localhost:") ||
+            origin.EndsWith(".vercel.app") ||
+            origin.Contains("vercel.app"))
               .AllowAnyHeader()
               .AllowAnyMethod();
     });

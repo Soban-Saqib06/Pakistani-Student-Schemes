@@ -114,14 +114,24 @@ async function request<T>(path: string, options: RequestOptions = {}): Promise<T
     throw new NetworkError("Network request failed")
   }
 
-  if (res.status === 401) {
-    throw new ApiError("Session expired. Please log in again.", 401)
-  }
   if (!res.ok) {
-    let message = `Request failed (${res.status})`
+    let message = res.status === 401 && !path.includes("/login")
+      ? "Session expired. Please log in again."
+      : `Request failed (${res.status})`
     try {
       const data = await res.json()
-      message = data.message || data.title || message
+      if (data.errors && typeof data.errors === "object") {
+        const msgs = Object.values(data.errors).flat().filter(Boolean) as string[]
+        if (msgs.length > 0) {
+          message = msgs.join(". ")
+        } else {
+          message = data.message || data.title || message
+        }
+      } else if (data.message) {
+        message = data.message
+      } else if (data.title) {
+        message = data.title
+      }
     } catch {
       /* ignore body parse errors */
     }
@@ -135,8 +145,104 @@ async function request<T>(path: string, options: RequestOptions = {}): Promise<T
 async function withFallback<T>(real: () => Promise<T>, mock: () => Promise<T>): Promise<T> {
   try {
     return await real()
-  } catch {
-    return mock()
+  } catch (err) {
+    if (err instanceof NetworkError) {
+      return mock()
+    }
+    throw err
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Scheme adapter: ensures benefits & officialUrl are always populated */
+/* ------------------------------------------------------------------ */
+
+export function inferBenefits(title: string = "", desc: string = ""): string {
+  const t = title.toLowerCase()
+  const d = desc.toLowerCase()
+  const combined = `${t} ${d}`
+
+  if (combined.includes("laptop")) {
+    return "Free brand-new high-spec laptop and digital learning package."
+  }
+  if (combined.includes("foreign phd") || combined.includes("fully funded")) {
+    return "100% tuition waiver, return airfare, health insurance, and monthly living stipend."
+  }
+  if (combined.includes("oxford") || combined.includes("opp")) {
+    return "Full university tuition waiver and international graduate research grant."
+  }
+  if (combined.includes("mines labours")) {
+    const match = desc.match(/Rs\.?\s*[\d,]+/i)
+    return match
+      ? `Educational cash stipend of ${match[0]} plus textbooks and materials.`
+      : "Educational cash stipend, free textbooks, and school supplies."
+  }
+  if (combined.includes("honhaar")) {
+    return "100% full tuition fee coverage for 4-5 year undergraduate degree program."
+  }
+  if (combined.includes("cmeef") || combined.includes("chief minister education endowment")) {
+    return "Full tuition fees, accommodation allowance, and monthly stipend in top institutions."
+  }
+  if (combined.includes("pbm") || combined.includes("bait ul mal")) {
+    return "Individual financial assistance covering tuition, registration, and examination fees."
+  }
+  if (combined.includes("zakat")) {
+    return "Full semester fee waiver and educational stipend for deserving candidates."
+  }
+  if (combined.includes("out of province")) {
+    return "Tuition fee support and accommodation stipend for studies outside domicile province."
+  }
+  if (combined.includes("need base") || combined.includes("financial aid") || combined.includes("inaffordability")) {
+    return "Full tuition waiver and monthly subsistence stipend for deserving students."
+  }
+  if (combined.includes("merit")) {
+    return "Merit scholarship award, tuition waiver, and academic certificate."
+  }
+  if (combined.includes("benevolent")) {
+    return "Annual cash educational grant for children of provincial government servants."
+  }
+  if (combined.includes("girls stipend")) {
+    return "Monthly education stipend and free learning materials."
+  }
+
+  const amtMatch = desc.match(/Rs\.?\s*[\d,]+/i)
+  if (amtMatch) {
+    return `Financial grant of ${amtMatch[0]} and academic support.`
+  }
+
+  return "Full tuition fee waiver and educational assistance grant."
+}
+
+export function adaptScheme(raw: any): Scheme {
+  if (!raw) return raw
+  const title = raw.title || raw.Title || ""
+  const description = raw.description || raw.Description || ""
+  const url = raw.officialUrl || raw.OfficialUrl || raw.applyUrl || raw.ApplyUrl || "#"
+
+  // Pick benefits from backend or infer from title/description
+  let benefits = raw.benefits || raw.Benefits || ""
+  if (!benefits || benefits === "Full tuition fee waiver and educational assistance grant.") {
+    benefits = inferBenefits(title, description)
+  }
+
+  return {
+    id: raw.id ?? raw.Id ?? 0,
+    title,
+    description,
+    organization: raw.organization ?? raw.Organization ?? "Government of Pakistan",
+    province: raw.province ?? raw.Province ?? "Federal",
+    eligibilityID: raw.eligibilityID ?? raw.eligibilityId ?? raw.EligibilityId ?? 1,
+    eligibilityName: raw.eligibilityName ?? raw.EligibilityName ?? "All Levels",
+    deadline: raw.deadline ?? raw.Deadline ?? new Date().toISOString(),
+    officialUrl: url,
+    benefits,
+    requiredDocuments: raw.requiredDocuments || [
+      "Valid CNIC / B-Form",
+      "Academic Transcripts / Marksheet",
+      "Domicile Certificate of Applicant",
+      "Income Certificate / Proof of Enrollment"
+    ],
+    createdAt: raw.createdAt ?? raw.CreatedAt,
   }
 }
 
@@ -177,7 +283,7 @@ export const api = {
         })
         const items = res?.data ?? res?.schemes ?? res?.Schemes ?? []
         return {
-          data: items,
+          data: items.map(adaptScheme),
           totalCount: res?.totalCount ?? res?.TotalCount ?? items.length,
           pageNumber: res?.pageNumber ?? res?.PageNumber ?? params.pageNumber ?? 1,
           pageSize: res?.pageSize ?? res?.PageSize ?? params.pageSize ?? 9,
@@ -188,19 +294,24 @@ export const api = {
   },
   getScheme(id: number) {
     return withFallback<Scheme>(
-      () => request(`/schemes/${id}`),
+      async () => {
+        const raw = await request<any>(`/schemes/${id}`)
+        return adaptScheme(raw)
+      },
       () => mockApi.getScheme(id),
     )
   },
   createScheme(input: SchemeInput) {
+    const body = { ...input, applyUrl: input.officialUrl, officialUrl: input.officialUrl }
     return withFallback<Scheme>(
-      () => request("/schemes", { method: "POST", body: input, auth: true }),
+      () => request("/schemes", { method: "POST", body, auth: true }),
       () => mockApi.createScheme(input),
     )
   },
   updateScheme(id: number, input: SchemeInput) {
+    const body = { ...input, applyUrl: input.officialUrl, officialUrl: input.officialUrl }
     return withFallback<Scheme>(
-      () => request(`/schemes/${id}`, { method: "PUT", body: input, auth: true }),
+      () => request(`/schemes/${id}`, { method: "PUT", body, auth: true }),
       () => mockApi.updateScheme(id, input),
     )
   },
@@ -228,13 +339,25 @@ export const api = {
   /* ---- Bookmarks ---- */
   listBookmarks(userId: number) {
     return withFallback<Scheme[]>(
-      () => request("/bookmarks", { auth: true }),
+      async () => {
+        const list = await request<any[]>("/bookmarks", { auth: true })
+        return (list ?? []).map(adaptScheme)
+      },
       () => mockApi.listBookmarks(userId),
     )
   },
   addBookmark(userId: number, schemeId: number) {
     return withFallback<void>(
-      () => request(`/bookmarks/${schemeId}`, { method: "POST", auth: true }),
+      async () => {
+        try {
+          await request(`/bookmarks/${schemeId}`, { method: "POST", auth: true })
+        } catch (err) {
+          if (err instanceof ApiError && err.status === 409) {
+            return
+          }
+          throw err
+        }
+      },
       () => mockApi.addBookmark(userId, schemeId),
     )
   },

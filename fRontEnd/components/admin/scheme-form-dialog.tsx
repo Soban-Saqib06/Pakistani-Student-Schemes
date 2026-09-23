@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import { AlertCircleIcon } from "lucide-react"
 import { toast } from "sonner"
 
 import { api, ApiError } from "@/lib/api"
@@ -154,6 +155,13 @@ export function SchemeFormDialog({ open, onOpenChange, scheme, categories, onSav
           </DialogDescription>
         </DialogHeader>
 
+        {error ? (
+          <div className="rounded-lg border border-destructive/30 bg-destructive/10 p-3.5 text-sm text-destructive flex items-start gap-2.5">
+            <AlertCircleIcon className="size-4 shrink-0 mt-0.5 text-destructive" />
+            <div className="flex-1 font-medium">{error}</div>
+          </div>
+        ) : null}
+
         <form id="scheme-form" onSubmit={handleSubmit}>
           <FieldGroup>
             <Field>
@@ -257,7 +265,7 @@ export function SchemeFormDialog({ open, onOpenChange, scheme, categories, onSav
               />
             </Field>
 
-            <Field data-invalid={error ? "true" : undefined}>
+            <Field>
               <FieldLabel htmlFor="sf-docs">Required documents</FieldLabel>
               <Textarea
                 id="sf-docs"
@@ -266,7 +274,6 @@ export function SchemeFormDialog({ open, onOpenChange, scheme, categories, onSav
                 value={form.requiredDocuments}
                 onChange={(e) => set("requiredDocuments", e.target.value)}
               />
-              {error ? <FieldError>{error}</FieldError> : null}
             </Field>
           </FieldGroup>
         </form>

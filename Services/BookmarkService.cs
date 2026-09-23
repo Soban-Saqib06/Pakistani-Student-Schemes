@@ -27,7 +27,8 @@ public class BookmarkService : IBookmarkService
                 EligibilityName = ss.Scheme.Eligibility != null ? ss.Scheme.Eligibility.Name : "General",
                 Organization = ss.Scheme.Organization,
                 Province = ss.Scheme.Province,
-                ApplyUrl = ss.Scheme.ApplyUrl ?? string.Empty
+                ApplyUrl = ss.Scheme.ApplyUrl ?? string.Empty,
+                OfficialUrl = ss.Scheme.ApplyUrl ?? string.Empty
             })
             .ToListAsync();
     }

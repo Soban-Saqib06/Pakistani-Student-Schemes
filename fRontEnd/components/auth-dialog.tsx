@@ -63,27 +63,44 @@ function LoginForm({ onDone }: { onDone: () => void }) {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [error, setError] = useState<string | null>(null)
+  const [emailError, setEmailError] = useState<string | null>(null)
   const [submitting, setSubmitting] = useState(false)
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     setError(null)
+    setEmailError(null)
+
+    const isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())
+    if (!isEmailValid) {
+      setEmailError("Please enter a valid email address.")
+      return
+    }
+
     setSubmitting(true)
     try {
-      await login(email, password)
+      await login(email.trim(), password)
       toast.success("Logged in successfully")
       onDone()
     } catch (err) {
-      setError(err instanceof ApiError || err instanceof Error ? err.message : "Login failed")
+      const msg = err instanceof ApiError || err instanceof Error ? err.message : "Login failed"
+      if (msg.toLowerCase().includes("email") && !msg.toLowerCase().includes("password")) {
+        setEmailError(msg)
+      } else {
+        setError(msg)
+      }
     } finally {
       setSubmitting(false)
     }
   }
 
+  const hasEmailIssue = Boolean(emailError || error)
+  const hasPasswordIssue = Boolean(error)
+
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} noValidate>
       <FieldGroup>
-        <Field data-invalid={error ? "true" : undefined}>
+        <Field data-invalid={hasEmailIssue ? "true" : undefined}>
           <FieldLabel htmlFor="login-email" className="text-sm font-medium">Email</FieldLabel>
           <Input
             id="login-email"
@@ -91,12 +108,18 @@ function LoginForm({ onDone }: { onDone: () => void }) {
             autoComplete="email"
             required
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => {
+              setEmail(e.target.value)
+              setEmailError(null)
+              setError(null)
+            }}
             placeholder="you@example.com"
+            aria-invalid={hasEmailIssue ? true : undefined}
             className="h-10 text-sm transition-all focus-visible:border-pak-green focus-visible:ring-2 focus-visible:ring-pak-green/20"
           />
+          {emailError ? <FieldError>{emailError}</FieldError> : null}
         </Field>
-        <Field data-invalid={error ? "true" : undefined}>
+        <Field data-invalid={hasPasswordIssue ? "true" : undefined}>
           <FieldLabel htmlFor="login-password" className="text-sm font-medium">Password</FieldLabel>
           <Input
             id="login-password"
@@ -104,8 +127,11 @@ function LoginForm({ onDone }: { onDone: () => void }) {
             autoComplete="current-password"
             required
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            aria-invalid={error ? true : undefined}
+            onChange={(e) => {
+              setPassword(e.target.value)
+              setError(null)
+            }}
+            aria-invalid={hasPasswordIssue ? true : undefined}
             className="h-10 text-sm transition-all focus-visible:border-pak-green focus-visible:ring-2 focus-visible:ring-pak-green/20"
           />
           {error ? <FieldError>{error}</FieldError> : null}
@@ -130,29 +156,48 @@ function RegisterForm({ onDone }: { onDone: () => void }) {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [error, setError] = useState<string | null>(null)
+  const [emailError, setEmailError] = useState<string | null>(null)
+  const [passwordError, setPasswordError] = useState<string | null>(null)
   const [submitting, setSubmitting] = useState(false)
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     setError(null)
-    if (password.length < 6) {
-      setError("Password must be at least 6 characters")
+    setEmailError(null)
+    setPasswordError(null)
+
+    const isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())
+    if (!isEmailValid) {
+      setEmailError("Please enter a valid email address.")
       return
     }
+
+    if (password.length < 6) {
+      setPasswordError("Password must be at least 6 characters.")
+      return
+    }
+
     setSubmitting(true)
     try {
-      await register(name, email, password)
+      await register(name.trim(), email.trim(), password)
       toast.success("Account created. You're all set!")
       onDone()
     } catch (err) {
-      setError(err instanceof ApiError || err instanceof Error ? err.message : "Registration failed")
+      const msg = err instanceof ApiError || err instanceof Error ? err.message : "Registration failed"
+      if (msg.toLowerCase().includes("email")) {
+        setEmailError(msg)
+      } else if (msg.toLowerCase().includes("password")) {
+        setPasswordError(msg)
+      } else {
+        setError(msg)
+      }
     } finally {
       setSubmitting(false)
     }
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} noValidate>
       <FieldGroup>
         <Field>
           <FieldLabel htmlFor="reg-name" className="text-sm font-medium">Full name</FieldLabel>
@@ -165,7 +210,7 @@ function RegisterForm({ onDone }: { onDone: () => void }) {
             className="h-10 text-sm transition-all focus-visible:border-pak-green focus-visible:ring-2 focus-visible:ring-pak-green/20"
           />
         </Field>
-        <Field>
+        <Field data-invalid={emailError ? "true" : undefined}>
           <FieldLabel htmlFor="reg-email" className="text-sm font-medium">Email</FieldLabel>
           <Input
             id="reg-email"
@@ -173,12 +218,17 @@ function RegisterForm({ onDone }: { onDone: () => void }) {
             autoComplete="email"
             required
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => {
+              setEmail(e.target.value)
+              setEmailError(null)
+            }}
             placeholder="you@example.com"
+            aria-invalid={emailError ? true : undefined}
             className="h-10 text-sm transition-all focus-visible:border-pak-green focus-visible:ring-2 focus-visible:ring-pak-green/20"
           />
+          {emailError ? <FieldError>{emailError}</FieldError> : null}
         </Field>
-        <Field data-invalid={error ? "true" : undefined}>
+        <Field data-invalid={(passwordError || error) ? "true" : undefined}>
           <FieldLabel htmlFor="reg-password" className="text-sm font-medium">Password</FieldLabel>
           <Input
             id="reg-password"
@@ -186,10 +236,15 @@ function RegisterForm({ onDone }: { onDone: () => void }) {
             autoComplete="new-password"
             required
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            aria-invalid={error ? true : undefined}
+            onChange={(e) => {
+              setPassword(e.target.value)
+              setPasswordError(null)
+              setError(null)
+            }}
+            aria-invalid={(passwordError || error) ? true : undefined}
             className="h-10 text-sm transition-all focus-visible:border-pak-green focus-visible:ring-2 focus-visible:ring-pak-green/20"
           />
+          {passwordError ? <FieldError>{passwordError}</FieldError> : null}
           {error ? <FieldError>{error}</FieldError> : null}
         </Field>
         <Button

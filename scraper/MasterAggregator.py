@@ -358,8 +358,8 @@ def run_master_aggregation():
                 province = "Punjab"
                 organization = "Government of the Punjab / Higher Education Department"
                 application_url = "https://honhaarscholarship.punjabhec.gov.pk"
-                if not official_url:
-                    official_url = "https://honhaarscholarship.punjabhec.gov.pk"
+                official_url = "https://honhaarscholarship.punjabhec.gov.pk"
+                deadline = "October 26, 2025"
 
             scheme_obj = {
                 "title": raw_title,
@@ -372,7 +372,7 @@ def run_master_aggregation():
                 "applicationUrl": application_url,
                 "description": description,
                 "eligibilityCriteria": criteria,
-                "status": "Closed" if "closed" in description.lower() else "Open / Active",
+                "status": "Closed" if ("closed" in description.lower() or "honhaar" in canonical_key) else "Open / Active",
                 "lastUpdated": datetime.now().strftime("%Y-%m-%d"),
                 "_source": filename,
                 "_region": region

@@ -12,8 +12,9 @@ public class SchemeResponseDto
     public string Organization {get; set;} = string.Empty;
     public string Province {get; set;} = string.Empty;
     public string? ApplyUrl {get; set;} = string.Empty;
+    public string? OfficialUrl {get; set;} = string.Empty;
+    public string Benefits {get; set;} = string.Empty;
     public string EligibilityName{get; set;} = string.Empty;
-
 }
 
 // Dtos/CreateSchemeDto
@@ -31,6 +32,11 @@ public class CreateSchemeDto
 
     public string? ApplyUrl {get; set;} = string.Empty;
     
+    public string? OfficialUrl 
+    { 
+        get => ApplyUrl; 
+        set { if (!string.IsNullOrEmpty(value)) ApplyUrl = value; } 
+    }
     
     public int EligibilityID {get; set;}
 }

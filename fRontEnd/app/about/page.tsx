@@ -119,10 +119,10 @@ export default function AboutPage() {
             </p>
           </div>
           <Link
-            href="/contact"
-            className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#2e7d32] hover:bg-[#256b2a] px-6 py-3 text-sm font-bold text-white shadow-xs transition-colors shrink-0 cursor-pointer"
+            href="/contact/"
+            className="inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-xl bg-[#2e7d32] hover:bg-[#256b2a] px-6 py-3.5 text-sm font-bold text-white shadow-xs transition-colors shrink-0 cursor-pointer"
           >
-            <span>Submit a Scheme</span>
+            <span>Contact &amp; Submit Scheme</span>
             <ArrowRightIcon className="size-4" />
           </Link>
         </div>

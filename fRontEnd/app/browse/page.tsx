@@ -56,7 +56,7 @@ export default function BrowsePage() {
 
               <div className="mt-4 pt-3.5 border-t border-border/50 flex items-center justify-between">
                 <Link
-                  href="/contact"
+                  href="/contact/"
                   className="inline-flex items-center gap-2 rounded-md bg-[#2e7d32] px-3.5 py-2 text-xs font-bold text-white transition-all hover:bg-[#256b2a] shadow-2xs"
                 >
                   <MailIcon className="size-3.5" />

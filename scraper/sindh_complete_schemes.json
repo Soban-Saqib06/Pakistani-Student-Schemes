@@ -1,0 +1,60 @@
+[
+  {
+    "title": "Sindh Educational Endowment Fund (SEEF) Scholarship Program 2026",
+    "organization": "Sindh Educational Endowment Fund (SEEF)",
+    "province": "Sindh",
+    "category": "Higher Education / University",
+    "officialUrl": "https://seef.sindh.gov.pk",
+    "applicationUrl": "https://form-seef.com/",
+    "deadline": "31st August 2026",
+    "description": "Government-funded financial assistance by the College Education Department, Government of Sindh, supporting poor, needy, and meritorious students from Sindh enrolled in partner universities for higher education.",
+    "eligibilityCriteria": [
+      "Must hold permanent domicile of Sindh Province.",
+      "Must be enrolled in an institution recognized and notified on the SEEF Trust Panel.",
+      "Minimum academic merit: 2.5 GPA (semester system) or 60% marks (annual examination system).",
+      "Demonstrated financial need as verified by the Institutional Scholarship Award Committee.",
+      "Interviews and verification conducted in partnership with IBA Karachi and Sukkur IBA.",
+      "Candidates cannot hold dual scholarships simultaneously (must hold only one government scholarship).",
+      "Domicile of Sindh Enrollment in a recognized institution Academic merit (minimum 2.5 GPA or 60% percentage) Financial need as prescribed in SEEF Trust Policy",
+      "Academic merit (minimum 2.5 GPA or 60% percentage)",
+      "Renewal criteria typically include maintaining a minimum 2.5 GPA or 60% percentage, continuing enrollment in a recognized institution, and demonstrating ongoing financial need."
+    ],
+    "scrapedAt": "2026-09-23 16:34:57"
+  },
+  {
+    "title": "PEEF Inter-Provincial Scholarship Quota for Sindh Students",
+    "organization": "Sindh Educational Endowment Fund (SEEF) / PEEF",
+    "province": "Sindh",
+    "category": "Inter-Provincial / Special Quota",
+    "officialUrl": "https://seef.sindh.gov.pk/apply-online-for-peef-scholarship",
+    "applicationUrl": "https://seef.sindh.gov.pk/apply-online-for-peef-scholarship",
+    "deadline": "Check Official Portal",
+    "description": "Special educational quota allocated by PEEF specifically for meritorious and needy students holding Sindh domicile to pursue intermediate and graduation studies.",
+    "eligibilityCriteria": [
+      "Must possess Sindh domicile certificate.",
+      "Secured at least 60% marks or minimum 2.5 CGPA in previous board/university examination.",
+      "Enrolled as a full-time regular student in an approved educational institution.",
+      "Total monthly family income must not exceed the prescribed threshold (Rs. 60,000/month or as updated).",
+      "Children of government servants in BPS 1-4 are exempted from the income certificate condition."
+    ],
+    "scrapedAt": "2026-09-23 16:34:57"
+  },
+  {
+    "title": "Sindh School Education Scholarship Program (SSESP) - Class VIII to XII",
+    "organization": "Sindh Education Foundation (SEF)",
+    "province": "Sindh",
+    "category": "Secondary & Higher Secondary Education",
+    "officialUrl": "https://sef.org.pk/scholarship/",
+    "applicationUrl": "https://sef.org.pk/ssesp/apply",
+    "deadline": "Announced Annually (Check Portal)",
+    "description": "Fully funded scholarship program by School Education & Literacy Department, Government of Sindh, linking talented students from Sindh with prestigious partner institutions (Cadet Colleges, IBA Public Schools, NJV) across Pakistan up to higher secondary level.",
+    "eligibilityCriteria": [
+      "Must be a bonafide student residing and studying in Sindh Province.",
+      "Studying in Government schools or SEF-assisted schools continuously for at least 3 years.",
+      "Applying for admission into Class VIII (Grade 8) at partner boarding/cadet institutions.",
+      "Must pass the standardized entry test conducted by testing agencies (e.g. SIBA Testing Services).",
+      "Scholarship covers full tuition fee, boarding/lodging, uniforms, books, and monthly stipend."
+    ],
+    "scrapedAt": "2026-09-23 16:34:57"
+  }
+]

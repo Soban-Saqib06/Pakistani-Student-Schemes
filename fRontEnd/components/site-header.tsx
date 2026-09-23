@@ -67,7 +67,7 @@ export function SiteHeader() {
         {/* Larger Navigation Tabs - single clean row on desktop */}
         <nav className="hidden md:flex items-center gap-1.5 md:gap-2">
           {navLinks.map((link) => {
-            const active = pathname === link.href
+            const active = pathname === link.href || pathname === `${link.href}/` || (pathname?.endsWith("/") && pathname.slice(0, -1) === link.href)
             const Icon = link.icon
             return (
               <Button
@@ -328,7 +328,7 @@ export function SiteHeader() {
         <div className="mx-auto max-w-6xl">
           <nav className="flex items-center justify-between gap-1 overflow-x-auto py-0.5 [scrollbar-width:thin] [-webkit-overflow-scrolling:touch]">
             {navLinks.map((link) => {
-              const active = pathname === link.href
+              const active = pathname === link.href || pathname === `${link.href}/` || (pathname?.endsWith("/") && pathname.slice(0, -1) === link.href)
               const Icon = link.icon
               return (
                 <Button

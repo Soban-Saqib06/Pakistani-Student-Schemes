@@ -1,5 +1,6 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
+import Link from 'next/link'
 import { Montserrat, DM_Serif_Display, Outfit, Plus_Jakarta_Sans } from 'next/font/google'
 import './globals.css'
 import { Providers } from '@/components/providers'
@@ -77,8 +78,8 @@ export default function RootLayout({
               <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-4 sm:flex-row text-sm text-muted-foreground">
                 <p>TaleemHub · Pakistan Scholarships &amp; Youth Opportunities Portal</p>
                 <div className="flex items-center gap-5">
-                  <a href="/about" className="text-sm font-medium hover:text-pak-green transition-colors">About Us</a>
-                  <a href="/contact" className="text-sm font-medium hover:text-pak-green transition-colors">Contact &amp; Submissions</a>
+                  <Link href="/about" className="text-sm font-medium hover:text-pak-green transition-colors">About Us</Link>
+                  <Link href="/contact" className="text-sm font-medium hover:text-pak-green transition-colors">Contact &amp; Submissions</Link>
                 </div>
               </div>
             </footer>

@@ -302,11 +302,20 @@ export function SiteHeader() {
               </DropdownMenuContent>
             </DropdownMenu>
           ) : (
-            <div className="hidden md:flex items-center gap-2.5">
-              <Button variant="ghost" size="default" className="h-10 px-4 text-sm font-semibold" onClick={() => promptAuth("login")}>
+            <div className="flex items-center gap-1.5 sm:gap-2.5">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="h-8 px-2.5 text-xs font-semibold md:h-10 md:px-4 md:text-sm"
+                onClick={() => promptAuth("login")}
+              >
                 Log in
               </Button>
-              <Button size="default" className="h-10 px-4.5 text-sm font-bold bg-[#2e7d32] hover:bg-[#256b2a] text-white shadow-xs cursor-pointer" onClick={() => promptAuth("register")}>
+              <Button
+                size="sm"
+                className="h-8 px-3 text-xs font-bold bg-[#2e7d32] hover:bg-[#256b2a] text-white shadow-2xs md:h-10 md:px-4.5 md:text-sm cursor-pointer"
+                onClick={() => promptAuth("register")}
+              >
                 Sign up
               </Button>
             </div>
@@ -314,11 +323,10 @@ export function SiteHeader() {
         </div>
       </div>
 
-      {/* Vertical / Mobile Bar: Out of header navigation and separate Sign up / Log in buttons */}
-      <div className="md:hidden border-t border-[#588157]/25 bg-[#15231b]/98 px-4 py-2.5 backdrop-blur-md">
-        <div className="mx-auto flex items-center justify-between gap-3 max-w-6xl">
-          {/* Mobile Navigation */}
-          <nav className="flex items-center gap-1.5 overflow-x-auto scrollbar-none py-0.5">
+      {/* Mobile Navigation Bar: All 4 tabs visible with equal distribution and smooth scrolling affordance */}
+      <div className="md:hidden border-t border-[#588157]/25 bg-[#15231b]/98 px-2.5 py-2 backdrop-blur-md">
+        <div className="mx-auto max-w-6xl">
+          <nav className="flex items-center justify-between gap-1 overflow-x-auto py-0.5 [scrollbar-width:thin] [-webkit-overflow-scrolling:touch]">
             {navLinks.map((link) => {
               const active = pathname === link.href
               const Icon = link.icon
@@ -327,15 +335,15 @@ export function SiteHeader() {
                   key={link.href}
                   variant={active ? "secondary" : "ghost"}
                   size="sm"
-                  className={`h-9 px-3 gap-1.5 text-xs font-semibold shrink-0 ${
+                  className={`h-9 flex-1 min-w-[70px] px-2 gap-1.5 text-xs font-semibold shrink-0 justify-center ${
                     active
                       ? "bg-secondary text-foreground shadow-2xs font-bold"
                       : "text-muted-foreground hover:text-foreground hover:bg-muted/70"
                   }`}
                   render={<Link href={link.href} />}
                 >
-                  <Icon className="size-3.5" />
-                  <span>{link.label}</span>
+                  <Icon className="size-3.5 shrink-0" />
+                  <span className="truncate">{link.label}</span>
                 </Button>
               )
             })}
@@ -343,39 +351,18 @@ export function SiteHeader() {
               <Button
                 variant={pathname.startsWith("/admin") ? "secondary" : "ghost"}
                 size="sm"
-                className={`h-9 px-3 gap-1.5 text-xs font-semibold shrink-0 ${
+                className={`h-9 flex-1 min-w-[70px] px-2 gap-1.5 text-xs font-semibold shrink-0 justify-center ${
                   pathname.startsWith("/admin")
                     ? "bg-secondary text-foreground shadow-2xs font-bold"
                     : "text-muted-foreground hover:text-foreground hover:bg-muted/70"
                 }`}
                 render={<Link href="/admin" />}
               >
-                <LayoutDashboardIcon className="size-3.5" />
-                <span>Admin</span>
+                <LayoutDashboardIcon className="size-3.5 shrink-0" />
+                <span className="truncate">Admin</span>
               </Button>
             ) : null}
           </nav>
-
-          {/* Out-of-Header Auth Buttons in Vertical Mode */}
-          {!user ? (
-            <div className="flex items-center gap-2 shrink-0">
-              <Button
-                variant="outline"
-                size="sm"
-                className="h-9 px-3.5 text-xs font-semibold shadow-2xs"
-                onClick={() => promptAuth("login")}
-              >
-                Log in
-              </Button>
-              <Button
-                size="sm"
-                className="h-9 px-3.5 text-xs font-bold bg-[#2e7d32] hover:bg-[#256b2a] text-white shadow-2xs"
-                onClick={() => promptAuth("register")}
-              >
-                Sign up
-              </Button>
-            </div>
-          ) : null}
         </div>
       </div>
     </header>

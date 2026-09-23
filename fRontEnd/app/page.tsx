@@ -100,7 +100,7 @@ export default async function HomePage() {
         <div className="mx-auto max-w-6xl px-4">
           <div className="max-w-2xl mb-12 md:mb-16">
             <span className="text-xs font-semibold uppercase tracking-widest text-[#a3b18a]">
-              01 // Architectural Principle
+              Verification Standard
             </span>
             <h2 className="mt-2 text-3xl sm:text-4xl font-bold tracking-tight text-[#dad7cd]">
               How TaleemHub Operates
@@ -145,7 +145,7 @@ export default async function HomePage() {
             {/* Left Column: Sticky Editorial Note */}
             <div className="lg:col-span-4 lg:sticky lg:top-28">
               <span className="text-xs font-semibold uppercase tracking-widest text-[#a3b18a]">
-                02 // Time-Sensitive
+                Time-Sensitive
               </span>
               <h2 className="mt-2 text-3xl font-bold tracking-tight text-[#dad7cd]">
                 Closing Deadlines
@@ -209,7 +209,7 @@ export default async function HomePage() {
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12">
             <div>
               <span className="text-xs font-semibold uppercase tracking-widest text-[#a3b18a]">
-                03 // Eligibility Tracks
+                Eligibility Tracks
               </span>
               <h2 className="mt-2 text-3xl font-bold tracking-tight text-[#dad7cd]">
                 Explore by Academic Level

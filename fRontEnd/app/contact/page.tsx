@@ -2,9 +2,6 @@ import {
   MailIcon,
   PhoneIcon,
   ExternalLinkIcon,
-  MessageSquareIcon,
-  SparklesIcon,
-  CheckCircle2Icon,
 } from "lucide-react"
 
 export default function ContactPage() {
@@ -12,10 +9,9 @@ export default function ContactPage() {
     <div className="mx-auto max-w-5xl px-4 py-16">
       {/* Header */}
       <div className="flex flex-col items-center text-center">
-        <span className="inline-flex items-center gap-2 rounded-md border border-pak-green/30 bg-pak-green/10 px-3 py-1 text-xs font-semibold text-pak-green mb-4 shadow-2xs">
-          <MessageSquareIcon className="size-3.5" />
+        <p className="font-mono text-xs uppercase tracking-widest text-[#a3b18a] mb-3">
           Get In Touch
-        </span>
+        </p>
         <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl md:text-5xl">
           Contact &amp; Scheme Submissions
         </h1>
@@ -30,9 +26,7 @@ export default function ContactPage() {
         {/* Email Card */}
         <div className="flex flex-col justify-between rounded-lg border border-border/70 bg-card p-6 shadow-xs transition-all hover:border-pak-green/50 hover:shadow-md">
           <div>
-            <div className="mb-4 flex size-12 items-center justify-center rounded-md bg-pak-green/10 text-pak-green">
-              <MailIcon className="size-6" />
-            </div>
+            <MailIcon className="mb-4 size-6 text-[#a3b18a]" />
             <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
               Direct Email
             </span>
@@ -58,9 +52,7 @@ export default function ContactPage() {
         {/* Phone / WhatsApp Card */}
         <div className="flex flex-col justify-between rounded-lg border border-border/70 bg-card p-6 shadow-xs transition-all hover:border-pak-green/50 hover:shadow-md">
           <div>
-            <div className="mb-4 flex size-12 items-center justify-center rounded-md bg-pak-green/10 text-pak-green">
-              <PhoneIcon className="size-6" />
-            </div>
+            <PhoneIcon className="mb-4 size-6 text-[#a3b18a]" />
             <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
               Phone &amp; WhatsApp
             </span>
@@ -94,15 +86,13 @@ export default function ContactPage() {
         {/* LinkedIn Card */}
         <div className="flex flex-col justify-between rounded-lg border border-border/70 bg-card p-6 shadow-xs transition-all hover:border-pak-green/50 hover:shadow-md sm:col-span-2 lg:col-span-1">
           <div>
-            <div className="mb-4 flex size-12 items-center justify-center rounded-md bg-pak-green/10 text-pak-green">
-              <svg
-                className="size-6 fill-current"
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-              >
-                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
-              </svg>
-            </div>
+            <svg
+              className="mb-4 size-6 fill-current text-[#a3b18a]"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+            </svg>
             <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
               Professional Network
             </span>
@@ -129,11 +119,10 @@ export default function ContactPage() {
       </div>
 
       {/* Scheme Submission Guidelines Box */}
-      <div className="mt-12 rounded-lg border border-border/70 bg-gradient-to-br from-card to-muted/30 p-6 sm:p-8 shadow-xs">
-        <div className="flex items-center gap-2 text-pak-green font-semibold text-sm mb-2">
-          <SparklesIcon className="size-4" />
-          <span>Help Us Keep TaleemHub Comprehensive</span>
-        </div>
+      <div className="mt-12 rounded-lg border border-border/70 bg-card p-6 sm:p-8 shadow-xs">
+        <p className="font-mono text-xs uppercase tracking-widest text-[#a3b18a] mb-2">
+          Submission Guidelines
+        </p>
         <h2 className="text-2xl font-bold text-foreground">
           What information should you include when submitting a new scheme?
         </h2>
@@ -143,19 +132,19 @@ export default function ContactPage() {
 
         <ul className="mt-6 grid gap-3.5 sm:grid-cols-2 text-sm sm:text-base text-muted-foreground">
           <li className="flex items-start gap-2.5">
-            <CheckCircle2Icon className="size-4.5 text-pak-green shrink-0 mt-0.5" />
+            <span className="text-[#35a333] font-bold select-none shrink-0">—</span>
             <span><strong>Scheme Title:</strong> Official name of the scholarship or grant</span>
           </li>
           <li className="flex items-start gap-2.5">
-            <CheckCircle2Icon className="size-4.5 text-pak-green shrink-0 mt-0.5" />
+            <span className="text-[#35a333] font-bold select-none shrink-0">—</span>
             <span><strong>Organization / Ministry:</strong> HEC, PEEF, BEEF, or university name</span>
           </li>
           <li className="flex items-start gap-2.5">
-            <CheckCircle2Icon className="size-4.5 text-pak-green shrink-0 mt-0.5" />
+            <span className="text-[#35a333] font-bold select-none shrink-0">—</span>
             <span><strong>Target Category:</strong> Undergraduate, Postgraduate, Need-based, etc.</span>
           </li>
           <li className="flex items-start gap-2.5">
-            <CheckCircle2Icon className="size-4.5 text-pak-green shrink-0 mt-0.5" />
+            <span className="text-[#35a333] font-bold select-none shrink-0">—</span>
             <span><strong>Application Link &amp; Deadline:</strong> The official portal or advertisement link</span>
           </li>
         </ul>

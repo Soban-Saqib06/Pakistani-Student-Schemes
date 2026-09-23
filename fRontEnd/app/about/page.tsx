@@ -24,58 +24,53 @@ export default function AboutPage() {
           </p>
         </div>
 
-        {/* Asymmetric 2-Column: Structural Reality vs TaleemHub Index */}
-        <div className="mt-16 grid gap-10 lg:grid-cols-12 lg:items-stretch">
-          {/* Left: The Structural Reality (Direct on canvas) */}
-          <div className="lg:col-span-6 flex flex-col justify-between rounded-2xl border border-[#588157]/30 bg-[#16221c]/50 p-8 sm:p-10">
+        {/* Asymmetric 2-Column: Structural Reality vs TaleemHub Index (Direct on Canvas, No Cards) */}
+        <div className="mt-16 grid gap-12 lg:grid-cols-12 lg:items-start border-t border-[#588157]/25 pt-12">
+          {/* Left: The Structural Reality */}
+          <div className="lg:col-span-6 flex flex-col justify-between">
             <div>
-              <span className="text-xs font-bold uppercase tracking-wider text-[#a3b18a]">
-                The Reality
+              <span className="text-xs font-semibold uppercase tracking-widest text-[#a3b18a]">
+                The Structural Reality
               </span>
               <h2 className="mt-2 text-2xl sm:text-3xl font-bold text-[#dad7cd]">
                 The Bureaucratic Black Box
               </h2>
-              <p className="mt-4 text-sm sm:text-base leading-relaxed text-[#dad7cd]/80">
-                Announcements from HEC, PEEF (Punjab), BEEF (Balochistan), SEF (Sindh), and KP Higher Education are frequently published as low-resolution newspaper clippings or single-page PDF notifications.
+              <p className="mt-4 text-base leading-relaxed text-[#dad7cd]/80">
+                Announcements from HEC, PEEF (Punjab), BEEF (Balochistan), SEF (Sindh), and KP Higher Education are frequently published as low-resolution newspaper clippings or single-page PDF notifications across unlinked portals.
               </p>
-              <p className="mt-3 text-sm sm:text-base leading-relaxed text-[#dad7cd]/80">
-                By the time a matric, intermediate, or undergraduate student in Gilgit, Gwadar, Thar, or Dera Ghazi Khan hears about an opportunity, the closing date has already passed or the quota details were never made clear.
+              <p className="mt-3 text-base leading-relaxed text-[#dad7cd]/80">
+                By the time a matric, intermediate, or undergraduate student in Gilgit, Gwadar, Thar, or Dera Ghazi Khan learns an initiative exists, the closing date has already passed or the quota details were never made clear. Reserved seats and provincial quotas frequently go unfilled due to unadvertised closing dates.
               </p>
-            </div>
-
-            <div className="mt-8 pt-6 border-t border-[#588157]/20 flex items-center gap-3 text-xs text-[#a3b18a]">
-              <span className="size-2 rounded-full bg-amber-400/80 shrink-0" />
-              <span>Over 35% of departmental scholarship quotas see sub-optimal application volumes.</span>
             </div>
           </div>
 
-          {/* Right: The Solution / The Standard (Elevated darker panel) */}
-          <div className="lg:col-span-6 flex flex-col justify-between rounded-2xl border border-[#588157]/45 bg-[#22362d] p-8 sm:p-10 shadow-sm">
+          {/* Right: The Solution / The Standard */}
+          <div className="lg:col-span-6 flex flex-col justify-between lg:border-l lg:border-[#588157]/25 lg:pl-12">
             <div>
-              <span className="text-xs font-bold uppercase tracking-wider text-[#35a333]">
-                The Standard
+              <span className="text-xs font-semibold uppercase tracking-widest text-[#35a333]">
+                The TaleemHub Standard
               </span>
               <h2 className="mt-2 text-2xl sm:text-3xl font-bold text-[#dad7cd]">
                 An Open Public Directory
               </h2>
-              <p className="mt-4 text-sm sm:text-base leading-relaxed text-[#dad7cd]/90">
+              <p className="mt-4 text-base leading-relaxed text-[#dad7cd]/90">
                 TaleemHub was created as an independent, non-commercial educational public utility. We monitor official gazettes, verify eligibility criteria, and present every initiative in a structured, searchable catalog.
               </p>
-              <p className="mt-3 text-sm sm:text-base leading-relaxed text-[#dad7cd]/90">
-                Students filter by their exact degree level and domicile region, check the required documentation before starting, and link directly to official agency application portals with zero middleman friction.
+              <p className="mt-3 text-base leading-relaxed text-[#dad7cd]/90">
+                Students filter by their exact degree level and domicile region, check required documentation upfront, and link directly to official agency application portals with zero middleman friction.
               </p>
             </div>
 
-            <div className="mt-8 pt-6 border-t border-[#588157]/30 flex items-center gap-3 text-xs font-semibold text-[#dad7cd]">
+            <div className="mt-8 pt-4 flex items-center gap-2.5 text-xs font-medium text-[#a3b18a]">
               <ShieldCheckIcon className="size-4 text-[#35a333] shrink-0" />
               <span>Independent &middot; 100% Free &middot; No Sponsored Listings</span>
             </div>
           </div>
         </div>
 
-        {/* Platform Commitments */}
+        {/* Platform Commitments (No cards, no circled numbers) */}
         <div className="mt-20 border-t border-[#588157]/25 pt-16">
-          <div className="max-w-2xl">
+          <div className="max-w-2xl mb-10">
             <span className="text-xs font-semibold uppercase tracking-widest text-[#a3b18a]">
               Guiding Principles
             </span>
@@ -84,51 +79,31 @@ export default function AboutPage() {
             </h2>
           </div>
 
-          <div className="mt-10 grid gap-6 sm:grid-cols-2">
-            <div className="p-6 rounded-xl border border-[#588157]/30 bg-[#17251e]/40">
-              <div className="flex items-center gap-3">
-                <span className="flex size-7 items-center justify-center rounded-full bg-[#1c2b24] border border-[#588157]/50 text-xs font-bold text-[#dad7cd]">
-                  1
-                </span>
-                <h3 className="text-base font-bold text-[#dad7cd]">Direct Official Links Only</h3>
-              </div>
-              <p className="mt-3 text-xs sm:text-sm text-[#dad7cd]/80 leading-relaxed pl-10">
+          <div className="grid gap-10 sm:grid-cols-2">
+            <div className="flex flex-col">
+              <h3 className="text-lg font-bold text-[#dad7cd]">Direct Official Links Only</h3>
+              <p className="mt-2 text-sm text-[#dad7cd]/80 leading-relaxed">
                 We never route students through ad-shorteners, monetization funnels, or third-party capture forms. You click straight to the official <span className="text-white font-mono">.gov.pk</span> or university portal.
               </p>
             </div>
 
-            <div className="p-6 rounded-xl border border-[#588157]/30 bg-[#17251e]/40">
-              <div className="flex items-center gap-3">
-                <span className="flex size-7 items-center justify-center rounded-full bg-[#1c2b24] border border-[#588157]/50 text-xs font-bold text-[#dad7cd]">
-                  2
-                </span>
-                <h3 className="text-base font-bold text-[#dad7cd]">Document Transparency</h3>
-              </div>
-              <p className="mt-3 text-xs sm:text-sm text-[#dad7cd]/80 leading-relaxed pl-10">
+            <div className="flex flex-col">
+              <h3 className="text-lg font-bold text-[#dad7cd]">Document Transparency</h3>
+              <p className="mt-2 text-sm text-[#dad7cd]/80 leading-relaxed">
                 Each listing specifies required documents (e.g. Domicile, Father&apos;s Salary Slip, B-Form, Attested Transcripts) upfront so candidates prepare before opening application windows.
               </p>
             </div>
 
-            <div className="p-6 rounded-xl border border-[#588157]/30 bg-[#17251e]/40">
-              <div className="flex items-center gap-3">
-                <span className="flex size-7 items-center justify-center rounded-full bg-[#1c2b24] border border-[#588157]/50 text-xs font-bold text-[#dad7cd]">
-                  3
-                </span>
-                <h3 className="text-base font-bold text-[#dad7cd]">Quota &amp; Domicile Precision</h3>
-              </div>
-              <p className="mt-3 text-xs sm:text-sm text-[#dad7cd]/80 leading-relaxed pl-10">
+            <div className="flex flex-col">
+              <h3 className="text-lg font-bold text-[#dad7cd]">Quota &amp; Domicile Precision</h3>
+              <p className="mt-2 text-sm text-[#dad7cd]/80 leading-relaxed">
                 Clear distinction between open-merit seats and dedicated quotas (Balochistan, rural Sindh, Gilgit-Baltistan, AJK, merged districts) so eligible students don&apos;t miss reserved funding.
               </p>
             </div>
 
-            <div className="p-6 rounded-xl border border-[#588157]/30 bg-[#17251e]/40">
-              <div className="flex items-center gap-3">
-                <span className="flex size-7 items-center justify-center rounded-full bg-[#1c2b24] border border-[#588157]/50 text-xs font-bold text-[#dad7cd]">
-                  4
-                </span>
-                <h3 className="text-base font-bold text-[#dad7cd]">Live Deadline Clocks</h3>
-              </div>
-              <p className="mt-3 text-xs sm:text-sm text-[#dad7cd]/80 leading-relaxed pl-10">
+            <div className="flex flex-col">
+              <h3 className="text-lg font-bold text-[#dad7cd]">Live Deadline Clocks</h3>
+              <p className="mt-2 text-sm text-[#dad7cd]/80 leading-relaxed">
                 Countdown indicators scale with urgency. Expired schemes are clearly archived to eliminate confusion between active calls and outdated programs.
               </p>
             </div>

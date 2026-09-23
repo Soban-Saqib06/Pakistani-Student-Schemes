@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { ArrowRightIcon, BookOpenIcon, LayersIcon } from "lucide-react"
+import { ArrowRightIcon } from "lucide-react"
 import { useCategories } from "@/lib/use-data"
 import { Skeleton } from "@/components/ui/skeleton"
 
@@ -41,12 +41,6 @@ export default function CategoriesPage() {
               className="group flex flex-col justify-between rounded-xl border border-[#588157]/35 bg-[#22362d] p-6 transition-all duration-200 hover:border-[#588157] hover:shadow-md cursor-pointer"
             >
               <div>
-                <div className="mb-4 flex items-center justify-between">
-                  <BookOpenIcon className="size-5 text-[#a3b18a] group-hover:text-[#35a333] transition-colors" />
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-[#a3b18a] group-hover:text-[#dad7cd] transition-colors">
-                    Track 0{cat.id}
-                  </span>
-                </div>
                 <h2 className="text-xl font-bold tracking-tight text-[#dad7cd] group-hover:text-[#35a333] transition-colors">
                   {cat.name}
                 </h2>

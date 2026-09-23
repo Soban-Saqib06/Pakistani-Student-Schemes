@@ -19,9 +19,7 @@ export default function BookmarksPage() {
   return (
     <div className="mx-auto max-w-6xl px-4 py-10">
       <div className="mb-8 flex items-center gap-3.5">
-        <span className="flex size-12 items-center justify-center rounded-md bg-pak-green/10 text-pak-green">
-          <BookmarkIcon className="size-6" />
-        </span>
+        <BookmarkIcon className="size-7 text-[#a3b18a]" />
         <div>
           <h1 className="text-3xl font-extrabold tracking-tight">Saved schemes</h1>
           <p className="text-base text-muted-foreground">Scholarships and grants you&apos;ve bookmarked.</p>

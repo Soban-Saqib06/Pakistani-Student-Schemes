@@ -8,7 +8,7 @@ if (isGithubActions) {
 }
 
 const nextConfig = {
-  output: "export",
+  ...(isGithubActions ? { output: "export" } : {}),
   basePath: basePath,
   trailingSlash: true,
   typescript: {

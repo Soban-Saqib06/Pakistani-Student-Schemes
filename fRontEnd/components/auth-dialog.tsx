@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { ShieldCheckIcon, UserCircle2Icon } from "lucide-react"
+import { UserCircle2Icon } from "lucide-react"
 import { toast } from "sonner"
 
 import { useAuth } from "@/lib/auth-context"
@@ -44,15 +44,6 @@ export function AuthDialog() {
             <RegisterForm onDone={() => setOpen(false)} />
           </TabsContent>
         </Tabs>
-
-        <div className="rounded-md border border-pak-green/25 bg-pak-green/[0.04] px-3.5 py-2.5 text-center text-xs text-muted-foreground">
-          <div className="font-semibold text-pak-green mb-0.5 flex items-center justify-center gap-1">
-            <ShieldCheckIcon className="size-3.5" /> Demo Credentials
-          </div>
-          Admin: <span className="font-medium text-foreground">admin@schemes.pk / admin123</span>
-          <br />
-          Student: <span className="font-medium text-foreground">student@example.com / student123</span>
-        </div>
       </DialogContent>
     </Dialog>
   )

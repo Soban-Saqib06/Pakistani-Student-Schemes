@@ -231,19 +231,11 @@ interface MockUser {
 const seedUsers: MockUser[] = [
   {
     id: 1,
-    name: "Portal Admin",
-    email: "admin@schemes.pk",
-    password: "admin123",
+    name: "admin",
+    email: "REDACTED",
+    password: "123456",
     role: "Admin",
     createdAt: daysFromNow(-120),
-  },
-  {
-    id: 2,
-    name: "Ayesha Khan",
-    email: "student@example.com",
-    password: "student123",
-    role: "User",
-    createdAt: daysFromNow(-30),
   },
 ]
 

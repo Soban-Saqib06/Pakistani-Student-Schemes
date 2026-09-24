@@ -83,7 +83,8 @@ using (var scope = app.Services.CreateScope())
     try
     {
         var context = services.GetRequiredService<AppDbContext>();
-        DbInitializer.Seed(context);
+        var config = services.GetRequiredService<IConfiguration>();
+        DbInitializer.Seed(context, config);
     }
     catch (Exception ex)
     {

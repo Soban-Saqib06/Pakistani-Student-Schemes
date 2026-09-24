@@ -5,7 +5,7 @@ namespace PersonalProject.Data;
 
 public static class DbInitializer
 {
-    public static void Seed(AppDbContext context)
+    public static void Seed(AppDbContext context, Microsoft.Extensions.Configuration.IConfiguration config)
     {
         context.Database.Migrate();
 
@@ -22,16 +22,22 @@ public static class DbInitializer
 
         if (!context.Users.Any())
         {
-            var admin = new User
+            var adminEmail = config["AdminUser:Email"] ?? Environment.GetEnvironmentVariable("ADMIN_EMAIL");
+            var adminPassword = config["AdminUser:Password"] ?? Environment.GetEnvironmentVariable("ADMIN_PASSWORD");
+
+            if (!string.IsNullOrWhiteSpace(adminEmail) && !string.IsNullOrWhiteSpace(adminPassword))
             {
-                Name = "admin",
-                Email = "REDACTED",
-                PasswordHash = BCrypt.Net.BCrypt.HashPassword("REDACTED"),
-                Role = "Admin",
-                CreatedAt = DateTime.UtcNow
-            };
-            context.Users.Add(admin);
-            context.SaveChanges();
+                var admin = new User
+                {
+                    Name = "admin",
+                    Email = adminEmail,
+                    PasswordHash = BCrypt.Net.BCrypt.HashPassword(adminPassword),
+                    Role = "Admin",
+                    CreatedAt = DateTime.UtcNow
+                };
+                context.Users.Add(admin);
+                context.SaveChanges();
+            }
         }
     }
 }

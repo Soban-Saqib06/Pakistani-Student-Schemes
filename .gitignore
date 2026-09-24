@@ -485,3 +485,8 @@ $RECYCLE.BIN/
 *.swp
 scraper/test_scraper.py
 AdminLoginCredentials.txt
+*.zip
+appsettings.local.json
+fRontEnd/AGENTS.md
+fRontEnd/CLAUDE.md
+

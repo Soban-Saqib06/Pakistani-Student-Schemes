@@ -489,4 +489,6 @@ AdminLoginCredentials.txt
 appsettings.local.json
 fRontEnd/AGENTS.md
 fRontEnd/CLAUDE.md
+ARCHITECTURE_HANDOVER.md
+*.secret.md
 

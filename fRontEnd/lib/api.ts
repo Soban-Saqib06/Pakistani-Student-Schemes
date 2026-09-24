@@ -141,12 +141,16 @@ async function request<T>(path: string, options: RequestOptions = {}): Promise<T
   return (await res.json()) as T
 }
 
-/** Try the real API; on connection or fetch failures, fall back to the mock. */
+/** Try the real API; on connection, fetch, or 5xx server failures (including SSR prerender), fall back to the mock. */
 async function withFallback<T>(real: () => Promise<T>, mock: () => Promise<T>): Promise<T> {
   try {
     return await real()
   } catch (err) {
-    if (err instanceof NetworkError) {
+    if (
+      err instanceof NetworkError ||
+      (err instanceof ApiError && err.status >= 500) ||
+      typeof window === "undefined"
+    ) {
       return mock()
     }
     throw err

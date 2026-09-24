@@ -237,7 +237,7 @@ export function adaptScheme(raw: any): Scheme {
     province: raw.province ?? raw.Province ?? "Federal",
     eligibilityID: raw.eligibilityID ?? raw.eligibilityId ?? raw.EligibilityId ?? 1,
     eligibilityName: raw.eligibilityName ?? raw.EligibilityName ?? "All Levels",
-    deadline: raw.deadline ?? raw.Deadline ?? new Date().toISOString(),
+    deadline: raw.deadline ?? raw.Deadline ?? null,
     officialUrl: url,
     benefits,
     requiredDocuments: raw.requiredDocuments || [

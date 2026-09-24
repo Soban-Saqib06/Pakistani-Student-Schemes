@@ -14,10 +14,10 @@ import type {
  */
 
 const LS = {
-  schemes: "ssdemo:schemes",
-  categories: "ssdemo:categories",
-  users: "ssdemo:users",
-  bookmarks: "ssdemo:bookmarks",
+  schemes: "ssdemo:schemes_v2",
+  categories: "ssdemo:categories_v2",
+  users: "ssdemo:users_v2",
+  bookmarks: "ssdemo:bookmarks_v2",
 }
 
 const daysFromNow = (n: number) => {
@@ -259,7 +259,7 @@ function getSchemes(): Scheme[] {
   const s = read<Scheme[] | null>(LS.schemes, null)
   if (s && s.length > 0) {
     const now = Date.now()
-    const activeCount = s.filter((item) => new Date(item.deadline).getTime() >= now).length
+    const activeCount = s.filter((item) => !item.deadline || new Date(item.deadline).getTime() >= now).length
     if (activeCount >= 5) {
       return s
     }
@@ -294,7 +294,7 @@ function decorate(scheme: Scheme, cats: EligibilityCategory[]): Scheme {
 }
 
 const delay = (ms = 350) => new Promise((r) => setTimeout(r, ms))
-const isActive = (s: Scheme) => new Date(s.deadline).getTime() >= Date.now()
+const isActive = (s: Scheme) => !s.deadline || new Date(s.deadline).getTime() >= Date.now()
 
 export const mockApi = {
   async searchSchemes(params: SchemeSearchParams): Promise<Paginated<Scheme>> {

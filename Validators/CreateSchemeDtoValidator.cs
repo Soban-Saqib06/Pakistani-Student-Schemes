@@ -21,9 +21,7 @@ public class CreateSchemeDtoValidator : AbstractValidator<CreateSchemeDto>
         RuleFor(x => x.Description)
             .NotEmpty().WithMessage("Description is required.")
             .Length(10, 10000).WithMessage("Description must be between 10 and 10,000 characters.");
-            
-        RuleFor(x => x.Deadline)
-            .NotEmpty().WithMessage("Deadline is required.");
+        // Deadline is optional for rolling/open-ended schemes (null when not specified)
         
         RuleFor(x => x.Organization)
             .NotEmpty().WithMessage("Organization is required.");

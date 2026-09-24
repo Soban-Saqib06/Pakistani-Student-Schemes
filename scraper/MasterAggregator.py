@@ -252,8 +252,8 @@ def sync_to_database(master_list: list, project_root: str):
             try:
                 deadline_dt = date_parser.parse(clean_dl, fuzzy=True).replace(tzinfo=timezone.utc)
             except Exception:
-                # Default rolling / open deadline (180 days in the future)
-                deadline_dt = datetime.now(timezone.utc) + timedelta(days=180)
+                # No assumed deadline; rolling/unspecified schemes remain null
+                deadline_dt = None
 
             apply_url = item.get("applicationUrl") or item.get("officialUrl") or ""
             organization = item.get("organization", "Government of Pakistan")

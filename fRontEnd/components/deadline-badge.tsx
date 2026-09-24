@@ -3,8 +3,20 @@ import { AlertTriangleIcon, CalendarClockIcon, ClockIcon } from "lucide-react"
 import { getDeadlineInfo } from "@/lib/format"
 import { Badge } from "@/components/ui/badge"
 
-export function DeadlineBadge({ deadline, className }: { deadline: string; className?: string }) {
+export function DeadlineBadge({ deadline, className }: { deadline?: string | null; className?: string }) {
   const info = getDeadlineInfo(deadline)
+
+  if (info.status === "none") {
+    return (
+      <Badge
+        variant="outline"
+        className={`inline-flex items-center justify-center px-2 py-0.5 text-xs font-normal border-border/40 bg-muted/20 text-muted-foreground ${className ?? ""}`}
+      >
+        <span>—</span>
+      </Badge>
+    )
+  }
+
   const isCritical = info.status === "closing" && info.daysLeft <= 3 && info.daysLeft >= 0
   const isClosing = info.status === "closing"
   const isExpired = info.status === "expired"

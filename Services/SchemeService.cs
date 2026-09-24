@@ -109,7 +109,7 @@ public class SchemeService : ISchemeService
         // 5. Active vs. Expired
         if (activeOnly == true)
         {
-            query = query.Where(s => s.Deadline >= DateTime.UtcNow);
+            query = query.Where(s => s.Deadline == null || s.Deadline >= DateTime.UtcNow);
         }
 
         // 6. Eligibility Filter

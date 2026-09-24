@@ -61,7 +61,8 @@ const emptyForm: FormState = {
   requiredDocuments: "",
 }
 
-function toDateInput(iso: string): string {
+function toDateInput(iso?: string | null): string {
+  if (!iso) return ""
   const d = new Date(iso)
   if (Number.isNaN(d.getTime())) return ""
   return d.toISOString().slice(0, 10)
@@ -101,8 +102,8 @@ export function SchemeFormDialog({ open, onOpenChange, scheme, categories, onSav
     e.preventDefault()
     setError(null)
 
-    if (!form.province || !form.eligibilityID || !form.deadline) {
-      setError("Please fill in province, eligibility and deadline.")
+    if (!form.province || !form.eligibilityID) {
+      setError("Please fill in province and eligibility.")
       return
     }
 
@@ -112,7 +113,7 @@ export function SchemeFormDialog({ open, onOpenChange, scheme, categories, onSav
       organization: form.organization.trim(),
       province: form.province,
       eligibilityID: Number(form.eligibilityID),
-      deadline: new Date(form.deadline).toISOString(),
+      deadline: form.deadline ? new Date(form.deadline).toISOString() : null,
       officialUrl: form.officialUrl.trim(),
       benefits: form.benefits.trim(),
       requiredDocuments: form.requiredDocuments

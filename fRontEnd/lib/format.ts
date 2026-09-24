@@ -1,4 +1,5 @@
-export function formatDate(iso: string): string {
+export function formatDate(iso?: string | null): string {
+  if (!iso) return "—"
   const d = new Date(iso)
   if (Number.isNaN(d.getTime())) return "—"
   return new Intl.DateTimeFormat("en-GB", {
@@ -8,7 +9,7 @@ export function formatDate(iso: string): string {
   }).format(d)
 }
 
-export type DeadlineStatus = "open" | "closing" | "expired"
+export type DeadlineStatus = "open" | "closing" | "expired" | "none"
 
 export interface DeadlineInfo {
   status: DeadlineStatus
@@ -16,9 +17,15 @@ export interface DeadlineInfo {
   label: string
 }
 
-export function getDeadlineInfo(iso: string): DeadlineInfo {
+export function getDeadlineInfo(iso?: string | null): DeadlineInfo {
+  if (!iso) {
+    return { status: "none", daysLeft: 0, label: "—" }
+  }
   const now = new Date()
   const deadline = new Date(iso)
+  if (Number.isNaN(deadline.getTime())) {
+    return { status: "none", daysLeft: 0, label: "—" }
+  }
   const msPerDay = 1000 * 60 * 60 * 24
   const daysLeft = Math.ceil((deadline.getTime() - now.getTime()) / msPerDay)
 

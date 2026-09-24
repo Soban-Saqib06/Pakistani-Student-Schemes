@@ -26,7 +26,7 @@ public static class DbInitializer
             {
                 Name = "admin",
                 Email = "REDACTED",
-                PasswordHash = BCrypt.Net.BCrypt.HashPassword("123456"),
+                PasswordHash = BCrypt.Net.BCrypt.HashPassword("REDACTED"),
                 Role = "Admin",
                 CreatedAt = DateTime.UtcNow
             };

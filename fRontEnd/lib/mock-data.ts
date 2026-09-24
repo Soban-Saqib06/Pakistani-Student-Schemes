@@ -233,7 +233,7 @@ const seedUsers: MockUser[] = [
     id: 1,
     name: "admin",
     email: "REDACTED",
-    password: "123456",
+    password: "REDACTED",
     role: "Admin",
     createdAt: daysFromNow(-120),
   },

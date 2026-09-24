@@ -31,7 +31,7 @@ export interface Scheme {
   province: string
   eligibilityID: number
   eligibilityName?: string
-  deadline: string // ISO date string
+  deadline?: string | null
   officialUrl: string
   benefits: string
   requiredDocuments?: string[]
@@ -89,7 +89,7 @@ export interface SchemeInput {
   organization: string
   province: string
   eligibilityID: number
-  deadline: string
+  deadline?: string | null
   officialUrl: string
   benefits: string
   requiredDocuments?: string[]

@@ -51,7 +51,7 @@ export default async function HomePage() {
 
           {/* Problem-Solving Subheadline */}
           <p className="mt-6 sm:mt-8 max-w-2xl text-base sm:text-lg md:text-xl font-normal leading-relaxed text-[#dad7cd]/85 text-pretty">
-            We track active funding, laptop initiatives, and provincial quotas from HEC, PEEF, BEEF, and Ihsaas in one verified directory &mdash;{" "}
+            We track active funding, laptop initiatives, and provincial quotas from HEC, PEEF, and BEEF in one verified directory &mdash;{" "}
             <span className="text-white font-medium">with verified closing dates and direct portal links.</span>
           </p>
 

@@ -1,6 +1,6 @@
 import { Suspense } from "react"
 import Link from "next/link"
-import { ShieldCheckIcon, MailIcon, ArrowRightIcon, PlusCircleIcon } from "lucide-react"
+import { ShieldCheckIcon, MailIcon, ArrowRightIcon, PlusCircleIcon, InfoIcon } from "lucide-react"
 
 import { SchemeBrowser } from "@/components/scheme-browser"
 import { CubeLoader } from "@/components/cube-loader"
@@ -72,6 +72,15 @@ export default function BrowsePage() {
 
       {/* Schemes Directory Browser */}
       <section className="mx-auto max-w-6xl px-4 py-8">
+        {/* Beta Notice Callout */}
+        <div className="mb-6 flex items-start gap-3 rounded-xl border border-amber-500/30 bg-amber-500/10 px-4 py-3.5 text-xs text-amber-200/90 shadow-2xs backdrop-blur-xs">
+          <InfoIcon className="size-4 shrink-0 text-amber-400 mt-0.5" />
+          <div className="leading-relaxed">
+            <span className="font-semibold text-amber-300">TaleemHub is currently in Beta: </span>
+            While we continuously scrape and aggregate public portals, scholarship terms and deadlines can change rapidly. Please always verify specific eligibility, requirements, and closing dates directly on the official scheme website before applying.
+          </div>
+        </div>
+
         <Suspense fallback={<CubeLoader size="md" label="Loading schemes..." />}>
           <SchemeBrowser />
         </Suspense>
